@@ -13,14 +13,13 @@ class ContainerViewController: UIViewController {
     @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var childVCStackView: UIStackView!
     
-    var buttonsCount = 6
-    var buttons: [UIButton] = []
-    var childs: [UIViewController] = []
-    let colors: [UIColor] = [.red, .yellow, .blue, .green, .brown, .cyan]
-    var childActiveState = [false, false, false, false, false, false]
-    let defaultVC = UIViewController()
+    private var buttons: [UIButton] = []
+    private let colors: [UIColor] = [.red, .yellow, .blue, .green, .brown, .cyan]
+    private var childActiveState = [false, false, false, false, false, false]
+    private var childs: [UIViewController] = []
+    private var defaultVC: UIViewController?
     
-    var isEmpty: Bool {
+    private var isEmpty: Bool {
         return childActiveState.allSatisfy({ $0 == false })
     }
     
@@ -30,53 +29,54 @@ class ContainerViewController: UIViewController {
     }
     
     @objc func buttonDidTapped(sender: UIButton) {
+        let index = sender.tag
         
-        guard let buttonLabel = sender.titleLabel?.text,
-            let index = Int(buttonLabel) else {
-                return
-        }
-        
-        sender.isSelected = !sender.isSelected
+        sender.isSelected.toggle()
         
         if sender.isSelected {
-            addChildVC(childVC: childs[index - 1])
-            childActiveState[index - 1] = true
+            addChildVC(childVC: childs[index])
+            childActiveState[index] = true
         } else {
-            removeChildVC(childVC: childs[index - 1])
-            childActiveState[index - 1] = false
+            removeChildVC(childVC: childs[index])
+            childActiveState[index] = false
         }
         
-        if isEmpty {
-            addChildVC(childVC: defaultVC)
-        } else {
-            removeChildVC(childVC: defaultVC)
+        if let defaultVC = defaultVC {
+            isEmpty ? addChildVC(childVC: defaultVC) : removeChildVC(childVC: defaultVC)
         }
     }
     
-    private func initialSetup() {
-        defaultVC.view.backgroundColor = .darkGray
-        addChildVC(childVC: defaultVC)
+    func addVC(_ vc: UIViewController, buttonTitle: String) {
+        assert(childs.count < 6, "Too many child ViewControllers: only 6 allowed")
         
-        for index in 1...buttonsCount {
-            let button = UIButton()
-            button.setTitleColor(.lightGray, for: .normal)
-            button.setTitle("\(index)", for: .normal)
-            button.setTitleColor(.black, for: .selected)
-            button.setTitle("\(index)", for: .selected)
-            button.addTarget(self, action: #selector(buttonDidTapped(sender:)), for: .touchUpInside)
-            buttons.append(button)
-            buttonsStackView.addArrangedSubview(button)
-            
-            let childVC = UIViewController()
-            childVC.view.backgroundColor = colors[index - 1]
-            childs.append(childVC)
+        childs.append(vc)
+        
+        let button = UIButton()
+        button.setTitleColor(.lightGray, for: .normal)
+        button.setTitle("\(buttonTitle)", for: .normal)
+        button.setTitleColor(.black, for: .selected)
+        button.setTitle("\(buttonTitle)", for: .selected)
+        button.addTarget(self, action: #selector(buttonDidTapped(sender:)), for: .touchUpInside)
+        button.tag = childs.count - 1
+        buttons.append(button)
+    }
+    
+    func setDefaultPlaceholder(_ vc: UIViewController) {
+        defaultVC = vc
+    }
+    
+    private func initialSetup() {
+        if let defaultVC = defaultVC {
+            addChildVC(childVC: defaultVC)
+        }
+        
+        for (index, vc) in childs.enumerated() {
+            vc.view.backgroundColor = colors[index]
+            buttonsStackView.addArrangedSubview(buttons[index])
         }
     }
     
     private func addChildVC(childVC: UIViewController) {
-        if children.count == 1 {
-            removeChildVC(childVC: defaultVC)
-        }
         addChild(childVC)
         childVCStackView.addArrangedSubview(childVC.view)
         childVC.didMove(toParent: self)
