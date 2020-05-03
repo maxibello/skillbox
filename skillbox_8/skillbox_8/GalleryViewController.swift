@@ -11,19 +11,22 @@ import UIKit
 class GalleryViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var stepper: UIStepper!
     
-    let photos: [UIImage?] = [
-        UIImage(named: "volvo.jpg"),
-        UIImage(named: "diablo.jpg"),
-        UIImage(named: "viper.jpg"),
-        UIImage(named: "f40.jpg"),
-        UIImage(named: "jaga.jpg"),
-        UIImage(named: "chev.jpg"),
-        UIImage(named: "lotus.jpg"),
-        UIImage(named: "honda.jpg"),
-        UIImage(named: "lotus.jpg"),
-        UIImage(named: "huracan.jpg")
+    let photos: [UIImage] = [
+        UIImage(named: "volvo.jpg")!,
+        UIImage(named: "diablo.jpg")!,
+        UIImage(named: "viper.jpg")!,
+        UIImage(named: "f40.jpg")!,
+        UIImage(named: "jaga.jpg")!,
+        UIImage(named: "chev.jpg")!,
+        UIImage(named: "lotus.jpg")!,
+        UIImage(named: "honda.jpg")!,
+        UIImage(named: "lotus.jpg")!,
+        UIImage(named: "huracan.jpg")!
     ]
+    
+    @IBOutlet weak var slider: UISlider!
     
     var currentPhoto: UIImage? {
         didSet {
@@ -41,6 +44,11 @@ class GalleryViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         currentPhoto = photos[0]
+        imageView.animationImages = photos
+        imageView.animationDuration = 10
+        slider.maximumValue = (Float(photos.count) - 1) / 10
+        stepper.setDecrementImage(UIImage(named: "minus.png")!, for: .normal)
+        stepper.setIncrementImage(UIImage(named: "plus.png")!, for: .normal)
     }
     
     @IBAction func nextPhoto(_ sender: Any) {
@@ -57,6 +65,19 @@ class GalleryViewController: UIViewController {
         } else {
             currentIndex -= 1
         }
+    }
+    @IBAction func startAnimation(_ sender: UIButton) {
+        imageView.startAnimating()
+    }
+    @IBAction func stopAnimation(_ sender: UIButton) {
+        imageView.stopAnimating()
+    }
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        currentIndex = Int(round(sender.value * 10))
+        
+    }
+    @IBAction func stepperChanged(_ sender: UIStepper) {
+        currentIndex = Int(sender.value)
     }
 }
 

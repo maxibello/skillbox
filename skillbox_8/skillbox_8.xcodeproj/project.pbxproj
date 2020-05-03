@@ -30,6 +30,11 @@
 		B15B8024244F39F800DDEBC6 /* night.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B15B8020244F39F700DDEBC6 /* night.jpeg */; };
 		B15B8025244F39F800DDEBC6 /* sky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B15B8021244F39F800DDEBC6 /* sky.jpg */; };
 		B175F32E2454A86C00B0D60F /* InfoBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175F32D2454A86C00B0D60F /* InfoBlock.swift */; };
+		B175F33124561DAC00B0D60F /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = B175F32F24561DAC00B0D60F /* start.png */; };
+		B175F33224561DAC00B0D60F /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = B175F33024561DAC00B0D60F /* stop.png */; };
+		B175F335245621C900B0D60F /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = B175F333245621C900B0D60F /* minus.png */; };
+		B175F336245621C900B0D60F /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = B175F334245621C900B0D60F /* plus.png */; };
+		B18ABFBC245C2D3100413A88 /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18ABFBB245C2D3100413A88 /* AdditionalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +63,11 @@
 		B15B8020244F39F700DDEBC6 /* night.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = night.jpeg; sourceTree = "<group>"; };
 		B15B8021244F39F800DDEBC6 /* sky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sky.jpg; sourceTree = "<group>"; };
 		B175F32D2454A86C00B0D60F /* InfoBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoBlock.swift; sourceTree = "<group>"; };
+		B175F32F24561DAC00B0D60F /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
+		B175F33024561DAC00B0D60F /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		B175F333245621C900B0D60F /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
+		B175F334245621C900B0D60F /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		B18ABFBB245C2D3100413A88 /* AdditionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +100,10 @@
 				B15B801F244F39F700DDEBC6 /* river.jpg */,
 				B15B8020244F39F700DDEBC6 /* night.jpeg */,
 				B15B801E244F39F700DDEBC6 /* moon.jpeg */,
+				B175F32F24561DAC00B0D60F /* start.png */,
+				B175F33024561DAC00B0D60F /* stop.png */,
+				B175F333245621C900B0D60F /* minus.png */,
+				B175F334245621C900B0D60F /* plus.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +128,7 @@
 				B15B801A244CD70A00DDEBC6 /* StaticImagesViewController.swift */,
 				B15B801C244CF27800DDEBC6 /* SegmentedViewController.swift */,
 				B175F32D2454A86C00B0D60F /* InfoBlock.swift */,
+				B18ABFBB245C2D3100413A88 /* AdditionalViewController.swift */,
 			);
 			path = skillbox_8;
 			sourceTree = "<group>";
@@ -181,11 +196,15 @@
 				B15B8011244CA06000DDEBC6 /* huracan.jpg in Resources */,
 				B15B8018244CA06000DDEBC6 /* honda.jpg in Resources */,
 				B15B8014244CA06000DDEBC6 /* volvo.jpg in Resources */,
+				B175F336245621C900B0D60F /* plus.png in Resources */,
 				B15B800F244CA06000DDEBC6 /* chev.jpg in Resources */,
 				B15B8012244CA06000DDEBC6 /* diablo.jpg in Resources */,
 				B15B8023244F39F800DDEBC6 /* river.jpg in Resources */,
+				B175F335245621C900B0D60F /* minus.png in Resources */,
 				B15B7FFE244C9AF800DDEBC6 /* LaunchScreen.storyboard in Resources */,
+				B175F33224561DAC00B0D60F /* stop.png in Resources */,
 				B15B7FFB244C9AF800DDEBC6 /* Assets.xcassets in Resources */,
+				B175F33124561DAC00B0D60F /* start.png in Resources */,
 				B15B8024244F39F800DDEBC6 /* night.jpeg in Resources */,
 				B15B8025244F39F800DDEBC6 /* sky.jpg in Resources */,
 				B15B8017244CA06000DDEBC6 /* ford.jpg in Resources */,
@@ -206,6 +225,7 @@
 				B15B801B244CD70A00DDEBC6 /* StaticImagesViewController.swift in Sources */,
 				B15B7FF6244C9AF700DDEBC6 /* GalleryViewController.swift in Sources */,
 				B15B801D244CF27800DDEBC6 /* SegmentedViewController.swift in Sources */,
+				B18ABFBC245C2D3100413A88 /* AdditionalViewController.swift in Sources */,
 				B15B7FF2244C9AF700DDEBC6 /* AppDelegate.swift in Sources */,
 				B15B7FF4244C9AF700DDEBC6 /* SceneDelegate.swift in Sources */,
 				B175F32E2454A86C00B0D60F /* InfoBlock.swift in Sources */,
