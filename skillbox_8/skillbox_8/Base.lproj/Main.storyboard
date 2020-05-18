@@ -292,7 +292,6 @@
                                         </constraints>
                                         <state key="normal" title="Start"/>
                                         <connections>
-                                            <action selector="prevPhoto:" destination="Ogx-cL-cBt" eventType="touchUpInside" id="kUi-49-ocH"/>
                                             <action selector="startAnimation:" destination="Ogx-cL-cBt" eventType="touchUpInside" id="G88-we-59e"/>
                                         </connections>
                                     </button>
@@ -305,14 +304,13 @@
                                         </constraints>
                                         <state key="normal" title="Stop"/>
                                         <connections>
-                                            <action selector="nextPhoto:" destination="Ogx-cL-cBt" eventType="touchUpInside" id="1i2-3U-aau"/>
                                             <action selector="stopAnimation:" destination="Ogx-cL-cBt" eventType="touchUpInside" id="hgU-Go-X3u"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.90000000000000002" minimumValueImage="start.png" maximumValueImage="stop.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qpr-Q9-V8H">
-                                <rect key="frame" x="113" y="591" width="188" height="33"/>
+                                <rect key="frame" x="113" y="627" width="188" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="MqY-G0-nbx"/>
                                     <constraint firstAttribute="width" constant="184" id="VDN-n3-cR7"/>
@@ -321,25 +319,34 @@
                                     <action selector="sliderChanged:" destination="Ogx-cL-cBt" eventType="valueChanged" id="01F-1L-DHb"/>
                                 </connections>
                             </slider>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="4VZ-MS-JER">
-                                <rect key="frame" x="160" y="631" width="94" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="4VZ-MS-JER">
+                                <rect key="frame" x="160" y="667" width="94" height="32"/>
                                 <connections>
                                     <action selector="stepperChanged:" destination="Ogx-cL-cBt" eventType="valueChanged" id="ISq-PL-9ud"/>
                                 </connections>
                             </stepper>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M49-di-5JD">
+                                <rect key="frame" x="117" y="606" width="180" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="EKm-sp-5sj"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Vh7-kG-lVz" firstAttribute="top" secondItem="n7y-p7-f0p" secondAttribute="top" id="7TR-WC-BUj"/>
                             <constraint firstItem="Vh7-kG-lVz" firstAttribute="leading" secondItem="n7y-p7-f0p" secondAttribute="leading" id="A46-Ik-Qoi"/>
+                            <constraint firstItem="4VZ-MS-JER" firstAttribute="top" secondItem="Qpr-Q9-V8H" secondAttribute="bottom" constant="8" id="FyB-EV-s7N"/>
                             <constraint firstItem="Iqx-Ao-fFo" firstAttribute="top" secondItem="Vh7-kG-lVz" secondAttribute="bottom" constant="10" id="KTn-i3-lLB"/>
-                            <constraint firstItem="Qpr-Q9-V8H" firstAttribute="top" secondItem="Ne4-Cw-5iA" secondAttribute="bottom" constant="4" id="NKl-ki-1CR"/>
+                            <constraint firstItem="M49-di-5JD" firstAttribute="top" secondItem="eY3-tn-9GA" secondAttribute="bottom" constant="19" id="SDm-Ye-DLu"/>
                             <constraint firstItem="Qpr-Q9-V8H" firstAttribute="centerX" secondItem="Abm-X8-K9q" secondAttribute="centerX" id="SiO-0J-lqo"/>
                             <constraint firstItem="Vh7-kG-lVz" firstAttribute="height" secondItem="Abm-X8-K9q" secondAttribute="height" multiplier="1:2" id="TJK-FM-Tfg"/>
                             <constraint firstItem="Ne4-Cw-5iA" firstAttribute="centerX" secondItem="Abm-X8-K9q" secondAttribute="centerX" id="Yqn-yx-aTI"/>
                             <constraint firstItem="n7y-p7-f0p" firstAttribute="trailing" secondItem="Vh7-kG-lVz" secondAttribute="trailing" id="bLU-M0-nWn"/>
                             <constraint firstItem="Ne4-Cw-5iA" firstAttribute="top" secondItem="Iqx-Ao-fFo" secondAttribute="bottom" constant="5" id="brz-G8-7L5"/>
+                            <constraint firstItem="M49-di-5JD" firstAttribute="centerX" secondItem="Abm-X8-K9q" secondAttribute="centerX" id="fCR-1t-ORZ"/>
+                            <constraint firstItem="Qpr-Q9-V8H" firstAttribute="top" secondItem="M49-di-5JD" secondAttribute="bottom" constant="19" id="g5U-sz-yEn"/>
+                            <constraint firstItem="4VZ-MS-JER" firstAttribute="centerX" secondItem="Abm-X8-K9q" secondAttribute="centerX" id="sC8-vm-bQ5"/>
                             <constraint firstItem="Iqx-Ao-fFo" firstAttribute="centerX" secondItem="Abm-X8-K9q" secondAttribute="centerX" id="vWn-1S-63I"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n7y-p7-f0p"/>
@@ -347,13 +354,14 @@
                     <tabBarItem key="tabBarItem" title="Item 1" id="cnw-1s-Vpk"/>
                     <connections>
                         <outlet property="imageView" destination="Vh7-kG-lVz" id="QWQ-By-8st"/>
+                        <outlet property="progressView" destination="M49-di-5JD" id="jnk-FU-mUd"/>
                         <outlet property="slider" destination="Qpr-Q9-V8H" id="EXn-Pc-Pbl"/>
                         <outlet property="stepper" destination="4VZ-MS-JER" id="kQE-hz-Cfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXs-lr-QBD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-14" y="-665"/>
+            <point key="canvasLocation" x="-14.492753623188406" y="-665.625"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="dYr-5Z-zqc">
