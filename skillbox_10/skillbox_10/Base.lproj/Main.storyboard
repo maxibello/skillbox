@@ -31,7 +31,7 @@
                                                     <rect key="frame" x="22" y="4" width="32" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="8Ts-D2-ucW"/>
-                                                        <constraint firstAttribute="height" constant="32" id="yhD-AN-0jP"/>
+                                                        <constraint firstAttribute="height" priority="999" constant="32" id="yhD-AN-0jP"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Авиарежим" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dw-QU-R6K">
@@ -69,7 +69,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTE-r3-O6D">
                                                     <rect key="frame" x="22" y="4" width="32" height="35.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="5zK-x3-65H"/>
+                                                        <constraint firstAttribute="height" priority="999" constant="32" id="5zK-x3-65H"/>
                                                         <constraint firstAttribute="width" constant="32" id="UX5-7h-yUI"/>
                                                     </constraints>
                                                 </imageView>

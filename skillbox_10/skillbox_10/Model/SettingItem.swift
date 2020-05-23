@@ -9,13 +9,13 @@
 import UIKit
 
 struct SettingItem {
-    let type: SettingCellType
+    let type: settingCellType
     let icon: UIImage?
     let title: String
     let disclosureTitle: String?
 }
 
-enum SettingCellType {
+enum settingCellType {
     case SwitchCell
     case DisclosureCell
 }
