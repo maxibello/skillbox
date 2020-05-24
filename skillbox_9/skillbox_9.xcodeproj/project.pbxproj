@@ -13,6 +13,7 @@
 		B18ABFD1245F1F7600413A88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B18ABFCF245F1F7600413A88 /* Main.storyboard */; };
 		B18ABFD3245F1F7900413A88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18ABFD2245F1F7900413A88 /* Assets.xcassets */; };
 		B18ABFD6245F1F7900413A88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B18ABFD4245F1F7900413A88 /* LaunchScreen.storyboard */; };
+		B1974B5E24791D0600926A67 /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1974B5D24791D0600926A67 /* AdditionalViewController.swift */; };
 		B1EE277D2461FD38009BEBA1 /* LabelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EE277C2461FD38009BEBA1 /* LabelsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		B18ABFD2245F1F7900413A88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B18ABFD5245F1F7900413A88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B18ABFD7245F1F7900413A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1974B5D24791D0600926A67 /* AdditionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalViewController.swift; sourceTree = "<group>"; };
 		B1EE277C2461FD38009BEBA1 /* LabelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 				B18ABFD4245F1F7900413A88 /* LaunchScreen.storyboard */,
 				B18ABFD7245F1F7900413A88 /* Info.plist */,
 				B1EE277C2461FD38009BEBA1 /* LabelsViewController.swift */,
+				B1974B5D24791D0600926A67 /* AdditionalViewController.swift */,
 			);
 			path = skillbox_9;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B18ABFCE245F1F7600413A88 /* ButtonsViewController.swift in Sources */,
+				B1974B5E24791D0600926A67 /* AdditionalViewController.swift in Sources */,
 				B18ABFCA245F1F7600413A88 /* AppDelegate.swift in Sources */,
 				B18ABFCC245F1F7600413A88 /* SceneDelegate.swift in Sources */,
 				B1EE277D2461FD38009BEBA1 /* LabelsViewController.swift in Sources */,
