@@ -38,10 +38,10 @@
                 <constraint firstItem="U3N-lf-sNW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="BZd-7c-3cp"/>
                 <constraint firstItem="F3f-Ny-ZHP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="F2Y-1O-R2n"/>
                 <constraint firstItem="U3N-lf-sNW" firstAttribute="leading" secondItem="F3f-Ny-ZHP" secondAttribute="trailing" id="I2W-YE-5TO"/>
-                <constraint firstAttribute="trailing" secondItem="5vs-Hh-Dhg" secondAttribute="trailing" priority="750" constant="2" id="JI3-s8-EXh"/>
+                <constraint firstAttribute="trailing" secondItem="5vs-Hh-Dhg" secondAttribute="trailing" priority="950" constant="2" id="JI3-s8-EXh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="U3N-lf-sNW" secondAttribute="bottom" constant="2" id="R1h-6R-CuH"/>
                 <constraint firstItem="F3f-Ny-ZHP" firstAttribute="width" secondItem="U3N-lf-sNW" secondAttribute="width" id="Uuo-Cu-5KF"/>
-                <constraint firstItem="5vs-Hh-Dhg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="2" id="Uvh-MN-46G"/>
+                <constraint firstItem="5vs-Hh-Dhg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="950" constant="2" id="Uvh-MN-46G"/>
                 <constraint firstAttribute="trailing" secondItem="U3N-lf-sNW" secondAttribute="trailing" constant="2" id="VD5-ou-5ga"/>
                 <constraint firstItem="F3f-Ny-ZHP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="caX-If-B37"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="F3f-Ny-ZHP" secondAttribute="bottom" constant="2" id="cs5-kB-L4D"/>
@@ -51,6 +51,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="JI3-s8-EXh"/>
+                    <exclude reference="Uvh-MN-46G"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="checkButtonOne" destination="Uvh-MN-46G" id="trg-ew-fGg"/>
                 <outlet property="checkButtonTwo" destination="JI3-s8-EXh" id="z4e-Fs-nJz"/>

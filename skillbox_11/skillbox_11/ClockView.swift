@@ -114,6 +114,16 @@ class ClockView: UIView {
     
     var isSetuped = false
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -151,10 +161,7 @@ class ClockView: UIView {
             marker.backgroundColor = markerColor
             addSubview(marker)
         }
-        addSubview(hourArrow)
-        addSubview(minuteArrow)
-        addSubview(secondArrow)
-        addSubview(roundedCenter)
+
     }
     
     private func updateClockTime() {
@@ -164,6 +171,13 @@ class ClockView: UIView {
         hourArrow.transform = CGAffineTransform(rotationAngle: hourAngle)
         minuteArrow.transform = CGAffineTransform(rotationAngle: minuteAngle)
         secondArrow.transform = CGAffineTransform(rotationAngle: secondAngle)
+    }
+    
+    private func commonInit() {
+        addSubview(hourArrow)
+        addSubview(minuteArrow)
+        addSubview(secondArrow)
+        addSubview(roundedCenter)
     }
 
 }

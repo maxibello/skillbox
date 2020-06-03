@@ -32,11 +32,11 @@ class MySegmentedView: UIView {
         didSet {
             switch activeSegment {
             case 0:
-                checkButtonOne.priority = UILayoutPriority(rawValue: 950)
-                checkButtonTwo.priority = UILayoutPriority(rawValue: 750)
+                checkButtonOne.isActive = true
+                checkButtonTwo.isActive = false
             case 1:
-                checkButtonOne.priority = UILayoutPriority(rawValue: 750)
-                checkButtonTwo.priority = UILayoutPriority(rawValue: 950)
+                checkButtonOne.isActive = false
+                checkButtonTwo.isActive = true
             default:
                 fatalError("Segment doesn't exist")
             }

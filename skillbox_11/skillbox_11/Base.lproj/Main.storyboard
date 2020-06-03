@@ -23,23 +23,11 @@
                                     <constraint firstAttribute="width" constant="240" id="g3F-DS-fg8"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="markerSmallSide">
-                                        <real key="value" value="11"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="hourArrowWidth">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="hourArrowOffset">
                                         <real key="value" value="50"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="clockHours">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="clockMinutes">
-                                        <real key="value" value="45"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="clockSeconds">
-                                        <real key="value" value="45"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="minuteArrowWidth">
                                         <real key="value" value="3"/>
