@@ -20,8 +20,13 @@ class AllwaysScrollViewController: UIViewController {
         let motionlessView = UIView(frame: CGRect(x: 50, y: 50, width: 150, height: 80))
         motionlessView.backgroundColor = .yellow
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width * 2, height: view.bounds.height * 2))
+        imageView.image = UIImage(named: "gates")
+        imageView.contentMode = .scaleAspectFill
+        
         view.addSubview(sv)
         view.addSubview(motionlessView)
+        sv.addSubview(imageView)
         
     }
 }

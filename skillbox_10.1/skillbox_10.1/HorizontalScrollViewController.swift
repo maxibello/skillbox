@@ -17,7 +17,12 @@ class HorizontalScrollViewController: UIViewController {
         sv.backgroundColor = .lightGray
         sv.contentSize = CGSize(width: view.bounds.width * 2, height: view.bounds.height)
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width * 2, height: view.bounds.height))
+        imageView.image = UIImage(named: "ferrari")
+        imageView.contentMode = .scaleAspectFit
+        
         view.addSubview(sv)
+        sv.addSubview(imageView)
     }
 
 }

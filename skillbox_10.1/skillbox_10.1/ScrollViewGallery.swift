@@ -67,24 +67,29 @@ class ScrollViewGallery: UIViewController {
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 imageView.contentMode = .scaleAspectFit
                 scrollView.addSubview(imageView)
-                imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-                imageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-                imageView.leftAnchor.constraint(equalTo: previousImageView?.rightAnchor ?? scrollView.leftAnchor).isActive = true
+                
+                NSLayoutConstraint.activate([
+                    imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+                    imageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor),
+                    imageView.leftAnchor.constraint(equalTo: previousImageView?.rightAnchor ?? scrollView.leftAnchor),
+                    imageView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+                ])
                 previousImageView = imageView
             }
             
             containerSV.addSubview(scrollView)
             
-            scrollView.leadingAnchor.constraint(
-                equalTo: svclg.leadingAnchor).isActive = true
-            scrollView.topAnchor.constraint(
-                equalTo: previousAlbumLabel?.bottomAnchor ?? svclg.topAnchor,
-                constant: 10).isActive = true
-            
-            scrollView.widthAnchor.constraint(equalTo: containerSV.widthAnchor).isActive = true
-            scrollView.heightAnchor.constraint(equalTo: containerSV.widthAnchor).isActive = true
-            scrollView.contentLayoutGuide.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            scrollView.contentLayoutGuide.rightAnchor.constraint(equalTo: previousImageView?.rightAnchor ?? svclg.rightAnchor).isActive = true
+            NSLayoutConstraint.activate([
+                scrollView.leadingAnchor.constraint(
+                    equalTo: svclg.leadingAnchor),
+                scrollView.topAnchor.constraint(
+                    equalTo: previousAlbumLabel?.bottomAnchor ?? svclg.topAnchor,
+                    constant: 10),
+                scrollView.widthAnchor.constraint(equalTo: containerSV.widthAnchor),
+                scrollView.heightAnchor.constraint(equalTo: containerSV.widthAnchor),
+                scrollView.contentLayoutGuide.heightAnchor.constraint(equalToConstant: 0),
+                scrollView.contentLayoutGuide.rightAnchor.constraint(equalTo: previousImageView?.rightAnchor ?? svclg.rightAnchor)
+            ])
             
             previousScrollView = scrollView
             yOffset += view.bounds.width
@@ -99,12 +104,15 @@ class ScrollViewGallery: UIViewController {
         containerSV.backgroundColor = .lightGray
         containerSV.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerSV)
+        
         NSLayoutConstraint.activate([
             containerSV.topAnchor.constraint(equalTo:self.view.topAnchor),
             containerSV.bottomAnchor.constraint(equalTo:self.view.bottomAnchor),
             containerSV.leadingAnchor.constraint(equalTo:self.view.leadingAnchor),
             containerSV.trailingAnchor.constraint(equalTo:self.view.trailingAnchor),
+            containerSV.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
+        
         return containerSV
     }
 }
