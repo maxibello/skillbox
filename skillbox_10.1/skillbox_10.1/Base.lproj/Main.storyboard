@@ -108,6 +108,7 @@
                                         <constraint firstAttribute="bottom" secondItem="9Sr-rY-kiF" secondAttribute="bottom" id="ZWm-xb-CsT"/>
                                         <constraint firstItem="9Sr-rY-kiF" firstAttribute="top" secondItem="Pam-tz-JFv" secondAttribute="bottom" constant="10" id="e68-nV-x9T"/>
                                         <constraint firstItem="Pam-tz-JFv" firstAttribute="top" secondItem="edj-wj-N4i" secondAttribute="top" id="shs-mS-iZo"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pam-tz-JFv" secondAttribute="trailing" constant="4" id="sjt-5Q-DOv"/>
                                         <constraint firstAttribute="trailing" secondItem="9Sr-rY-kiF" secondAttribute="trailing" id="xD6-Nx-nsv"/>
                                     </constraints>
                                 </tableViewCellContentView>
