@@ -29,6 +29,7 @@ class CurrentCityController: UIViewController {
         cityLabel.text = city.name
         weatherDescriptionLabel.text = city.weather.first?.formattedDesctiption
         tempLabel.text = "\(city.main.temp.tempCelsius) ℃"
+        
         cityLabel.isHidden = false
         weatherDescriptionLabel.isHidden = false
         tempLabel.isHidden = false

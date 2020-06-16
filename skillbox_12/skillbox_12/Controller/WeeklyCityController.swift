@@ -20,10 +20,6 @@ class WeeklyCityController: UITableViewController {
         }
     }
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return items?.count ?? 0
-//    }
-//    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items?.count ?? 0
     }

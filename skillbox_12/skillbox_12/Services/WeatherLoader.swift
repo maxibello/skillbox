@@ -30,12 +30,11 @@ class WeatherLoader {
     
     func weeklyCityLoader(completion: @escaping (WeeklyWeather) -> Void) {
         AF.request("https://api.openweathermap.org/data/2.5/forecast/daily?q=moscow&cnt=7&appid=3a4b63153cfe906902828d5828a97054")
-        .validate()
-        .responseDecodable(of: WeeklyWeather.self) { (response) in
-          guard let weeklyWeather = response.value else { return }
-//            print(weeklyWeather.city.name)
-            completion(weeklyWeather)
+            .validate()
+            .responseDecodable(of: WeeklyWeather.self) { (response) in
+                guard let weeklyWeather = response.value else { return }
+                completion(weeklyWeather)
         }
-
+        
     }
 }
