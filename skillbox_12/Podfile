@@ -1,0 +1,4 @@
+target 'skillbox_12' do
+  use_frameworks!
+  pod 'Alamofire', '~> 5.2'
+end
