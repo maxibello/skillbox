@@ -11,79 +11,79 @@ import UIKit
 class CustomSwitch: UIControl {
     public var padding: CGFloat = 5 {
         didSet {
-           self.layoutSubviews()
+            self.setNeedsLayout()
         }
     }
     
     public var labelPadding: CGFloat = 10 {
         didSet {
-           self.layoutSubviews()
+            self.setNeedsLayout()
         }
     }
     
     public var onTintColor = UIColor(red: 56/255, green: 74/255, blue: 92/255, alpha: 1) {
-       didSet {
-          self.setupUI()
+        didSet {
+            backgroundColor = isOn ? onTintColor : offTintColor
         }
     }
     public var offTintColor = UIColor.lightGray {
-         didSet {
-            self.setupUI()
-         }
+        didSet {
+            backgroundColor = isOn ? onTintColor : offTintColor
+        }
     }
     public var textOnColor = UIColor(red: 89/255, green: 185/255, blue: 157/255, alpha: 1) {
-         didSet {
-            self.setupUI()
-         }
+        didSet {
+            textLabel.textColor = self.isOn ? self.textOnColor : self.textOffColor
+        }
     }
     public var textOffColor = UIColor.white {
-         didSet {
-            self.setupUI()
-         }
+        didSet {
+            textLabel.textColor = self.isOn ? self.textOnColor : self.textOffColor
+        }
     }
     
     public var textOn: String = "ON" {
-         didSet {
-            self.setupUI()
-         }
+        didSet {
+            textLabel.text = self.isOn ? textOn : textOff
+        }
     }
     
     public var textOff: String = "OFF" {
-         didSet {
-            self.setupUI()
-         }
+        didSet {
+            textLabel.text = self.isOn ? textOn : textOff
+        }
     }
     
     public var cornerRadius: CGFloat = 0.5 {
-         didSet {
-            self.layoutSubviews()
+        didSet {
+            self.setNeedsLayout()
         }
     }
     public var thumbOnTintColor = UIColor(red: 89/255, green: 185/255, blue: 157/255, alpha: 1) {
-         didSet {
+        didSet {
             self.thumbView.backgroundColor = self.thumbOnTintColor
-       }
+        }
     }
     public var thumbOffTintColor = UIColor.darkGray {
-         didSet {
+        didSet {
             self.thumbView.backgroundColor = self.thumbOffTintColor
-       }
+        }
     }
     public var thumbCornerRadius: CGFloat = 0.5 {
-         didSet {
-            self.layoutSubviews()
-       }
+        didSet {
+            self.setNeedsLayout()
+        }
     }
     public var thumbSize = CGSize.zero {
-         didSet {
-            self.layoutSubviews()
+        didSet {
+            self.setNeedsLayout()
+        }
     }
-       }
     public var labelSize = CGSize.zero {
-         didSet {
-            self.layoutSubviews()
+        didSet {
+            self.setNeedsLayout()
+        }
     }
-       }
     
     public var isOn = true
     public var animationDuration: Double = 0.5
@@ -106,11 +106,11 @@ class CustomSwitch: UIControl {
     }
     
     func setupUI() {
-        self.clear()
-        self.clipsToBounds = false
-        self.thumbView.isUserInteractionEnabled = false
-        self.addSubview(textLabel)
-        self.addSubview(thumbView)
+        clear()
+        clipsToBounds = false
+        thumbView.isUserInteractionEnabled = false
+        addSubview(textLabel)
+        addSubview(thumbView)
     }
     
     private func clear() {
@@ -132,20 +132,18 @@ class CustomSwitch: UIControl {
             let yPosition = (self.bounds.size.height - thumbSize.height) / 2
             let labelYPosition = (self.bounds.size.height - labelSize.height) / 2
             
-            self.onPoint = CGPoint(x: self.bounds.size.width - thumbSize.width - self.padding, y: yPosition)
-            self.offPoint = CGPoint(x: self.padding, y: yPosition)
+            onPoint = CGPoint(x: self.bounds.size.width - thumbSize.width - self.padding, y: yPosition)
+            offPoint = CGPoint(x: self.padding, y: yPosition)
             
-            self.labelOnPoint = CGPoint(x: self.labelPadding, y: labelYPosition)
-            self.labelOffPoint = CGPoint(x: self.bounds.size.width - labelSize.width - self.labelPadding, y: labelYPosition)
+            labelOnPoint = CGPoint(x: self.labelPadding, y: labelYPosition)
+            labelOffPoint = CGPoint(x: self.bounds.size.width - labelSize.width - self.labelPadding, y: labelYPosition)
             
-            self.thumbView.frame = CGRect(origin: self.isOn ? self.onPoint : self.offPoint, size: thumbSize)
-            self.thumbView.layer.cornerRadius = thumbSize.height * self.thumbCornerRadius
-            self.thumbView.backgroundColor = isOn ? self.thumbOnTintColor : self.thumbOffTintColor
+            thumbView.frame = CGRect(origin: self.isOn ? self.onPoint : self.offPoint, size: thumbSize)
+            thumbView.layer.cornerRadius = thumbSize.height * self.thumbCornerRadius
+            thumbView.backgroundColor = isOn ? self.thumbOnTintColor : self.thumbOffTintColor
             
-            self.textLabel.frame = CGRect(origin: self.isOn ? self.labelOnPoint : self.labelOffPoint, size: labelSize)
-            self.textLabel.text = self.isOn ? textOn : textOff
-            self.textLabel.textColor = self.isOn ? self.textOnColor : self.textOffColor
-            
+            textLabel.frame = CGRect(origin: self.isOn ? self.labelOnPoint : self.labelOffPoint, size: labelSize)
+            updateSwitchState()
         }
         
     }
@@ -156,15 +154,21 @@ class CustomSwitch: UIControl {
         return true
     }
     
+    private func updateSwitchState() {
+        textLabel.text = self.isOn ? textOn : textOff
+        textLabel.textColor = self.isOn ? self.textOnColor : self.textOffColor
+        self.thumbView.frame.origin.x = self.isOn ? self.onPoint.x : self.offPoint.x
+    }
+    
     private func animate() {
-        self.isOn = !self.isOn
+        isOn.toggle()
         self.isAnimating = true
         UIView.animate(withDuration: self.animationDuration, delay: 0, usingSpringWithDamping: 0.7,
                        initialSpringVelocity: 0.5, options: [UIView.AnimationOptions.curveEaseOut,
                                                              UIView.AnimationOptions.beginFromCurrentState], animations: {
                                                                 self.thumbView.frame.origin.x = self.isOn ? self.onPoint.x : self.offPoint.x
                                                                 self.thumbView.backgroundColor = self.isOn ? self.thumbOnTintColor : self.thumbOffTintColor
-
+                                                                
                                                                 self.backgroundColor = self.isOn ? self.onTintColor : self.offTintColor
                                                                 self.textLabel.frame.origin.x = self.isOn ? self.labelOnPoint.x : self.labelOffPoint.x
                                                                 self.textLabel.text = self.isOn ? self.textOn : self.textOff
