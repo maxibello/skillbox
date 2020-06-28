@@ -11,10 +11,13 @@ import UIKit
 class Battery: UIView {
     
     var path: UIBezierPath!
+    var capacityLayer: CAShapeLayer!
     
     public var capacityValue: CGFloat = 1 {
         didSet {
-           setupUI()
+            capacityLayer.removeFromSuperlayer()
+            capacityLayer = createCapacityLayer(with: capacityValue)
+            layer.insertSublayer(capacityLayer, at: 0)
         }
     }
     
@@ -34,7 +37,7 @@ class Battery: UIView {
     }
     
     private func commonInit() {
-        let capacityLayer = createCapacityLayer(with: CGFloat(capacityValue))
+        capacityLayer = createCapacityLayer(with: capacityValue)
         let batteryBorderLayer = createBatteryBordersLayer()
         let batteryBorderLayerMask = CAShapeLayer()
         batteryBorderLayerMask.path = path.cgPath
