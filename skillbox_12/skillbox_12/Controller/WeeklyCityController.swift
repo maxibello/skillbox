@@ -10,25 +10,39 @@ import UIKit
 
 class WeeklyCityController: UITableViewController {
     
-    var items: [DailyWeather]?
+    var items: [DailyWeather] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        WeatherLoader().weeklyCityLoader() { [weak self] weeklyWeather in
-            self?.items = weeklyWeather.list
-            self?.tableView.reloadData()
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items?.count ?? 0
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeekDayCell") as! WeekDayCell
-        if let model = items?[indexPath.row] {
-            cell.configure(with: model)
-        }
+        cell.configure(with: items[indexPath.row])
         return cell
+    }
+    
+    private func loadData() {
+        WeatherLoader().weeklyCityLoader() { [weak self] result in
+            switch result {
+            case .success(let weeklyWeather):
+                self?.items = weeklyWeather.list
+                self?.tableView.reloadData()
+            case .failure(let networkError):
+                let alert = UIAlertController(title: "Network Error", message: networkError.localizedDescription, preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+                    self?.loadData()
+                })
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(retryAction)
+                alert.addAction(okAction)
+                self?.present(alert, animated: true)
+            }
+        }
     }
 }

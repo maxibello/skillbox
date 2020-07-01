@@ -25,11 +25,17 @@ struct WeatherDescription: Decodable {
 }
 
 struct WeatherInfo: Decodable {
-    
     let temp: Float
-    let feels_like: Float
+    let feelsLike: Float
     let pressure: Int
     let humidity: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case temp
+        case feelsLike = "feels_like"
+        case pressure
+        case humidity
+    }
 }
 
 extension Float {
