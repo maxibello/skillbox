@@ -182,10 +182,17 @@ class CustomSwitch: UIControl {
     
     private func animate() {
         isOn.toggle()
-        thumbOffConstraint.isActive = !isOn
-        thumbOnConstraint.isActive = isOn
-        textOffConstraint.isActive = !isOn
-        textOnConstraint.isActive = isOn
+        if isOn {
+            thumbOffConstraint.isActive = false
+            textOffConstraint.isActive = false
+            thumbOnConstraint.isActive = true
+            textOnConstraint.isActive = true
+        } else {
+            thumbOnConstraint.isActive = false
+            textOnConstraint.isActive = false
+            thumbOffConstraint.isActive = true
+            textOffConstraint.isActive = true
+        }
         
         UIView.animate(withDuration: self.animationDuration,
                        delay: 0, usingSpringWithDamping: 0.7,

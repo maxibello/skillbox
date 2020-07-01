@@ -12,16 +12,15 @@ class CustomTextField: UIControl {
     
     public struct TextFieldStatus: Equatable {
         let message: String
-        let progressOffset: Float
         let color: UIColor
         let lettersCount: Int
     }
     
     public var statuses: [TextFieldStatus] = [
-        TextFieldStatus(message: "Слишком короткий пароль", progressOffset: 0.33, color: .red, lettersCount: 3),
-        TextFieldStatus(message: "Добавьте еще немного символов", progressOffset: 0.66, color: .yellow, lettersCount: 6),
-        TextFieldStatus(message: "Еще совсем чуть-чуть", progressOffset: 0.66, color: .blue, lettersCount: 8),
-        TextFieldStatus(message: "Надежный пароль", progressOffset: 1, color: .green, lettersCount: 9)
+        TextFieldStatus(message: "Слишком короткий пароль", color: .red, lettersCount: 3),
+        TextFieldStatus(message: "Добавьте еще немного символов", color: .yellow, lettersCount: 6),
+        TextFieldStatus(message: "Еще совсем чуть-чуть", color: .blue, lettersCount: 8),
+        TextFieldStatus(message: "Надежный пароль", color: .green, lettersCount: 9)
     ]
     
     var statusOffset: CGFloat {
@@ -116,14 +115,16 @@ class CustomTextField: UIControl {
     }
     
     @objc func checkStatus() {
-        guard let lettersCount = textField.text?.count else {
-            return
+        guard let lettersCount = textField.text?.count,
+            lettersCount > 0
+            else {
+                currentStatus = nil
+                return
         }
-            
+        
         if let statusIndex = statuses.firstIndex(where: { item in
             item.lettersCount > lettersCount
         }) {
-            print(statusIndex)
             currentStatus = statuses[statusIndex]
         } else if !statuses.isEmpty {
             currentStatus = statuses[statuses.count - 1]
@@ -139,7 +140,12 @@ class CustomTextField: UIControl {
                 self.messageLabel.text = currentStatus.message
                 self.setNeedsLayout()
             })
-
+        } else {
+            currentStatusConstraint.constant = 0
+            UIView.animate(withDuration: 0.2, animations: {
+                self.messageLabel.text = ""
+                self.setNeedsLayout()
+            })
         }
     }
     
