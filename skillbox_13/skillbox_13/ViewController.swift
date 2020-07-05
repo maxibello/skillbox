@@ -11,7 +11,13 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var animationNumberLabel: UILabel!
-    @IBOutlet weak var square: UIView!
+    
+    lazy var square: UIView = {
+        let square = UIView()
+        square.translatesAutoresizingMaskIntoConstraints = false
+        return square
+    }()
+    
     var squareHorizontralCenter: NSLayoutConstraint!
     var squareTopSpacing: NSLayoutConstraint!
     
@@ -23,15 +29,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(square)
+        
         squareHorizontralCenter = square.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
         squareTopSpacing = square.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90)
-        NSLayoutConstraint.activate([squareHorizontralCenter, squareTopSpacing])
+        NSLayoutConstraint.activate([
+            squareHorizontralCenter,
+            squareTopSpacing,
+            square.widthAnchor.constraint(equalToConstant: view.bounds.width / 2),
+            square.heightAnchor.constraint(equalToConstant: view.bounds.width / 2)
+        ])
+        square.backgroundColor = .red
         
         animationNumberLabel.text = "\(animationNumber)"
     }
     
     @IBAction func performAnimation(_ sender: UIButton) {
-        stopRotation()
+        stopRotationIfNeeded()
+        
         if sender.tag == 1 {
             if animationNumber >= 7 {
                 animationNumber = 1
@@ -108,7 +123,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private func stopRotation() {
+    private func stopRotationIfNeeded() {
         if square.layer.animation(forKey: "transform.rotation") != nil {
             square.layer.removeAnimation(forKey: "transform.rotation")
         }
