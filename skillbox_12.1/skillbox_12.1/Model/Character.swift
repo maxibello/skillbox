@@ -22,4 +22,5 @@ struct Characters: Decodable {
 
 struct Info: Decodable {
     let count: Int
+    let pages: Int
 }

@@ -10,11 +10,11 @@ import UIKit
 
 class CharactersViewController: UICollectionViewController {
     
-    var items: [Character] = []
-    var itemsCount = 0
-    var currentPage = 1
-    var isFetchInProgress = false
-    private let itemsPerPage = 20
+    private var characters: [Character] = []
+    private var itemsCount = 0
+    private var currentPage = 1
+    private var isFetchInProgress = false
+    private var itemsPerPage: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +28,7 @@ class CharactersViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CharacterViewCell", for: indexPath) as! CharacterViewCell
-        
-        if isLoadingItem(for: indexPath) {
-            cell.configure(with: .none)
-        } else {
-            cell.configure(with: items[indexPath.row])
-        }
-        
+        if !isLoadingItem(for: indexPath) { cell.configure(with: characters[indexPath.row]) }
         return cell
     }
     
@@ -61,12 +55,18 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
         
         isFetchInProgress = true
         
-        HTTPService.loadCharacters(from: currentPage) { [weak self] result in
+        RickMortyApiService.loadCharacters(from: currentPage) { [weak self] result in
             switch result {
-            case .success(let characters):
+            case .success(let charactersResponse):
                     self?.isFetchInProgress = false
-                    self?.items += characters.results
-                    self?.itemsCount = characters.info.count
+                    self?.characters += charactersResponse.page
+                    if let itemsCount = self?.itemsCount, itemsCount != charactersResponse.allCount {
+                        self?.collectionView.reloadData()
+                    }
+                    self?.itemsCount = charactersResponse.allCount
+                    if self?.itemsPerPage == nil {
+                        self?.itemsPerPage = Int(ceil(Float(charactersResponse.allCount) / Float(charactersResponse.pageCount)))
+                    }
                     self?.currentPage += 1
                     if let currentPage = self?.currentPage, currentPage > 2 {
                         if let indexPathsToReload = self?.calculateIndexPathsToReload() {
@@ -93,14 +93,16 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
 
 extension CharactersViewController: UICollectionViewDataSourcePrefetching {
     
-    private func calculateIndexPathsToReload() -> [IndexPath] {
-        let startIndex = items.count - itemsPerPage
+    private func calculateIndexPathsToReload() -> [IndexPath]? {
+        guard let itemsPerPage = itemsPerPage else { return nil }
+        let startIndex = characters.count - itemsPerPage
         let endIndex = startIndex + itemsPerPage
+        
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }
     
     private func isLoadingItem(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= items.count
+        return indexPath.row >= characters.count
     }
     
     private func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {

@@ -9,14 +9,14 @@
 import Foundation
 import Alamofire
 
-class HTTPService {
+class RickMortyApiService {
     
     static let imageCache = NSCache<NSString, UIImage>()
     
-    static func loadCharacters(from page: Int, completion: @escaping (Result<Characters, AFError>) -> Void) {
+    static func loadCharacters(from page: Int, completion: @escaping (Result<CharactersResponse, AFError>) -> Void) {
         AF.request("https://rickandmortyapi.com/api/character/?page=\(page)")
         .validate()
-        .responseDecodable(of: Characters.self) { (response) in
+        .responseDecodable(of: CharactersResponse.self) { (response) in
             DispatchQueue.main.async {
                 completion(response.result)
             }

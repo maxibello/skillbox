@@ -15,8 +15,9 @@
 		B13A582224B271A1007FCDDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B13A582024B271A1007FCDDF /* Main.storyboard */; };
 		B13A582424B271A3007FCDDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B13A582324B271A3007FCDDF /* Assets.xcassets */; };
 		B13A582724B271A3007FCDDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B13A582524B271A3007FCDDF /* LaunchScreen.storyboard */; };
-		B13A583024B3B669007FCDDF /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13A582F24B3B669007FCDDF /* HTTPService.swift */; };
+		B13A583024B3B669007FCDDF /* RickMortyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13A582F24B3B669007FCDDF /* RickMortyApiService.swift */; };
 		B13A583324B3B966007FCDDF /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13A583224B3B966007FCDDF /* Character.swift */; };
+		B1D47A8E24B9C2750015E563 /* CharactersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D47A8D24B9C2750015E563 /* CharactersResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +31,9 @@
 		B13A582324B271A3007FCDDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B13A582624B271A3007FCDDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B13A582824B271A3007FCDDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B13A582F24B3B669007FCDDF /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
+		B13A582F24B3B669007FCDDF /* RickMortyApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickMortyApiService.swift; sourceTree = "<group>"; };
 		B13A583224B3B966007FCDDF /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		B1D47A8D24B9C2750015E563 /* CharactersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResponse.swift; sourceTree = "<group>"; };
 		CFC52763265C3BFBADEA5A9F /* Pods_skillbox_12_1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_skillbox_12_1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F432A04B8D6FAF8509BEBECA /* Pods-skillbox_12.1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillbox_12.1.release.xcconfig"; path = "Target Support Files/Pods-skillbox_12.1/Pods-skillbox_12.1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,7 +113,8 @@
 		B13A582E24B3B642007FCDDF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B13A582F24B3B669007FCDDF /* HTTPService.swift */,
+				B13A582F24B3B669007FCDDF /* RickMortyApiService.swift */,
+				B1D47A8D24B9C2750015E563 /* CharactersResponse.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -249,9 +252,10 @@
 			files = (
 				B1020C2124B478AA0030CC0F /* CharacterViewCell.swift in Sources */,
 				B13A581F24B271A1007FCDDF /* CharactersViewController.swift in Sources */,
-				B13A583024B3B669007FCDDF /* HTTPService.swift in Sources */,
+				B13A583024B3B669007FCDDF /* RickMortyApiService.swift in Sources */,
 				B13A583324B3B966007FCDDF /* Character.swift in Sources */,
 				B13A581B24B271A1007FCDDF /* AppDelegate.swift in Sources */,
+				B1D47A8E24B9C2750015E563 /* CharactersResponse.swift in Sources */,
 				B13A581D24B271A1007FCDDF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
