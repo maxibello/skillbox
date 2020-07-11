@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(square)
         
         squareHorizontralCenter = square.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
@@ -36,8 +35,8 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             squareHorizontralCenter,
             squareTopSpacing,
-            square.widthAnchor.constraint(equalToConstant: view.bounds.width / 2),
-            square.heightAnchor.constraint(equalToConstant: view.bounds.width / 2)
+            square.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
+            square.heightAnchor.constraint(equalTo: square.widthAnchor)
         ])
         square.backgroundColor = .red
         
@@ -45,7 +44,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func performAnimation(_ sender: UIButton) {
-        stopRotationIfNeeded()
+        resetViewToDefaults()
         
         if sender.tag == 1 {
             if animationNumber >= 7 {
@@ -63,10 +62,18 @@ class ViewController: UIViewController {
         
         switch animationNumber {
         case 1:
-            UIView.animate(withDuration: 2, animations: {
-                self.square.backgroundColor = .yellow
-            }, completion: { result in
-                self.square.backgroundColor = .red
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 2,
+                delay: 0,
+                options: .curveLinear,
+                animations: {
+                    self.square.backgroundColor = .yellow
+            }, completion: { animatingPosition in
+                guard animatingPosition == .end else { return }
+                UIView.animate(withDuration: 2, animations: {
+                    self.square.backgroundColor = .red
+                }, completion: nil)
+                
             })
         case 2:
             let yOffset: CGFloat = 90
@@ -83,33 +90,63 @@ class ViewController: UIViewController {
                             
             },
                            completion: { finished in
+                            guard finished else { return }
                             self.squareTopSpacing.constant += yOffset
                             self.squareHorizontralCenter.constant -= xOffset
-                            self.view.layoutIfNeeded()
+                            UIView.animate(withDuration: 2,
+                                           delay: 0,
+                                           usingSpringWithDamping: 0.5,
+                                           initialSpringVelocity: 0.3,
+                                           options: [.curveEaseInOut],
+                                           animations: {
+                                            self.view.layoutIfNeeded()
+                            }, completion: nil)
             })
         case 3:
-            let animation = CABasicAnimation(keyPath: "cornerRadius")
-            animation.fromValue = NSNumber(value: 0)
-            animation.toValue = square.bounds.width / 2
-            animation.duration = 2
-            square.layer.add(animation, forKey: "cornerRadius")
+            CATransaction.begin()
+            let animationCorner = CABasicAnimation(keyPath: "cornerRadius")
+            animationCorner.fromValue = NSNumber(value: 0)
+            animationCorner.toValue = square.bounds.width / 2
+            animationCorner.duration = 2
+            
+            CATransaction.setCompletionBlock({
+                guard self.animationNumber == 3 else { return }
+                let animationRollback = CABasicAnimation(keyPath: "cornerRadius")
+                animationRollback.fromValue = self.square.bounds.width / 2
+                animationRollback.toValue = NSNumber(value: 0)
+                animationRollback.duration = 2
+                self.square.layer.add(animationRollback, forKey: "cornerRadiusDesc")
+            })
+            
+            square.layer.add(animationCorner, forKey: "cornerRadiusInc")
+            CATransaction.commit()
+            
         case 4:
             UIView.animate(withDuration: 2, animations: {
                 self.square.transform = CGAffineTransform(rotationAngle: .pi)
             }, completion: { finished in
-                self.square.transform = CGAffineTransform(rotationAngle: 2 * .pi)
+                guard finished else { return }
+                UIView.animate(withDuration: 2, animations: {
+                    self.square.transform = CGAffineTransform(rotationAngle: 2 * .pi)
+                }, completion: nil)
             })
         case 5:
             UIView.animate(withDuration: 2, animations: {
                 self.square.alpha = 0
             }, completion: { finished in
-                self.square.alpha = 1
+                guard finished else { return }
+                UIView.animate(withDuration: 2, animations: {
+                    self.square.alpha = 1
+                }, completion: nil)
             })
         case 6:
             UIView.animate(withDuration: 2, animations: {
                 self.square.transform = CGAffineTransform(scaleX: 2, y: 2)
             }, completion: { finished in
-                self.square.transform = CGAffineTransform(scaleX: 1, y: 1)
+                guard finished else { return }
+                UIView.animate(withDuration: 2, animations: {
+                    self.square.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
             })
         case 7:
             let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
@@ -123,10 +160,18 @@ class ViewController: UIViewController {
         }
     }
     
-    private func stopRotationIfNeeded() {
-        if square.layer.animation(forKey: "transform.rotation") != nil {
-            square.layer.removeAnimation(forKey: "transform.rotation")
-        }
+    private func resetViewToDefaults() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        CATransaction.commit()
+        
+        square.layer.removeAllAnimations()
+        square.backgroundColor = .red
+        squareTopSpacing.constant = 90
+        squareHorizontralCenter.constant = 0
+        square.transform = CGAffineTransform(rotationAngle: 2 * .pi)
+        square.transform = CGAffineTransform(scaleX: 1, y: 1)
+        square.alpha = 1
     }
 }
 
