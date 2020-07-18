@@ -13,8 +13,8 @@ class RickMortyApiService {
     
     static let imageCache = NSCache<NSString, UIImage>()
     
-    static func loadCharacters(from page: Int, completion: @escaping (Result<CharactersResponse, AFError>) -> Void) {
-        AF.request("https://rickandmortyapi.com/api/character/?page=\(page)")
+    static func loadCharacters(with request: DataRequest, from page: Int, completion: @escaping (Result<CharactersResponse, AFError>) -> Void) {
+        request
         .validate()
         .responseDecodable(of: CharactersResponse.self) { (response) in
             DispatchQueue.main.async {
@@ -22,6 +22,10 @@ class RickMortyApiService {
             }
             
         }
+    }
+    
+    static func createNewReqest(for page: Int) -> DataRequest {
+        return AF.request("https://rickandmortyapi.com/api/character/?page=\(page)")
     }
     
     static func downloadImage(url: URL, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {

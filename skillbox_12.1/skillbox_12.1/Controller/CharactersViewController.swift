@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class CharactersViewController: UICollectionViewController {
     
     private var characters: [Character] = []
     private var itemsCount = 0
     private var currentPage = 1
-    private var isFetchInProgress = false
-    private var itemsPerPage: Int?
+    var requests: [Int : DataRequest] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,33 +50,29 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func loadData() {
+        guard requests[currentPage] == nil else { return }
         
-        guard !isFetchInProgress else { return }
-        
-        isFetchInProgress = true
-        
-        RickMortyApiService.loadCharacters(from: currentPage) { [weak self] result in
+        let newRequest = RickMortyApiService.createNewReqest(for: currentPage)
+        requests[currentPage] = newRequest
+        RickMortyApiService.loadCharacters(with: newRequest, from: currentPage) { [weak self] result in
             switch result {
             case .success(let charactersResponse):
-                    self?.isFetchInProgress = false
                     self?.characters += charactersResponse.page
                     if let itemsCount = self?.itemsCount, itemsCount != charactersResponse.allCount {
                         self?.collectionView.reloadData()
                     }
                     self?.itemsCount = charactersResponse.allCount
-                    if self?.itemsPerPage == nil {
-                        self?.itemsPerPage = Int(ceil(Float(charactersResponse.allCount) / Float(charactersResponse.pageCount)))
-                    }
                     self?.currentPage += 1
                     if let currentPage = self?.currentPage, currentPage > 2 {
-                        if let indexPathsToReload = self?.calculateIndexPathsToReload() {
-                            self?.collectionView.reloadItems(at: indexPathsToReload)
+                        if let indexPathsToReload = self?.calculateIndexPathsToReload(nextPageItemsCount: charactersResponse.page.count) {
+                            if let visibleIndexPathsToReload = self?.visibleIndexPathsToReload(intersecting: indexPathsToReload) {
+                                self?.collectionView.reloadItems(at: visibleIndexPathsToReload)
+                            }
                         }
                     } else {
                         self?.collectionView.reloadData()
                     }
             case .failure(let networkError):
-                self?.isFetchInProgress = false
                 
                 let alert = UIAlertController(title: "Network Error", message: networkError.localizedDescription, preferredStyle: .alert)
                 let retryAction = UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
@@ -93,10 +89,9 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
 
 extension CharactersViewController: UICollectionViewDataSourcePrefetching {
     
-    private func calculateIndexPathsToReload() -> [IndexPath]? {
-        guard let itemsPerPage = itemsPerPage else { return nil }
-        let startIndex = characters.count - itemsPerPage
-        let endIndex = startIndex + itemsPerPage
+    private func calculateIndexPathsToReload(nextPageItemsCount: Int) -> [IndexPath]? {
+        let startIndex = characters.count - nextPageItemsCount
+        let endIndex = startIndex + nextPageItemsCount
         
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }
@@ -114,6 +109,14 @@ extension CharactersViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingItem) {
             loadData()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        // Cancel any in-flight requests for data for the specified index paths.
+        if let dataRequest = requests[currentPage] {
+            dataRequest.cancel()
+            requests.removeValue(forKey: currentPage)
         }
     }
 }
