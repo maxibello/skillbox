@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		392BB5E0CB285C9322166D8D /* Pods_skillbox_14.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF482470029CDDFDDB0B53F /* Pods_skillbox_14.framework */; };
+		B11E921C24D08C4A007C2BF2 /* ViewController+showError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E921B24D08C4A007C2BF2 /* ViewController+showError.swift */; };
 		B12154C024C0AE52007DF313 /* TodoItems+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12154BE24C0AE52007DF313 /* TodoItems+CoreDataClass.swift */; };
 		B12154C124C0AE52007DF313 /* TodoItems+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12154BF24C0AE52007DF313 /* TodoItems+CoreDataProperties.swift */; };
 		B12154C324C0B136007DF313 /* ToDoListCoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12154C224C0B136007DF313 /* ToDoListCoreDataViewController.swift */; };
-		B1C7EFED24C2E6730087F95E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C7EFEC24C2E6730087F95E /* CoreDataStack.swift */; };
 		B1D47A9C24BBA96C0015E563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D47A9B24BBA96C0015E563 /* AppDelegate.swift */; };
 		B1D47A9E24BBA96C0015E563 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D47A9D24BBA96C0015E563 /* SceneDelegate.swift */; };
 		B1D47AA024BBA96C0015E563 /* UserDefaultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D47A9F24BBA96C0015E563 /* UserDefaultsController.swift */; };
@@ -30,10 +30,10 @@
 /* Begin PBXFileReference section */
 		4F171FE51B42EA79FA066453 /* Pods-skillbox_14.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillbox_14.debug.xcconfig"; path = "Target Support Files/Pods-skillbox_14/Pods-skillbox_14.debug.xcconfig"; sourceTree = "<group>"; };
 		601185886420AFC87FA2510C /* Pods-skillbox_14.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillbox_14.release.xcconfig"; path = "Target Support Files/Pods-skillbox_14/Pods-skillbox_14.release.xcconfig"; sourceTree = "<group>"; };
+		B11E921B24D08C4A007C2BF2 /* ViewController+showError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+showError.swift"; sourceTree = "<group>"; };
 		B12154BE24C0AE52007DF313 /* TodoItems+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItems+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B12154BF24C0AE52007DF313 /* TodoItems+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItems+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B12154C224C0B136007DF313 /* ToDoListCoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCoreDataViewController.swift; sourceTree = "<group>"; };
-		B1C7EFEC24C2E6730087F95E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B1D47A9824BBA96C0015E563 /* skillbox_14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skillbox_14.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D47A9B24BBA96C0015E563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1D47A9D24BBA96C0015E563 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,13 +64,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B11E921A24D08BEA007C2BF2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B11E921B24D08C4A007C2BF2 /* ViewController+showError.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		B12154B924C0ADD2007DF313 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				B1C7EFEE24C2E8810087F95E /* Model */,
 				B12154C224C0B136007DF313 /* ToDoListCoreDataViewController.swift */,
 				B1D47AA424BBA96C0015E563 /* skillbox_14.xcdatamodeld */,
-				B1C7EFEC24C2E6730087F95E /* CoreDataStack.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -105,6 +112,7 @@
 		B1D47A9A24BBA96C0015E563 /* skillbox_14 */ = {
 			isa = PBXGroup;
 			children = (
+				B11E921A24D08BEA007C2BF2 /* Extension */,
 				B12154B924C0ADD2007DF313 /* CoreData */,
 				B1F83E1A24BF40BB00FC49D2 /* Weather */,
 				B1F83E1624BF04B800FC49D2 /* Realm */,
@@ -293,8 +301,8 @@
 				B1D47AA024BBA96C0015E563 /* UserDefaultsController.swift in Sources */,
 				B1F83E2024BF41C300FC49D2 /* CurrentCIty.swift in Sources */,
 				B1F83E1924BF04D100FC49D2 /* ToDoItem.swift in Sources */,
+				B11E921C24D08C4A007C2BF2 /* ViewController+showError.swift in Sources */,
 				B1D47A9C24BBA96C0015E563 /* AppDelegate.swift in Sources */,
-				B1C7EFED24C2E6730087F95E /* CoreDataStack.swift in Sources */,
 				B12154C024C0AE52007DF313 /* TodoItems+CoreDataClass.swift in Sources */,
 				B1D47A9E24BBA96C0015E563 /* SceneDelegate.swift in Sources */,
 				B1EA092024BE144D0039CAC6 /* ToDoListViewController.swift in Sources */,

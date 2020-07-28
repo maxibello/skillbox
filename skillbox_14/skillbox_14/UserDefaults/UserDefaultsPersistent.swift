@@ -14,6 +14,8 @@ class UserDefaultsPersistent {
     enum CodingKeys: String {
         case firstname = "UserDefaultsPersistent.firstname"
         case lastname = "UserDefaultsPersistent.lastname"
+        case realmFirstLaunch = "UserDefaultsPersistent.reactFirstLaunch"
+        case coreDataFirstLaunch = "UserDefaultsPersistent.coreDataFirstLaunch"
     }
     
     var firstname: String? {
@@ -24,6 +26,16 @@ class UserDefaultsPersistent {
     var lastname: String? {
         set { UserDefaults.standard.set(newValue, forKey: CodingKeys.lastname.rawValue) }
         get { UserDefaults.standard.string(forKey: CodingKeys.lastname.rawValue) }
+    }
+    
+    var realmFirstLaunch: Bool? {
+        set { UserDefaults.standard.set(newValue, forKey: CodingKeys.realmFirstLaunch.rawValue) }
+        get { UserDefaults.standard.bool(forKey: CodingKeys.realmFirstLaunch.rawValue) }
+    }
+    
+    var coreDataFirstLaunch: Bool? {
+        set { UserDefaults.standard.set(newValue, forKey: CodingKeys.coreDataFirstLaunch.rawValue) }
+        get { UserDefaults.standard.bool(forKey: CodingKeys.coreDataFirstLaunch.rawValue) }
     }
     
 }

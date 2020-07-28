@@ -16,7 +16,7 @@ class CurrentCityController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    let realm = try! Realm()
+    var realm: Realm?
     var currentCity: CurrentCity?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +25,14 @@ class CurrentCityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+           realm = try Realm()
+        } catch {
+            showError(message: error.localizedDescription)
+            return
+        }
+        
         loadDataFromStorage()
         loadDataFromNetwork()
     }
@@ -42,7 +50,7 @@ class CurrentCityController: UIViewController {
     }
     
     private func loadDataFromStorage() {
-        currentCity = realm.objects(CurrentCity.self).first
+        currentCity = realm?.objects(CurrentCity.self).first
         if let currentCity = currentCity {
             updateUI(with: currentCity)
         }
@@ -51,16 +59,22 @@ class CurrentCityController: UIViewController {
     private func loadDataFromNetwork() {
         activityIndicator.startAnimating()
         WeatherLoader().currentCityLoader() { [weak self] result in
-            self?.activityIndicator.stopAnimating()
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
             switch result {
             case .success(let downloadedCity):
-                self?.updateUI(with: downloadedCity)
-                try! self?.realm.write({
-                    if let cachedCity = self?.currentCity {
-                        self?.realm.delete(cachedCity)
-                    }
-                    self?.realm.add(downloadedCity)
-                })
+                self.updateUI(with: downloadedCity)
+                do {
+                    try self.realm?.write({
+                        if let cachedCity = self.currentCity {
+                            self.realm?.delete(cachedCity)
+                        }
+                        self.realm?.add(downloadedCity)
+                    })
+                } catch {
+                    self.showError(message: error.localizedDescription)
+                }
+                
             case .failure(let error):
                 let alert = UIAlertController(title: "Network Error", message: error.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -70,7 +84,7 @@ class CurrentCityController: UIViewController {
                 })
                 alert.addAction(retryAction)
                 alert.addAction(okAction)
-                self?.present(alert, animated: true)
+                self.present(alert, animated: true)
             }
         }
     }

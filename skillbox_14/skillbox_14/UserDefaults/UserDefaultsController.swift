@@ -13,10 +13,14 @@ class UserDefaultsController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var lastnameTextField: UITextField!
     
-    let persistent = UserDefaultsPersistent()
+    let persistent = UserDefaultsPersistent.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        
         firstnameTextField.delegate = self
         lastnameTextField.delegate = self
     }
@@ -41,6 +45,10 @@ class UserDefaultsController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    @objc func handleTap() {
+        view.endEditing(true)
     }
 
 }

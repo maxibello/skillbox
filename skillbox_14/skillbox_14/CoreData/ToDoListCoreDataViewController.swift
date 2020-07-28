@@ -12,7 +12,17 @@ import CoreData
 class ToDoListCoreDataViewController: UITableViewController {
     
     var itemsToDo: [TodoItems] = []
-    let coreDataStack = CoreDataStack(modelName: "skillbox_14")
+    let persistent = UserDefaultsPersistent.shared
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "skillbox_14")
+        container.loadPersistentStores { [weak self] description, error in
+            if let error = error {
+                self?.showError(message: error.localizedDescription)
+            }
+        }
+        return container
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +44,9 @@ class ToDoListCoreDataViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let itemToDelete = itemsToDo[indexPath.row]
-            coreDataStack.managedContext.delete(itemToDelete)
-            coreDataStack.saveContext()
+            
+            persistentContainer.viewContext.delete(itemToDelete)
+            saveContext()
             itemsToDo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -45,15 +56,15 @@ class ToDoListCoreDataViewController: UITableViewController {
         let alert = UIAlertController(title: "New task", message: "Type what you want to do", preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: nil)
-        let saveAction = UIAlertAction(title: "OK", style: .default, handler: { action in
-            guard let textField = alert.textFields?.first else {
+        let saveAction = UIAlertAction(title: "OK", style: .default, handler: { [weak self, weak alert] action in
+            guard let self = self, let textField = alert?.textFields?.first else {
                 return
             }
             
             if let text = textField.text, text.count > 0 {
-                let todoItem = TodoItems(context: self.coreDataStack.managedContext)
+                let todoItem = TodoItems(context: self.persistentContainer.viewContext)
                 todoItem.text = text
-                self.coreDataStack.saveContext()
+                self.saveContext()
                 self.retrieveItems()
                 self.tableView.reloadData()
             }
@@ -65,25 +76,34 @@ class ToDoListCoreDataViewController: UITableViewController {
     }
     
     private func retrieveItems() {
-        let managedContext =
-        coreDataStack.managedContext
+        let managedContext = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<TodoItems> = TodoItems.fetchRequest()
         do {
             itemsToDo = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
+            showError(message: error.localizedDescription)
         }
     }
     
     private func populateDefaultTodosIfNeeded() {
-        if itemsToDo.count == 0 {
+        if persistent.coreDataFirstLaunch == nil {
             ["Clean my room", "Wash the dishes", "Save the planet"].forEach({ task in
-                let todoItem = TodoItems(context: coreDataStack.managedContext)
+                let todoItem = TodoItems(context: persistentContainer.viewContext)
                 todoItem.text = task
-                coreDataStack.saveContext()
+                saveContext()
             })
             retrieveItems()
+            persistent.coreDataFirstLaunch = true
         }
-        
+    }
+    
+    private func saveContext() {
+        let context = persistentContainer.viewContext
+        guard context.hasChanges else { return }
+        do {
+            try context.save()
+        } catch let error as NSError {
+            showError(message: error.localizedDescription)
+        }
     }
 }
