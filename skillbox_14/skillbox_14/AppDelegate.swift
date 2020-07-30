@@ -8,14 +8,44 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var persistentContainer: NSPersistentContainer {
+            let container = NSPersistentContainer(name: "skillbox_14")
+            container.persistentStoreDescriptions.first?.shouldAddStoreAsynchronously = true
+            container.loadPersistentStores { description, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            return container
+        }
+
+        let serviceLocator = ServiceLocator.shared
+        
+//        DispatchQueue.global(qos: .background).async {
+//            do {
+//                let realm = try Realm()
+//                serviceLocator.add(services: realm)
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
+            do {
+                let realm = try Realm()
+                serviceLocator.add(services: realm)
+            } catch {
+                print(error.localizedDescription)
+            }
+
+        serviceLocator.add(services:UserDefaultsPersistent.shared)
+        
         return true
     }
 

@@ -11,7 +11,14 @@ import RealmSwift
 
 class ToDoListViewController: UITableViewController {
     
-    var realm: Realm?
+    var realm: Realm? {
+        guard let realm = ServiceLocator.shared.get(Realm.self) else {
+            showError(message: "Realm initialization error")
+            return nil
+        }
+        return realm
+    }
+    
     lazy var itemsToDo: Results<ToDoItem>? = {
         if let realm = self.realm {
             return realm.objects(ToDoItem.self)
@@ -23,12 +30,6 @@ class ToDoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-           realm = try Realm()
-        } catch {
-            showError(message: error.localizedDescription)
-            return
-        }
         
         populateDefaultTodos()
     }

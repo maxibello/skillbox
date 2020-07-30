@@ -9,11 +9,17 @@
 import UIKit
 
 class UserDefaultsController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var lastnameTextField: UITextField!
     
-    let persistent = UserDefaultsPersistent.shared
+    var persistent: UserDefaultsPersistent? {
+        guard let persistent = ServiceLocator.shared.get(UserDefaultsPersistent.self) else {
+            showError(message: "UserDefaults initialization error")
+            return nil
+        }
+        return persistent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,21 +33,23 @@ class UserDefaultsController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let persistent = persistent else { return }
         firstnameTextField.text = persistent.firstname
         lastnameTextField.text = persistent.lastname
     }
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if let text = textField.text,
-           let textRange = Range(range, in: text) {
-           let updatedText = text.replacingCharacters(in: textRange,
-                                                       with: string)
-            if textField === firstnameTextField {
-                persistent.firstname = updatedText
-            } else if textField === lastnameTextField {
-                persistent.lastname = updatedText
-            }
+        guard let persistent = persistent,
+            let text = textField.text,
+            let textRange = Range(range, in: text) else { return false }
+        
+        let updatedText = text.replacingCharacters(in: textRange,
+                                                   with: string)
+        if textField === firstnameTextField {
+            persistent.firstname = updatedText
+        } else if textField === lastnameTextField {
+            persistent.lastname = updatedText
         }
         
         return true
@@ -50,6 +58,6 @@ class UserDefaultsController: UIViewController, UITextFieldDelegate {
     @objc func handleTap() {
         view.endEditing(true)
     }
-
+    
 }
 

@@ -12,22 +12,33 @@ import CoreData
 class ToDoListCoreDataViewController: UITableViewController {
     
     var itemsToDo: [TodoItems] = []
-    let persistent = UserDefaultsPersistent.shared
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "skillbox_14")
-        container.loadPersistentStores { [weak self] description, error in
-            if let error = error {
-                self?.showError(message: error.localizedDescription)
-            }
+    var persistent: UserDefaultsPersistent? {
+        guard let persistent = ServiceLocator.shared.get(UserDefaultsPersistent.self) else {
+            return nil
         }
-        return container
-    }()
+        return persistent
+    }
+    
+    
+    var persistentContainer: NSPersistentContainer? {
+        guard let persistentContainer = ServiceLocator.shared.get(NSPersistentContainer.self) else {
+            let errorVC = ErrorOverlayVC()
+            errorVC.modalPresentationStyle = .overCurrentContext
+            errorVC.modalTransitionStyle = .coverVertical
+            errorVC.delegate = self
+            errorVC.errorMessage = "CoreData storage initialization error"
+            present(errorVC, animated: true, completion: nil)
+            return nil
+        }
+        return persistentContainer
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveItems()
         populateDefaultTodosIfNeeded()
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,7 +56,7 @@ class ToDoListCoreDataViewController: UITableViewController {
         if editingStyle == .delete {
             let itemToDelete = itemsToDo[indexPath.row]
             
-            persistentContainer.viewContext.delete(itemToDelete)
+            persistentContainer?.viewContext.delete(itemToDelete)
             saveContext()
             itemsToDo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -57,12 +68,12 @@ class ToDoListCoreDataViewController: UITableViewController {
         
         alert.addTextField(configurationHandler: nil)
         let saveAction = UIAlertAction(title: "OK", style: .default, handler: { [weak self, weak alert] action in
-            guard let self = self, let textField = alert?.textFields?.first else {
+            guard let self = self, let textField = alert?.textFields?.first, let persistentContainer = self.persistentContainer else {
                 return
             }
             
             if let text = textField.text, text.count > 0 {
-                let todoItem = TodoItems(context: self.persistentContainer.viewContext)
+                let todoItem = TodoItems(context: persistentContainer.viewContext)
                 todoItem.text = text
                 self.saveContext()
                 self.retrieveItems()
@@ -76,7 +87,9 @@ class ToDoListCoreDataViewController: UITableViewController {
     }
     
     private func retrieveItems() {
-        let managedContext = persistentContainer.viewContext
+        guard let managedContext = persistentContainer?.viewContext else {
+            return
+        }
         let fetchRequest: NSFetchRequest<TodoItems> = TodoItems.fetchRequest()
         do {
             itemsToDo = try managedContext.fetch(fetchRequest)
@@ -86,24 +99,32 @@ class ToDoListCoreDataViewController: UITableViewController {
     }
     
     private func populateDefaultTodosIfNeeded() {
-        if persistent.coreDataFirstLaunch == nil {
-            ["Clean my room", "Wash the dishes", "Save the planet"].forEach({ task in
-                let todoItem = TodoItems(context: persistentContainer.viewContext)
-                todoItem.text = task
-                saveContext()
-            })
-            retrieveItems()
-            persistent.coreDataFirstLaunch = true
+        guard let persistentContainer = persistentContainer, let persistent = persistent, persistent.coreDataFirstLaunch == nil else {
+            return
         }
+        
+        ["Clean my room", "Wash the dishes", "Save the planet"].forEach({ task in
+            let todoItem = TodoItems(context: persistentContainer.viewContext)
+            todoItem.text = task
+            saveContext()
+        })
+        retrieveItems()
+        persistent.coreDataFirstLaunch = true
+        
     }
     
     private func saveContext() {
-        let context = persistentContainer.viewContext
-        guard context.hasChanges else { return }
+        guard let context = persistentContainer?.viewContext, context.hasChanges else { return }
         do {
             try context.save()
         } catch let error as NSError {
             showError(message: error.localizedDescription)
         }
+    }
+}
+
+extension ToDoListCoreDataViewController: ErrorOverlayDismissing {
+    func didCloseErrorVC(_: ErrorOverlayVC) {
+        dismiss(animated: true, completion: nil)
     }
 }
