@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		392BB5E0CB285C9322166D8D /* Pods_skillbox_14.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF482470029CDDFDDB0B53F /* Pods_skillbox_14.framework */; };
+		9341B42024D44FFC0026F0B2 /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9341B41F24D44FFC0026F0B2 /* FirstLaunch.swift */; };
 		B11E921C24D08C4A007C2BF2 /* ViewController+showError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E921B24D08C4A007C2BF2 /* ViewController+showError.swift */; };
 		B11E922024D2BDD0007C2BF2 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E921E24D2B416007C2BF2 /* ServiceLocator.swift */; };
 		B11E922324D37AB7007C2BF2 /* ErrorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11E922224D37AB7007C2BF2 /* ErrorOverlayVC.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		4F171FE51B42EA79FA066453 /* Pods-skillbox_14.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillbox_14.debug.xcconfig"; path = "Target Support Files/Pods-skillbox_14/Pods-skillbox_14.debug.xcconfig"; sourceTree = "<group>"; };
 		601185886420AFC87FA2510C /* Pods-skillbox_14.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillbox_14.release.xcconfig"; path = "Target Support Files/Pods-skillbox_14/Pods-skillbox_14.release.xcconfig"; sourceTree = "<group>"; };
+		9341B41F24D44FFC0026F0B2 /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
 		B11E921B24D08C4A007C2BF2 /* ViewController+showError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+showError.swift"; sourceTree = "<group>"; };
 		B11E921E24D2B416007C2BF2 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		B11E922224D37AB7007C2BF2 /* ErrorOverlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorOverlayVC.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				B1D47AA724BBA9710015E563 /* Assets.xcassets */,
 				B1D47AA924BBA9710015E563 /* LaunchScreen.storyboard */,
 				B1D47AAC24BBA9710015E563 /* Info.plist */,
+				9341B41F24D44FFC0026F0B2 /* FirstLaunch.swift */,
 			);
 			path = skillbox_14;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				B11E921C24D08C4A007C2BF2 /* ViewController+showError.swift in Sources */,
 				B1D47A9C24BBA96C0015E563 /* AppDelegate.swift in Sources */,
 				B12154C024C0AE52007DF313 /* TodoItems+CoreDataClass.swift in Sources */,
+				9341B42024D44FFC0026F0B2 /* FirstLaunch.swift in Sources */,
 				B1D47A9E24BBA96C0015E563 /* SceneDelegate.swift in Sources */,
 				B1EA092024BE144D0039CAC6 /* ToDoListViewController.swift in Sources */,
 				B1F83E1C24BF40CB00FC49D2 /* CurrentCityController.swift in Sources */,

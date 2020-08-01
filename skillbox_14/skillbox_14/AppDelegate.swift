@@ -28,15 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let serviceLocator = ServiceLocator.shared
-        
-//        DispatchQueue.global(qos: .background).async {
-//            do {
-//                let realm = try Realm()
-//                serviceLocator.add(services: realm)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
             do {
                 let realm = try Realm()
                 serviceLocator.add(services: realm)
@@ -44,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
 
-        serviceLocator.add(services:UserDefaultsPersistent.shared)
+        serviceLocator.add(services:UserDefaultsPersistent.shared, persistentContainer)
+        
+        FirstLaunch.initializeDefaultDbData()
         
         return true
     }

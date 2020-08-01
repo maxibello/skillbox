@@ -27,13 +27,6 @@ class ToDoListViewController: UITableViewController {
         }()
     let persistent = UserDefaultsPersistent.shared
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        populateDefaultTodos()
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemsToDo?.count ?? 0
     }
@@ -46,7 +39,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete, let itemsToDo = itemsToDo {
+        guard editingStyle == .delete, let itemsToDo = itemsToDo else { return }
             do {
                 try realm?.write({
                     realm?.delete(itemsToDo[indexPath.row])
@@ -57,7 +50,7 @@ class ToDoListViewController: UITableViewController {
                 showError(message: error.localizedDescription)
             }
             
-        }
+        
     }
     
     @IBAction func addNewTask(_ sender: Any) {
@@ -85,24 +78,5 @@ class ToDoListViewController: UITableViewController {
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
-    }
-    
-    private func populateDefaultTodos() {
-        if persistent.realmFirstLaunch == nil {
-            do {
-                try realm?.write({
-                    ["Finish skillbox course", "Clean teeth", "Have a shower"].forEach({ task in
-                        let todoItem = ToDoItem()
-                        todoItem.text = task
-                        self.realm?.add(todoItem)
-                    })
-                })
-                persistent.realmFirstLaunch = true
-            } catch {
-                showError(message: error.localizedDescription)
-            }
-
-        }
-        
     }
 }
