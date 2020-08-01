@@ -13,7 +13,12 @@ class ToDoListViewController: UITableViewController {
     
     var realm: Realm? {
         guard let realm = ServiceLocator.shared.get(Realm.self) else {
-            showError(message: "Realm initialization error")
+            let errorVC = ErrorOverlayVC()
+            errorVC.modalPresentationStyle = .overCurrentContext
+            errorVC.modalTransitionStyle = .coverVertical
+            errorVC.delegate = self
+            errorVC.errorMessage = "Realm initialization error"
+            present(errorVC, animated: true, completion: nil)
             return nil
         }
         return realm
@@ -78,5 +83,11 @@ class ToDoListViewController: UITableViewController {
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension ToDoListViewController: ErrorOverlayDismissing {
+    func didCloseErrorVC(_: ErrorOverlayVC) {
+        dismiss(animated: true, completion: nil)
     }
 }

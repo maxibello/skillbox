@@ -16,7 +16,19 @@ class CurrentCityController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var realm: Realm?
+    var realm: Realm? {
+        guard let realm = ServiceLocator.shared.get(Realm.self) else {
+            let errorVC = ErrorOverlayVC()
+            errorVC.modalPresentationStyle = .overCurrentContext
+            errorVC.modalTransitionStyle = .coverVertical
+            errorVC.delegate = self
+            errorVC.errorMessage = "Realm initialization error"
+            present(errorVC, animated: true, completion: nil)
+            return nil
+        }
+        return realm
+    }
+    
     var currentCity: CurrentCity?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,14 +37,6 @@ class CurrentCityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        do {
-           realm = try Realm()
-        } catch {
-            showError(message: error.localizedDescription)
-            return
-        }
-        
         loadDataFromStorage()
         loadDataFromNetwork()
     }
@@ -43,7 +47,7 @@ class CurrentCityController: UIViewController {
         if let temp = city.main?.temp {
             tempLabel.text = "\(temp.tempCelsius) ℃"
         }
-
+        
         cityLabel.isHidden = cityLabel.isHidden ? false : cityLabel.isHidden
         weatherDescriptionLabel.isHidden = false
         tempLabel.isHidden = tempLabel.isHidden ? false : tempLabel.isHidden
@@ -89,4 +93,10 @@ class CurrentCityController: UIViewController {
         }
     }
     
+}
+
+extension CurrentCityController: ErrorOverlayDismissing {
+    func didCloseErrorVC(_: ErrorOverlayVC) {
+        dismiss(animated: true, completion: nil)
+    }
 }

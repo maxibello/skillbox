@@ -15,7 +15,12 @@ class UserDefaultsController: UIViewController, UITextFieldDelegate {
     
     var persistent: UserDefaultsPersistent? {
         guard let persistent = ServiceLocator.shared.get(UserDefaultsPersistent.self) else {
-            showError(message: "UserDefaults initialization error")
+            let errorVC = ErrorOverlayVC()
+            errorVC.modalPresentationStyle = .overCurrentContext
+            errorVC.modalTransitionStyle = .coverVertical
+            errorVC.delegate = self
+            errorVC.errorMessage = "UserDefaults initialization error"
+            present(errorVC, animated: true, completion: nil)
             return nil
         }
         return persistent
@@ -61,3 +66,8 @@ class UserDefaultsController: UIViewController, UITextFieldDelegate {
     
 }
 
+extension UserDefaultsController: ErrorOverlayDismissing {
+    func didCloseErrorVC(_: ErrorOverlayVC) {
+        dismiss(animated: true, completion: nil)
+    }
+}

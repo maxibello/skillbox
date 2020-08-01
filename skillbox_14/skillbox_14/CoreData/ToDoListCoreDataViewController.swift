@@ -13,6 +13,12 @@ class ToDoListCoreDataViewController: UITableViewController {
     
     var persistent: UserDefaultsPersistent? {
         guard let persistent = ServiceLocator.shared.get(UserDefaultsPersistent.self) else {
+            let errorVC = ErrorOverlayVC()
+            errorVC.modalPresentationStyle = .overCurrentContext
+            errorVC.modalTransitionStyle = .coverVertical
+            errorVC.delegate = self
+            errorVC.errorMessage = "UserDefaults initialization error"
+            present(errorVC, animated: true, completion: nil)
             return nil
         }
         return persistent
