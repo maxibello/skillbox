@@ -12,7 +12,7 @@ private enum State {
     case closed
     case open
 }
- 
+
 extension State {
     var opposite: State {
         switch self {
@@ -21,26 +21,26 @@ extension State {
         }
     }
 }
- 
+
 class ViewController: UIViewController {
- 
+    
     private lazy var popupView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
         return view
     }()
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         popupView.addGestureRecognizer(panRecognizer)
     }
- 
+    
     private var bottomConstraint = NSLayoutConstraint()
     var transitionAnimator: UIViewPropertyAnimator!
     let popupOffset: CGFloat = 440
     private var animationProgress: CGFloat = 0
- 
+    
     private func layout() {
         popupView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(popupView)
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         bottomConstraint.isActive = true
         popupView.heightAnchor.constraint(equalToConstant: 550).isActive = true
     }
- 
+    
     private var currentState: State = .closed
     
     private lazy var panRecognizer: UIPanGestureRecognizer = {
@@ -58,12 +58,11 @@ class ViewController: UIViewController {
         recognizer.addTarget(self, action: #selector(popupViewPanned(recognizer:)))
         return recognizer
     }()
-     
+    
     @objc private func popupViewPanned(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
-            animateTransitionIfNeeded(to: currentState.opposite, duration: 1.5)
-            transitionAnimator.pauseAnimation()
+            activatedTransitionAnimator(to: currentState.opposite, duration: 1.5)
             animationProgress = transitionAnimator.fractionComplete
         case .changed:
             let translation = recognizer.translation(in: popupView)
@@ -79,19 +78,16 @@ class ViewController: UIViewController {
             }
             switch currentState {
             case .open:
-                if !shouldClose && !transitionAnimator.isReversed { transitionAnimator.isReversed = !transitionAnimator.isReversed }
-                if shouldClose && transitionAnimator.isReversed { transitionAnimator.isReversed = !transitionAnimator.isReversed }
+                if shouldClose == transitionAnimator.isReversed { transitionAnimator.isReversed.toggle() }
             case .closed:
-                if shouldClose && !transitionAnimator.isReversed { transitionAnimator.isReversed = !transitionAnimator.isReversed }
-                if !shouldClose && transitionAnimator.isReversed { transitionAnimator.isReversed = !transitionAnimator.isReversed }
+                if shouldClose != transitionAnimator.isReversed { transitionAnimator.isReversed.toggle() }
             }
             transitionAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        default:
-            ()
+        default: break
         }
     }
     
-    fileprivate func animateTransitionIfNeeded(to: State, duration: CGFloat) {
+    fileprivate func activatedTransitionAnimator(to: State, duration: CGFloat) {
         let state = currentState.opposite
         transitionAnimator = UIViewPropertyAnimator(duration: 1, dampingRatio: 1, animations: {
             switch state {
@@ -108,11 +104,10 @@ class ViewController: UIViewController {
                 self.currentState = state.opposite
             case .end:
                 self.currentState = state
-            case .current:
-                ()
-            @unknown default:
-                ()
+            case .current: break
+            @unknown default: break
             }
+            
             switch self.currentState {
             case .open:
                 self.bottomConstraint.constant = 0
@@ -121,7 +116,8 @@ class ViewController: UIViewController {
             }
         }
         transitionAnimator.startAnimation()
+        transitionAnimator.pauseAnimation()
     }
- 
+    
 }
 
