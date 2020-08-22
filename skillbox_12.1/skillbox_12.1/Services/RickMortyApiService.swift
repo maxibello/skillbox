@@ -13,7 +13,7 @@ class RickMortyApiService {
     
     static let imageCache = NSCache<NSString, UIImage>()
     
-    static func loadCharacters(with request: DataRequest, from page: Int, completion: @escaping (Result<CharactersResponse, AFError>) -> Void) {
+    static func loadCharacters(with request: DataRequest, completion: @escaping (Result<CharactersResponse, AFError>) -> Void) {
         request
         .validate()
         .responseDecodable(of: CharactersResponse.self) { (response) in
@@ -36,6 +36,8 @@ class RickMortyApiService {
                 if let error = error {
                     completion(nil, error)
                 } else if let data = data, let image = UIImage(data: data) {
+                    
+//                    data.write(to: <#T##URL#>, options: .atomic)
                     imageCache.setObject(image, forKey: url.absoluteString as NSString)
                     completion(image, nil)
                 } else {
