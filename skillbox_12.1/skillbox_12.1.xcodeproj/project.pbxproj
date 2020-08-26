@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		933CDC4F24DB137A006B035C /* UserDefaultsPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933CDC4E24DB137A006B035C /* UserDefaultsPersistent.swift */; };
-		934885A724DAC41B00609D90 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934885A624DAC41B00609D90 /* DBManager.swift */; };
+		934885A724DAC41B00609D90 /* CharacterDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934885A624DAC41B00609D90 /* CharacterDB.swift */; };
 		9349020024D9C302009CF699 /* CharacterDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934901FF24D9C302009CF699 /* CharacterDetailVC.swift */; };
 		938126C924DFF8240093CB2D /* ConflictResolverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938126C824DFF8240093CB2D /* ConflictResolverVC.swift */; };
 		9F87E7FB7C5DDD532608BC72 /* Pods_skillbox_12_1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC52763265C3BFBADEA5A9F /* Pods_skillbox_12_1.framework */; };
@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		2962968BB0BA0676A6C3D53F /* Pods-skillbox_12.1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillbox_12.1.debug.xcconfig"; path = "Target Support Files/Pods-skillbox_12.1/Pods-skillbox_12.1.debug.xcconfig"; sourceTree = "<group>"; };
 		933CDC4E24DB137A006B035C /* UserDefaultsPersistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistent.swift; sourceTree = "<group>"; };
-		934885A624DAC41B00609D90 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		934885A624DAC41B00609D90 /* CharacterDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDB.swift; sourceTree = "<group>"; };
 		934901FF24D9C302009CF699 /* CharacterDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailVC.swift; sourceTree = "<group>"; };
 		938126C824DFF8240093CB2D /* ConflictResolverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictResolverVC.swift; sourceTree = "<group>"; };
 		B1020C2024B478AA0030CC0F /* CharacterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewCell.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 				B13A582324B271A3007FCDDF /* Assets.xcassets */,
 				B13A582524B271A3007FCDDF /* LaunchScreen.storyboard */,
 				B13A582824B271A3007FCDDF /* Info.plist */,
-				934885A624DAC41B00609D90 /* DBManager.swift */,
+				934885A624DAC41B00609D90 /* CharacterDB.swift */,
 				933CDC4E24DB137A006B035C /* UserDefaultsPersistent.swift */,
 			);
 			path = skillbox_12.1;
@@ -266,7 +266,7 @@
 				B13A581F24B271A1007FCDDF /* CharactersViewController.swift in Sources */,
 				B13A583024B3B669007FCDDF /* RickMortyApiService.swift in Sources */,
 				9349020024D9C302009CF699 /* CharacterDetailVC.swift in Sources */,
-				934885A724DAC41B00609D90 /* DBManager.swift in Sources */,
+				934885A724DAC41B00609D90 /* CharacterDB.swift in Sources */,
 				B13A583324B3B966007FCDDF /* Character.swift in Sources */,
 				B13A581B24B271A1007FCDDF /* AppDelegate.swift in Sources */,
 				B1D47A8E24B9C2750015E563 /* CharactersResponse.swift in Sources */,

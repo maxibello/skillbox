@@ -24,7 +24,7 @@ class CharactersViewController: UICollectionViewController {
     //    private var itemsCountRemote = 0
     private var currentPage = 1
     var requests: [Int : DataRequest] = [:]
-    let realmStorage = DBManager.sharedInstance
+    let realmStorage = CharacterDB.sharedInstance
     let userDefaults = UserDefaultsPersistent.shared
     
     var receivedObjects: [Character] = []
@@ -121,11 +121,9 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
                 self.receivedObjects = charactersResponse.page
                 
                 for modifiedObject in modifiedObjects {
-                    if self.receivedObjects.contains(where: { $0.id == modifiedObject.id }) {
-                        if let receivedObject = self.receivedObjects.first(where: { $0.id == modifiedObject.id }) {
-                            self.conflictedCharacters.append((local: modifiedObject, remote: receivedObject))
-                            
-                        }
+                    if let receivedObject = self.receivedObjects.first(where: { $0.id == modifiedObject.id }) {
+                        self.conflictedCharacters.append((local: modifiedObject, remote: receivedObject))
+                        
                     }
                 }
                 
@@ -151,7 +149,7 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
                 } else {
                     self.characters += self.receivedObjects
                      self.collectionView.reloadData()
-                    DBManager.sharedInstance.addObjects(objects: self.receivedObjects)
+                    CharacterDB.sharedInstance.addObjects(objects: self.receivedObjects)
                 }
                 
             case .failure(let networkError):
@@ -262,9 +260,14 @@ extension CharactersViewController: IConflictResolver {
                 item.saveLocalImage(tempImage)
             }
         })
-        DBManager.sharedInstance.addObjects(objects: resolved)
+        CharacterDB.sharedInstance.addObjects(objects: resolved)
         loadFromStorage()
 
         collectionView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.collectionView.refreshControl?.beginRefreshing()
+            self.collectionView.refreshControl?.endRefreshing()
+        }
     }
 }

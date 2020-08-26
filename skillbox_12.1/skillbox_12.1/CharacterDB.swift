@@ -9,9 +9,9 @@
 import Foundation
 import RealmSwift
 
-class DBManager {
+class CharacterDB {
     private var database: Realm
-    static let sharedInstance = DBManager()
+    static let sharedInstance = CharacterDB()
     
     private init() {
         database = try! Realm()
@@ -21,20 +21,7 @@ class DBManager {
         let results: Results<Character> = database.objects(Character.self)
         return results
     }
-//    func addData(object: Character)   {
-//        try! database.write {
-//            database.add(object)
-//            print("Added new object")
-//        }
-//    }
-    
-//    func addObjects(objects: List<Character>) {
-//        try! database.write {
-//            database.add(objects, update: .all)
-//            print("Added new objects")
-//        }
-//    }
-//
+
     func addObjects(objects: [Character]) {
         
         try! database.write {

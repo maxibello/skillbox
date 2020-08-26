@@ -57,10 +57,12 @@ class Character: Object, Decodable {
     
     func saveLocalImage(_ image: UIImage) {
         guard let filePath = localImagePath else { return }
-        do {
-            try image.pngData()?.write(to: filePath, options: .atomic)
-        } catch {
-            print("Error saving local image")
+        DispatchQueue.global(qos: .userInteractive).async {
+            do {
+                try image.pngData()?.write(to: filePath, options: .atomic)
+            } catch {
+                print("Error saving local image")
+            }
         }
     }
 }

@@ -15,8 +15,6 @@ protocol CharacterChanged {
 class CharacterDetailVC: UIViewController {
     var character: Character?
     
-    @IBOutlet weak var idLabel: UILabel!
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var speciesTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
@@ -36,7 +34,7 @@ class CharacterDetailVC: UIViewController {
     }
     
     private func updateUI(with item: Character) {
-        idLabel.text = "ID: \(item.id)"
+        navigationItem.title = "Character #\(item.id)"
         nameTextField.text = item.name
         speciesTextField.text = item.species
         photoImageView.image = item.localImage
@@ -45,7 +43,7 @@ class CharacterDetailVC: UIViewController {
     @IBAction func saveCharacter(_ sender: Any) {
         guard let character = character,
         nameTextField.text != character.name || speciesTextField.text != character.species || imageChanged else { return }
-        DBManager.sharedInstance.edit(object: character) {
+        CharacterDB.sharedInstance.edit(object: character) {
             character.name = nameTextField.text ?? ""
             character.species = speciesTextField.text ?? ""
             character.localRevision = true
