@@ -169,7 +169,7 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     private func loadFromStorage() {
         characters = Array(realmStorage.getDataFromDB())
         
-        guard itemsCount > 0 else {
+        guard characters.count > 0 else {
             loadData()
             return
         }

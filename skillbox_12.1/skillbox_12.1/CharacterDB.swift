@@ -30,20 +30,42 @@ class CharacterDB {
         }
     }
     
-    func edit(object: Character, closure: () -> Void) {
-        try! database.write {
-            closure()
+    func edit(object: Character, name: String, species: String, localRevision: Bool, completion: @escaping () -> Void) {
+        database.writeAsync(obj: object, completion: completion) { (realm, object) in
+            guard let object = object else { return }
+            object.name = name
+            object.species = species
+            object.localRevision = localRevision
         }
     }
     
-    func deleteAllFromDatabase()  {
-        try! database.write {
-            database.deleteAll()
-        }
-    }
-    func deleteFromDb(object: Character)   {
-        try! database.write {
-            database.delete(object)
+}
+
+extension Realm {
+    func writeAsync<T : ThreadConfined>(obj: T,
+                                        completion: @escaping () -> Void,
+                                        errorHandler: @escaping ((_ error : Swift.Error) -> Void) = { _ in return },
+                                        block: @escaping ((Realm, T?) -> Void)) {
+        let wrappedObj = ThreadSafeReference(to: obj)
+        let config = self.configuration
+        DispatchQueue(label: "background").async {
+            autoreleasepool {
+                do {
+                    let realm = try Realm(configuration: config)
+                    let obj = realm.resolve(wrappedObj)
+
+                    try realm.write {
+                        block(realm, obj)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                }
+                catch {
+                    errorHandler(error)
+                }
+            }
         }
     }
 }

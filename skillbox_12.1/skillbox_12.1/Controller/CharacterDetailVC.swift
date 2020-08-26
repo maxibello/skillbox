@@ -43,12 +43,13 @@ class CharacterDetailVC: UIViewController {
     @IBAction func saveCharacter(_ sender: Any) {
         guard let character = character,
         nameTextField.text != character.name || speciesTextField.text != character.species || imageChanged else { return }
-        CharacterDB.sharedInstance.edit(object: character) {
-            character.name = nameTextField.text ?? ""
-            character.species = speciesTextField.text ?? ""
-            character.localRevision = true
+        CharacterDB.sharedInstance.edit(object: character,
+                                        name: nameTextField.text ?? "",
+                                        species: speciesTextField.text ?? "",
+                                        localRevision: true) {
+                                            self.delegate?.didChangeCharacter(self)
         }
-        delegate?.didChangeCharacter(self)
+        
         navigationController?.popViewController(animated: true)
     }
     
