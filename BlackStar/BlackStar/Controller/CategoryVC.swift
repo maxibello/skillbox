@@ -18,10 +18,11 @@ class CategoryVC: UITableViewController {
             guard let self = self else { return }
             switch result {
             case .success(let categories):
-                let sortedCategories = categories.sorted(by: {
-                    left, right in
-                    return Int(left.sortOrder) ?? Int.max < Int(right.sortOrder) ?? Int.max
-                })
+//                categories.filter { $0.subcategories.count > 0 }
+                let sortedCategories = categories
+                    .filter { $0.subcategories.count > 0 }
+                    .sorted(by: { Int($0.sortOrder) ?? Int.max < Int($1.sortOrder) ?? Int.max
+                    })
                 self.categories = sortedCategories
                 self.tableView.reloadData()
             case .failure(let error):
@@ -54,7 +55,7 @@ class CategoryVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Subcategories",
             let subcategoryVC = segue.destination as? SubcategoryVC,
-        let selectedCategory = selectedCategory {
+            let selectedCategory = selectedCategory {
             subcategoryVC.subcategories = selectedCategory.subcategories.sorted(by: {
                 left, right in
                 return Int(left.sortOrder) ?? Int.max < Int(right.sortOrder) ?? Int.max

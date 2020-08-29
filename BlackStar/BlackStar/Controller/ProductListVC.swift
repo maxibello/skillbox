@@ -10,8 +10,9 @@ import UIKit
 
 class ProductListVC: UICollectionViewController {
     
-    var products: [Product] = []
+    var products: [[Product]] = [[]]
     var category: Subcategory?
+    var formedProduct: FormedProduct?
     
     override func viewDidLoad() {
         guard let category = category else { return }
@@ -24,7 +25,8 @@ class ProductListVC: UICollectionViewController {
                     left, right in
                     return Int(left.sortOrder) ?? Int.max < Int(right.sortOrder) ?? Int.max
                 })
-                self.products = sortedProducts
+                let groupedByArticle = Dictionary(grouping: sortedProducts, by: { $0.article })
+                self.products = Array(groupedByArticle.values)
                 print(self.products)
                 self.collectionView.reloadData()
             case .failure(let error):
@@ -39,9 +41,21 @@ class ProductListVC: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductViewCell
-        cell.configure(with: products[indexPath.row])
-        
+        guard let product = products[indexPath.row].first else { return cell }
+        cell.configure(with: product)
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let formedProduct = FormedProduct(with: products[indexPath.row]) else { return false }
+        self.formedProduct = formedProduct
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Product", let productVC = segue.destination as? ProductVC {
+            productVC.product = formedProduct
+        }
     }
 }
 
@@ -49,7 +63,7 @@ extension ProductListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width / 2, height: view.bounds.height / 2.5)
+        return CGSize(width: view.bounds.width / 2, height: view.bounds.height / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -63,4 +77,5 @@ extension ProductListVC: UICollectionViewDelegateFlowLayout {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
       return 0
     }
+    
 }

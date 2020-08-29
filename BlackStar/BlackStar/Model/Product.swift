@@ -16,6 +16,8 @@ struct Product: Decodable {
     let productImages: [ProductImage]
     let offers: [Offer]
     let price: String
+    let article: String
+    let colorName: String
     let id: String
     
     enum CodingKeys: CodingKey {
@@ -26,6 +28,8 @@ struct Product: Decodable {
         case productImages
         case offers
         case price
+        case article
+        case colorName
     }
     
     init(from decoder: Decoder) throws {
@@ -41,6 +45,8 @@ struct Product: Decodable {
         productImages = try container.decode([ProductImage].self, forKey: .productImages)
         offers = try container.decode([Offer].self, forKey: .offers)
         price = try container.decode(String.self, forKey: .price)
+        article = try container.decode(String.self, forKey: .article)
+        colorName = try container.decode(String.self, forKey: .colorName)
         id = container.codingPath.first!.stringValue
     }
 }
