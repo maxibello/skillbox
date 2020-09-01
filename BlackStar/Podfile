@@ -7,4 +7,5 @@ target 'BlackStar' do
 
   # Pods for BlackStar
   pod 'Alamofire', '~> 5.2'
+  pod 'RealmSwift'
 end
