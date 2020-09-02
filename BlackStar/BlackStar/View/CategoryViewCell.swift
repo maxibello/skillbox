@@ -17,6 +17,7 @@ class CategoryViewCell: UITableViewCell {
     @IBOutlet weak var imageLoader: UIActivityIndicatorView!
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         imageLoader.startAnimating()
     }
     

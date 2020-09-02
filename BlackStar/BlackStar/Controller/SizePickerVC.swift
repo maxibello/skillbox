@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SizePickerDelegate {
-    func didPickSize(_: SizePickerVC)
+    func didPickSize(_: SizePickerVC, color: String, offer: Offer)
 }
 
 class SizePickerVC: UIViewController {
@@ -54,6 +54,9 @@ extension SizePickerVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! ColorOffersViewCell
         cell.checkmarkImageView.image = #imageLiteral(resourceName: "doneIcon")
-        delegate?.didPickSize(self)
+        
+        let color = offers[indexPath.section].0
+        let offer = offers[indexPath.section].1[indexPath.row]
+        delegate?.didPickSize(self, color: color, offer: offer)
     }
 }

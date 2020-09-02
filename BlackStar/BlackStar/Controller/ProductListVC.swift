@@ -16,6 +16,7 @@ class ProductListVC: UICollectionViewController {
     
     override func viewDidLoad() {
         guard let category = category else { return }
+        navigationItem.title = category.name
         
         BlackStarApiService.loadProducts(for: category.id) { [weak self] result in
             guard let self = self else { return }

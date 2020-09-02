@@ -56,6 +56,7 @@ class CategoryVC: UITableViewController {
         if segue.identifier == "Subcategories",
             let subcategoryVC = segue.destination as? SubcategoryVC,
             let selectedCategory = selectedCategory {
+            subcategoryVC.navigationItem.title = selectedCategory.name
             subcategoryVC.subcategories = selectedCategory.subcategories.sorted(by: {
                 left, right in
                 return Int(left.sortOrder) ?? Int.max < Int(right.sortOrder) ?? Int.max

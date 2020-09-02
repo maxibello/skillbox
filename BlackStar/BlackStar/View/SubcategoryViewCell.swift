@@ -15,6 +15,7 @@ class SubcategoryViewCell: UITableViewCell {
     @IBOutlet weak var imageLoader: UIActivityIndicatorView!
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         subcategoryImageView.image = nil
         imageLoader.startAnimating()
     }

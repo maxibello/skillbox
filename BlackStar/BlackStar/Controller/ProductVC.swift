@@ -12,6 +12,8 @@ class ProductVC: UIViewController {
     var product: FormedProduct?
     var loadedImages: [UIImage] = []
     
+    let cartDBManager = CartDBManager.shared
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -86,6 +88,10 @@ class ProductVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc func cartButtonTapped() {
+        performSegue(withIdentifier: "CartItems", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let product = product else { return }
@@ -96,26 +102,24 @@ class ProductVC: UIViewController {
         view.addGestureRecognizer(gestureRecognizer)
         
         let backButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-//        backButtonRecognizer.delegate = self
         backButton.addGestureRecognizer(backButtonRecognizer)
+        
+        let cartButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(cartButtonTapped))
+        basketControl.addGestureRecognizer(cartButtonRecognizer)
         
         
         containerView.isUserInteractionEnabled = false
         photoScrollView.addSubview(photoPageControl)
         photoScrollView.addSubview(backButton)
         photoScrollView.addSubview(basketControl)
-        //        photoPageControl.frame = CGRect(x: photoScrollView.bounds.size.width/2, y: photoScrollView.bounds.size.height / 2, width: photoPageControl.bounds.size.width, height: photoPageControl.bounds.size.height)
         view.addSubview(photoScrollView)
-        
-        
-        
         setupConstraints()
         
         DispatchQueue.global(qos: .userInitiated).async {
             let downloadGroup = DispatchGroup()
-            for photo in product.photoGallery {
+            for relativeUrl in Array(arrayLiteral: product.frontProduct.mainImage) + product.photoGallery.map({ $0.imageURL }) {
                 downloadGroup.enter()
-                BlackStarApiService.downloadImage(from: photo.imageURL) { [weak self] image, error in
+                BlackStarApiService.downloadImage(from: relativeUrl) { [weak self] image, error in
                     if let image = image {
                         self?.loadedImages.append(image)
                     }
@@ -160,25 +164,38 @@ class ProductVC: UIViewController {
     
     private func setupImages(_ images: [UIImage]) {
         
+        var imageViews: [UIImageView] = []
         for i in 0..<images.count {
             
             let imageView = UIImageView()
+            imageViews.append(imageView)
             imageView.image = images[i]
-            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
-            imageView.frame = CGRect(x: xPosition, y: 0, width: photoScrollView.frame.width, height: photoScrollView.frame.height)
             imageView.contentMode = .scaleAspectFill
+            imageView.translatesAutoresizingMaskIntoConstraints = false
             
             photoScrollView.contentSize.width = photoScrollView.frame.width * CGFloat(i + 1)
             photoScrollView.addSubview(imageView)
             photoScrollView.delegate = self
+            
+            NSLayoutConstraint.activate([
+                imageView.widthAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.widthAnchor),
+                imageView.heightAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.heightAnchor)
+            ])
+        }
+        
+        guard imageViews.count > 0 else { return }
+        imageViews[0].leadingAnchor.constraint(equalTo: photoScrollView.leadingAnchor).isActive = true
+        
+        for i in 1..<imageViews.count {
+            imageViews[i].leadingAnchor.constraint(equalTo: imageViews[i - 1].trailingAnchor).isActive = true
         }
         
     }
     
     private func updateUI(with product: FormedProduct) {
-        nameLabel.text = product.frontProduct.name
+        nameLabel.text = product.frontProduct.name.withoutHtml
         priceLabel.text = product.frontProduct.price.formattedPrice
-        descriptionLabel.text = product.frontProduct.description
+        descriptionLabel.text = product.frontProduct.description.withoutHtml
         descriptionLabel.sizeToFit()
     }
     
@@ -187,12 +204,11 @@ class ProductVC: UIViewController {
         containerView.isUserInteractionEnabled = false
         let sizePickerVC = children[0]
         sizePickerVC.willMove(toParent: nil)
-        //            childVCStackView.removeArrangedSubview(childVC.view)
         
         UIView.animate(withDuration: 0.8, animations: { sizePickerVC.view.alpha = 0 },
-        completion: {(value: Bool) in
-                      sizePickerVC.view.removeFromSuperview()
-                    })
+                       completion: {(value: Bool) in
+                        sizePickerVC.view.removeFromSuperview()
+        })
         
         sizePickerVC.removeFromParent()
     }
@@ -215,10 +231,17 @@ extension ProductVC: UIGestureRecognizerDelegate {
 }
 
 extension ProductVC: SizePickerDelegate {
-    func didPickSize(_: SizePickerVC) {
+    func didPickSize(_: SizePickerVC, color: String, offer: Offer) {
         closeSizePickerVC()
         basketControl.setShopItemsCount(with: basketControl.shopItemsCount + 1)
+        
+        guard let product = product else { return }
+        let cartItem = CartItem(from: product,
+                                color: color,
+                                offer: offer,
+                                image: loadedImages.first
+        )
+        
+        cartDBManager.add(cart: cartItem)
     }
-    
-    
 }

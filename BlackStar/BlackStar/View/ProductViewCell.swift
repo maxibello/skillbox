@@ -18,11 +18,11 @@ class ProductViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        [nameLabel, priceLabel].forEach({ $0?.isHidden = true })
         imageLoader.startAnimating()
     }
     
     func configure(with product: Product) {
+        imageLoader.startAnimating()
         nameLabel.text = product.name
         nameLabel.textColor = UIColor(red: 0.459, green: 0.459, blue: 0.459, alpha: 1)
         nameLabel.font = UIFont(name: "SFProDisplay-Medium", size: 11)

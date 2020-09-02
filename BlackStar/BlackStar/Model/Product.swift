@@ -56,7 +56,7 @@ struct ProductImage: Decodable {
     let sortOrder: String
 }
 
-struct Offer: Decodable {
+struct Offer: Codable {
     let size: String
     let productOfferID: String
     let quantity: String
