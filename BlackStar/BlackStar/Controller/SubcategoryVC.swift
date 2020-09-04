@@ -12,6 +12,11 @@ class SubcategoryVC: UITableViewController {
     var subcategories: [Subcategory] = []
     var selectedSubcategory: Subcategory?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         subcategories.count
     }

@@ -46,7 +46,7 @@ class ProductVC: UIViewController {
         sizePickerVC.offers = product.offers.map { $0 }
     }
     
-    let photoScrollView: UIScrollView = {
+    lazy var photoScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.isPagingEnabled = true
         scroll.showsVerticalScrollIndicator = false
@@ -55,7 +55,16 @@ class ProductVC: UIViewController {
         return scroll
     }()
     
-    let photoPageControl: UIPageControl = {
+    lazy var imageLoader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView()
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        loader.hidesWhenStopped = true
+        loader.style = .large
+        loader.color = .lightGray
+        return loader
+    }()
+    
+    lazy var photoPageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.hidesForSinglePage = true
@@ -63,7 +72,7 @@ class ProductVC: UIViewController {
         return pageControl
     }()
     
-    let backButton: UIImageView = {
+    lazy var backButton: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "backButton")
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +81,7 @@ class ProductVC: UIViewController {
         return imageView
     }()
     
-    let basketControl: BasketControl = {
+    lazy var basketControl: BasketControl = {
         let basketControl = BasketControl()
         basketControl.translatesAutoresizingMaskIntoConstraints = false
         return basketControl
@@ -92,6 +101,11 @@ class ProductVC: UIViewController {
         performSegue(withIdentifier: "CartItems", sender: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        basketControl.setShopItemsCount(with: cartDBManager.getItemsCount())
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let product = product else { return }
@@ -107,14 +121,15 @@ class ProductVC: UIViewController {
         let cartButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(cartButtonTapped))
         basketControl.addGestureRecognizer(cartButtonRecognizer)
         
-        
         containerView.isUserInteractionEnabled = false
         photoScrollView.addSubview(photoPageControl)
         photoScrollView.addSubview(backButton)
         photoScrollView.addSubview(basketControl)
+        photoScrollView.addSubview(imageLoader)
         view.addSubview(photoScrollView)
         setupConstraints()
         
+        imageLoader.startAnimating()
         DispatchQueue.global(qos: .userInitiated).async {
             let downloadGroup = DispatchGroup()
             for relativeUrl in Array(arrayLiteral: product.frontProduct.mainImage) + product.photoGallery.map({ $0.imageURL }) {
@@ -129,6 +144,7 @@ class ProductVC: UIViewController {
             }
             downloadGroup.wait()
             DispatchQueue.main.async {
+                self.imageLoader.stopAnimating()
                 self.setupImages(self.loadedImages)
                 self.photoScrollView.bringSubviewToFront(self.photoPageControl)
                 self.photoScrollView.bringSubviewToFront(self.backButton)
@@ -158,6 +174,8 @@ class ProductVC: UIViewController {
             basketControl.heightAnchor.constraint(equalToConstant: 32),
             basketControl.topAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.topAnchor, constant: 10),
             basketControl.trailingAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.trailingAnchor, constant: -16),
+            imageLoader.centerXAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.centerXAnchor),
+            imageLoader.centerYAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.centerYAnchor)
             
         ])
     }
@@ -233,7 +251,7 @@ extension ProductVC: UIGestureRecognizerDelegate {
 extension ProductVC: SizePickerDelegate {
     func didPickSize(_: SizePickerVC, color: String, offer: Offer) {
         closeSizePickerVC()
-        basketControl.setShopItemsCount(with: basketControl.shopItemsCount + 1)
+        basketControl.setShopItemsCount(with: basketControl.shopItemsCount + 1, animated: true)
         
         guard let product = product else { return }
         let cartItem = CartItem(from: product,

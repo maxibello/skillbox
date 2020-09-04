@@ -13,9 +13,29 @@ class CategoryVC: UITableViewController {
     var categories: [Category] = []
     var selectedCategory: Category?
     
+    lazy var loader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView()
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        loader.hidesWhenStopped = true
+        loader.style = .large
+        loader.color = .lightGray
+        return loader
+    }()
+    
     override func viewDidLoad() {
+        tableView.tableFooterView = UIView()
+        view.addSubview(loader)
+        
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        loader.startAnimating()
+        
         BlackStarApiService.loadCategories() { [weak self] result in
             guard let self = self else { return }
+            self.loader.stopAnimating()
+            
             switch result {
             case .success(let categories):
 //                categories.filter { $0.subcategories.count > 0 }

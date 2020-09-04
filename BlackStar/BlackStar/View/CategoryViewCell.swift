@@ -23,7 +23,7 @@ class CategoryViewCell: UITableViewCell {
     
     func configure(with category: Category) {
         categoryLabel.text = category.name
-        
+        imageLoader.startAnimating()
         
         BlackStarApiService.downloadImage(from: category.iconImage) { [weak self] image, error in
             DispatchQueue.main.async {

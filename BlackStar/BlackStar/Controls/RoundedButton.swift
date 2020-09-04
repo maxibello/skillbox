@@ -19,6 +19,13 @@ class RoundedButton: UIButton {
     }
     
     @IBInspectable
+    var borderWidth: CGFloat = 0 {
+        didSet {
+            setup()
+        }
+    }
+    
+    @IBInspectable
     var color: UIColor = UIColor(red: 0, green: 0.478, blue: 1, alpha: 1) {
         didSet {
             setup()
@@ -46,6 +53,7 @@ class RoundedButton: UIButton {
     private func setup() {
         backgroundColor = color
         layer.cornerRadius = cornerRadius
+        layer.borderWidth = borderWidth
         setTitleColor(fontColor, for: .normal)
     }
 }

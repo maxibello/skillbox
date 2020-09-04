@@ -152,7 +152,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IRt-t3-A5R">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IRt-t3-A5R">
                                                     <rect key="frame" x="8" y="8" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="3cb-LI-qwc"/>
@@ -184,10 +184,15 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYz-mk-X6G">
-                                                    <rect key="frame" x="348" y="37" width="7" height="22"/>
+                                                    <rect key="frame" x="331" y="36" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="GjC-yv-oGr"/>
+                                                        <constraint firstAttribute="height" constant="24" id="XRO-qt-1XC"/>
+                                                    </constraints>
                                                     <state key="normal" image="bin"/>
                                                     <connections>
                                                         <action selector="deleteItem:" destination="wMA-oq-LVq" eventType="touchUpInside" id="G9Y-M6-mzs"/>
+                                                        <segue destination="tfy-Rp-lsp" kind="presentation" identifier="CartAlert" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Bhv-vJ-k53"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -297,6 +302,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="closeBarItem" destination="C3R-Ln-tFZ" id="3is-ne-cqw"/>
+                        <outlet property="finalPriceLabel" destination="n6c-Im-P2I" id="OAj-nK-TQq"/>
                         <outlet property="navBar" destination="zFO-aO-oGi" id="9OI-RF-mAE"/>
                         <outlet property="tableView" destination="5bj-W4-byx" id="KJs-iy-BkR"/>
                     </connections>
@@ -304,6 +310,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5Z-sc-60W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3256.8000000000002" y="841.52923538230891"/>
+        </scene>
+        <!--Cart AlertVC-->
+        <scene sceneID="msv-J2-9OG">
+            <objects>
+                <viewController id="tfy-Rp-lsp" customClass="CartAlertVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oX0-ch-ZXr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M1V-yo-lEP">
+                                <rect key="frame" x="17.5" y="213.5" width="340" height="240"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удалить из корзины?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJv-gM-Vck">
+                                        <rect key="frame" x="85.5" y="38" width="169" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHL-FA-9ho" customClass="RoundedButton" customModule="BlackStar" customModuleProvider="target">
+                                        <rect key="frame" x="28" y="94" width="284" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="mmn-hF-xRE"/>
+                                        </constraints>
+                                        <state key="normal" title="ДА"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="okButton:" destination="tfy-Rp-lsp" eventType="touchUpInside" id="Qak-Je-Aj1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqv-D2-p6L" customClass="RoundedButton" customModule="BlackStar" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="154" width="292" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="R6i-Mm-P1G"/>
+                                        </constraints>
+                                        <state key="normal" title="НЕТ"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelButton:" destination="tfy-Rp-lsp" eventType="touchUpInside" id="djI-hy-eyk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="Dfu-xD-CaE"/>
+                                    <constraint firstAttribute="bottom" secondItem="uqv-D2-p6L" secondAttribute="bottom" constant="38" id="FEc-lx-X9a"/>
+                                    <constraint firstAttribute="width" constant="340" id="KOh-48-JUk"/>
+                                    <constraint firstAttribute="trailing" secondItem="uqv-D2-p6L" secondAttribute="trailing" constant="24" id="QCM-QB-Ldj"/>
+                                    <constraint firstItem="uqv-D2-p6L" firstAttribute="top" secondItem="bHL-FA-9ho" secondAttribute="bottom" constant="12" id="RTZ-f3-GYA"/>
+                                    <constraint firstItem="iJv-gM-Vck" firstAttribute="top" secondItem="M1V-yo-lEP" secondAttribute="top" constant="38" id="SJP-8b-w5h"/>
+                                    <constraint firstItem="bHL-FA-9ho" firstAttribute="leading" secondItem="M1V-yo-lEP" secondAttribute="leading" constant="28" id="YOo-X1-AhL"/>
+                                    <constraint firstItem="uqv-D2-p6L" firstAttribute="leading" secondItem="M1V-yo-lEP" secondAttribute="leading" constant="24" id="gEr-3q-z6b"/>
+                                    <constraint firstItem="iJv-gM-Vck" firstAttribute="centerX" secondItem="M1V-yo-lEP" secondAttribute="centerX" id="ra5-F5-pvb"/>
+                                    <constraint firstAttribute="trailing" secondItem="bHL-FA-9ho" secondAttribute="trailing" constant="28" id="v81-sb-4TS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="M1V-yo-lEP" firstAttribute="centerX" secondItem="oX0-ch-ZXr" secondAttribute="centerX" id="Pfp-e5-jeX"/>
+                            <constraint firstItem="M1V-yo-lEP" firstAttribute="centerY" secondItem="oX0-ch-ZXr" secondAttribute="centerY" id="X60-83-Tbg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PZd-rZ-OpC"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RmM-Ys-4OV"/>
+                    <connections>
+                        <outlet property="contentView" destination="M1V-yo-lEP" id="i9J-r9-ZEY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CdX-aG-zVV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4135" y="1237"/>
         </scene>
         <!--Product ListVC-->
         <scene sceneID="YUr-0q-wOU">
@@ -508,11 +602,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите подходящий цвет и размер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31A-6j-WBK">
                                         <rect key="frame" x="16" y="11.5" width="303" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.91509193180000004" green="0.95233637090000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.96817945073173461" green="1" blue="0.86756582543724781" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.4681328535" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="31A-6j-WBK" firstAttribute="leading" secondItem="Z11-4h-kkm" secondAttribute="leading" constant="16" id="0bD-0i-A56"/>
                                     <constraint firstItem="31A-6j-WBK" firstAttribute="centerY" secondItem="Z11-4h-kkm" secondAttribute="centerY" id="KRH-1N-EEZ"/>

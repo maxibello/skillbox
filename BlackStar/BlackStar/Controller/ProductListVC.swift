@@ -14,12 +14,31 @@ class ProductListVC: UICollectionViewController {
     var category: Subcategory?
     var formedProduct: FormedProduct?
     
+    lazy var loader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView()
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        loader.hidesWhenStopped = true
+        loader.style = .large
+        loader.color = .lightGray
+        return loader
+    }()
+    
     override func viewDidLoad() {
         guard let category = category else { return }
         navigationItem.title = category.name
         
+        view.addSubview(loader)
+        
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        loader.startAnimating()
+        
         BlackStarApiService.loadProducts(for: category.id) { [weak self] result in
             guard let self = self else { return }
+            self.loader.stopAnimating()
+            
             switch result {
             case .success(let products):
                 let sortedProducts = products.sorted(by: {
@@ -28,7 +47,7 @@ class ProductListVC: UICollectionViewController {
                 })
                 let groupedByArticle = Dictionary(grouping: sortedProducts, by: { $0.article })
                 self.products = Array(groupedByArticle.values)
-                print(self.products)
+//                print(self.products)
                 self.collectionView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)

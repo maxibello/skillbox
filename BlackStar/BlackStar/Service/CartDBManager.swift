@@ -21,6 +21,10 @@ class CartDBManager {
         return results
     }
     
+    func getItemsCount() -> Int {
+        return getAllCartItems().count
+    }
+    
     func add(cart: CartItem) {
         
         try! database.write {

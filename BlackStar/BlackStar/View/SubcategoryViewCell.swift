@@ -22,6 +22,7 @@ class SubcategoryViewCell: UITableViewCell {
     
     func configure(with subcategory: Subcategory) {
         subcategoryLabel.text = subcategory.name
+        imageLoader.startAnimating()
         
         guard !subcategory.iconImage.isEmpty else {
             imageLoader.stopAnimating()

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		933B66D425015C7B0061424D /* CartAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933B66D325015C7B0061424D /* CartAlertVC.swift */; };
 		933C60B824F7F05C005FDB69 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933C60B724F7F05C005FDB69 /* CategoryViewCell.swift */; };
 		933FC31C24FFFB0E000D34FD /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FC31B24FFFB0E000D34FD /* RoundedButton.swift */; };
 		933FC31E25000326000D34FD /* String+WithoutHtml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FC31D25000326000D34FD /* String+WithoutHtml.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		59DE3BD96BBDDE5B7FE560E0 /* Pods_BlackStar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlackStar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0534751D9D5BCF8AABE9BF /* Pods-BlackStar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackStar.release.xcconfig"; path = "Target Support Files/Pods-BlackStar/Pods-BlackStar.release.xcconfig"; sourceTree = "<group>"; };
+		933B66D325015C7B0061424D /* CartAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartAlertVC.swift; sourceTree = "<group>"; };
 		933C60B724F7F05C005FDB69 /* CategoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewCell.swift; sourceTree = "<group>"; };
 		933FC31B24FFFB0E000D34FD /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		933FC31D25000326000D34FD /* String+WithoutHtml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+WithoutHtml.swift"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				937235AD24FA28F300CBC70F /* ProductVC.swift */,
 				934AE01224FC0AB20003F70D /* SizePickerVC.swift */,
 				9386765724FED2A600DCF74C /* CartVC.swift */,
+				933B66D325015C7B0061424D /* CartAlertVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				937235AE24FA28F300CBC70F /* ProductVC.swift in Sources */,
 				934AEEA024FA332400CDB7A3 /* FormedProduct.swift in Sources */,
 				9386765A24FED51B00DCF74C /* CartItemViewCell.swift in Sources */,
+				933B66D425015C7B0061424D /* CartAlertVC.swift in Sources */,
 				9377A00724F8D85B0018B0BE /* ProductListVC.swift in Sources */,
 				934AE00F24FBFBDF0003F70D /* ColorOffersViewCell.swift in Sources */,
 				9348C50F24FE63DF002D1EBF /* CartItem.swift in Sources */,

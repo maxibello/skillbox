@@ -37,8 +37,6 @@ class BasketControl: UIView {
         return imageView
     }()
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -49,37 +47,46 @@ class BasketControl: UIView {
         setupUI()
     }
     
-    func setShopItemsCount(with value: Int) {
-        bubbleView.isHidden = false
+    func setShopItemsCount(with value: Int, animated: Bool = false) {
         shopItemsCount = value
-        
-        if let widthConstraint = bubbleWidthConstraint, let heightConstraint = bubbleHeightConstaint {
-            widthConstraint.constant += 10
-            heightConstraint.constant += 10
-            
-            UIView.animate(withDuration: 0.3,
-                           animations: { self.layoutIfNeeded() },
-                           completion: { finished in
-                            guard finished else { return }
-                            widthConstraint.constant -= 10
-                            heightConstraint.constant -= 10
-                            UIView.animate(withDuration: 0.3,
-                                           animations: { self.layoutIfNeeded() })
-            })
+        guard shopItemsCount > 0 else {
+            bubbleView.isHidden = true
+            return
         }
+        
+        bubbleView.isHidden = false
+        
         itemsCountLabel.text = "\(shopItemsCount)"
+        
+        if animated {
+            if let widthConstraint = bubbleWidthConstraint, let heightConstraint = bubbleHeightConstaint {
+                widthConstraint.constant += 10
+                heightConstraint.constant += 10
+                
+                UIView.animate(withDuration: 0.3,
+                               animations: { self.layoutIfNeeded() },
+                               completion: { finished in
+                                guard finished else { return }
+                                widthConstraint.constant -= 10
+                                heightConstraint.constant -= 10
+                                UIView.animate(withDuration: 0.3,
+                                               animations: { self.layoutIfNeeded() })
+                })
+            }
+        }
+
+        
     }
     
     private func setupUI() {
-        itemsCountLabel.text = "\(shopItemsCount)"
         bubbleView.addSubview(itemsCountLabel)
         cart.addSubview(bubbleView)
         addSubview(cart)
-        
-        if shopItemsCount == 0 {
-            bubbleView.isHidden = true
-        }
-        
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        itemsCountLabel.text = "\(shopItemsCount)"
         bubbleWidthConstraint = bubbleView.widthAnchor.constraint(equalTo: cart.widthAnchor, multiplier: 0.6)
         bubbleHeightConstaint = bubbleView.heightAnchor.constraint(equalTo: cart.widthAnchor, multiplier: 0.6)
         
@@ -95,8 +102,5 @@ class BasketControl: UIView {
             itemsCountLabel.centerXAnchor.constraint(equalTo: bubbleView.centerXAnchor),
             itemsCountLabel.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor)
         ])
-        
-        
-        
     }
 }
