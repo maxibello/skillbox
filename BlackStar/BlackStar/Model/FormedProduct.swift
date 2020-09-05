@@ -22,7 +22,6 @@ struct FormedProduct {
         for product in products {
             photoGallery += product.productImages
                 .sorted(by: { Int($0.sortOrder) ?? Int.max < Int($1.sortOrder) ?? Int.max })
-//            offers[product.colorName] = product.offers
             offers.append((colorName: product.colorName, colorURL: product.colorImageURL, offers: product.offers ))
         }
         self.photoGallery = photoGallery

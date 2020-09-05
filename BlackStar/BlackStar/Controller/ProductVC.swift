@@ -20,31 +20,6 @@ class ProductVC: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
     
-    @IBAction func addToCart(_ sender: Any) {
-        
-        guard children.count == 0,
-            let sizePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "SizePickerVC") as? SizePickerVC, let product = product else {
-                return
-        }
-        showBlur()
-        addToCartButton.isEnabled = false
-        addChild(sizePickerVC)
-        
-        sizePickerVC.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.isUserInteractionEnabled = true
-        containerView.addSubview(sizePickerVC.view)
-        NSLayoutConstraint.activate([
-            sizePickerVC.view.topAnchor.constraint(equalTo: containerView.topAnchor),
-            sizePickerVC.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            sizePickerVC.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            sizePickerVC.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
-        ])
-        sizePickerVC.didMove(toParent: self)
-        
-        sizePickerVC.delegate = self
-        sizePickerVC.options = product.offers
-    }
     
     lazy var photoScrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -102,28 +77,6 @@ class ProductVC: UIViewController {
         return hud
     }()
     
-    @objc func handleTap() {
-        if children.count > 0 {
-            closeSizePickerVC()
-            UIView.animate(withDuration: 0.3, animations: {
-                self.blurView.alpha = 0
-            })
-        }
-    }
-    
-    @objc func backButtonTapped() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func cartButtonTapped() {
-        performSegue(withIdentifier: "CartItems", sender: self)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        basketControl.setShopItemsCount(with: cartDBManager.getItemsCount())
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let product = product else { return }
@@ -175,6 +128,54 @@ class ProductVC: UIViewController {
         }
         updateUI(with: product)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        basketControl.setShopItemsCount(with: cartDBManager.getItemsCount())
+    }
+    
+    @IBAction func addToCart(_ sender: Any) {
+        
+        guard children.count == 0,
+            let sizePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "SizePickerVC") as? SizePickerVC, let product = product else {
+                return
+        }
+        showBlur()
+        addToCartButton.isEnabled = false
+        addChild(sizePickerVC)
+        
+        sizePickerVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.isUserInteractionEnabled = true
+        containerView.addSubview(sizePickerVC.view)
+        NSLayoutConstraint.activate([
+            sizePickerVC.view.topAnchor.constraint(equalTo: containerView.topAnchor),
+            sizePickerVC.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            sizePickerVC.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            sizePickerVC.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        ])
+        sizePickerVC.didMove(toParent: self)
+        
+        sizePickerVC.delegate = self
+        sizePickerVC.options = product.offers
+    }
+
+    @objc func handleTap() {
+        if children.count > 0 {
+            closeSizePickerVC()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.blurView.alpha = 0
+            })
+        }
+    }
+    
+    @objc func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func cartButtonTapped() {
+        performSegue(withIdentifier: "CartItems", sender: self)
     }
     
     private func setupConstraints() {

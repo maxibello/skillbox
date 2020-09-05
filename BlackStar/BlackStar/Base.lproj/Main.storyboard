@@ -502,7 +502,7 @@
             <objects>
                 <viewController id="tPm-5C-mpU" customClass="ProductVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h2X-KE-DHa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="980"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="601" ambiguous="YES" text=" Крутая Портупея" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="yta-Zk-iT4">
@@ -563,7 +563,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="Cot-Kg-1Rx"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phq-nF-pUt">
-                                <rect key="frame" x="0.0" y="660" width="375" height="320"/>
+                                <rect key="frame" x="0.0" y="327" width="375" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" id="Ift-iy-usn"/>
                                 </constraints>
@@ -592,7 +592,6 @@
                         <viewLayoutGuide key="safeArea" id="bH9-vF-cKB"/>
                     </view>
                     <navigationItem key="navigationItem" id="UnI-LH-e81"/>
-                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="addToCartButton" destination="Lpp-Sa-Ca2" id="1IV-ZF-XD3"/>
                         <outlet property="containerView" destination="phq-nF-pUt" id="gAH-L6-ZxL"/>
