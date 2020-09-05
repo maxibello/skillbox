@@ -237,7 +237,6 @@ class ProductVC: UIViewController {
         nameLabel.text = product.frontProduct.name.withoutHtml
         priceLabel.text = product.frontProduct.price.formattedPrice
         descriptionLabel.text = product.frontProduct.description.withoutHtml
-//        descriptionLabel.sizeToFit()
     }
     
     private func performSuccessAnimation() {
