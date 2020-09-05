@@ -191,7 +191,7 @@
                                                     </constraints>
                                                     <state key="normal" image="bin"/>
                                                     <connections>
-                                                        <action selector="deleteItem:" destination="wMA-oq-LVq" eventType="touchUpInside" id="G9Y-M6-mzs"/>
+                                                        <action selector="deleteButtonTapped:" destination="wMA-oq-LVq" eventType="touchUpInside" id="hVU-1m-yM6"/>
                                                         <segue destination="tfy-Rp-lsp" kind="presentation" identifier="CartAlert" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Bhv-vJ-k53"/>
                                                     </connections>
                                                 </button>
@@ -392,7 +392,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="RmM-Ys-4OV"/>
                     <connections>
-                        <outlet property="contentView" destination="M1V-yo-lEP" id="i9J-r9-ZEY"/>
+                        <outlet property="contentView" destination="M1V-yo-lEP" id="bWR-WT-ck0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CdX-aG-zVV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -505,26 +505,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Крутая Портупея" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="yta-Zk-iT4">
-                                <rect key="frame" x="64.5" y="482.5" width="246" height="37"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="601" text=" Крутая Портупея" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="yta-Zk-iT4">
+                                <rect key="frame" x="64.5" y="494.5" width="246" height="37"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Стоимость:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ds4-S1-wXx">
-                                <rect key="frame" x="16" y="521.5" width="87" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="601" text="Стоимость:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ds4-S1-wXx">
+                                <rect key="frame" x="16" y="533.5" width="87" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2500 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ie-2Q-GnV">
-                                <rect key="frame" x="303" y="520.5" width="56" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="601" text="2500 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ie-2Q-GnV">
+                                <rect key="frame" x="300" y="531.5" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpp-Sa-Ca2" customClass="RoundedButton" customModule="BlackStar" customModuleProvider="target">
-                                <rect key="frame" x="16" y="557" width="343" height="48"/>
+                                <rect key="frame" x="16" y="569" width="343" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="rNC-dt-x0D"/>
@@ -537,7 +537,7 @@
                                     <action selector="addToCart:" destination="tPm-5C-mpU" eventType="touchUpInside" id="TUx-2n-ZG2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Nv0-RZ-MBb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="600" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Nv0-RZ-MBb">
                                 <rect key="frame" x="14" y="633" width="347" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -556,11 +556,11 @@
                             <constraint firstItem="yta-Zk-iT4" firstAttribute="centerX" secondItem="h2X-KE-DHa" secondAttribute="centerX" id="7h6-cj-PcH"/>
                             <constraint firstItem="phq-nF-pUt" firstAttribute="leading" secondItem="bH9-vF-cKB" secondAttribute="leading" id="97b-5C-2Ux"/>
                             <constraint firstItem="Ds4-S1-wXx" firstAttribute="top" secondItem="yta-Zk-iT4" secondAttribute="bottom" constant="2" id="FEu-OL-0Ss"/>
-                            <constraint firstItem="Nv0-RZ-MBb" firstAttribute="top" secondItem="Lpp-Sa-Ca2" secondAttribute="bottom" constant="28" id="FLs-x3-z8v"/>
+                            <constraint firstItem="Nv0-RZ-MBb" firstAttribute="top" secondItem="Lpp-Sa-Ca2" secondAttribute="bottom" constant="16" id="FLs-x3-z8v"/>
                             <constraint firstItem="Lpp-Sa-Ca2" firstAttribute="leading" secondItem="bH9-vF-cKB" secondAttribute="leading" constant="16" id="Hea-yQ-lFc"/>
                             <constraint firstItem="bH9-vF-cKB" firstAttribute="trailing" secondItem="Nv0-RZ-MBb" secondAttribute="trailing" constant="14" id="T7P-uX-n8h"/>
                             <constraint firstItem="Ds4-S1-wXx" firstAttribute="leading" secondItem="bH9-vF-cKB" secondAttribute="leading" constant="16" id="Tfl-ee-OpD"/>
-                            <constraint firstItem="bH9-vF-cKB" firstAttribute="bottom" secondItem="Nv0-RZ-MBb" secondAttribute="bottom" priority="999" constant="14" id="XtG-PN-ZF0"/>
+                            <constraint firstItem="bH9-vF-cKB" firstAttribute="bottom" secondItem="Nv0-RZ-MBb" secondAttribute="bottom" priority="500" constant="14" id="XtG-PN-ZF0"/>
                             <constraint firstAttribute="bottom" secondItem="phq-nF-pUt" secondAttribute="bottom" id="Yi2-lK-Jpy"/>
                             <constraint firstItem="Lpp-Sa-Ca2" firstAttribute="top" secondItem="Ds4-S1-wXx" secondAttribute="bottom" constant="16" id="drk-v1-P5W"/>
                             <constraint firstItem="7ie-2Q-GnV" firstAttribute="firstBaseline" secondItem="Ds4-S1-wXx" secondAttribute="firstBaseline" id="gSz-PJ-Zqh"/>
@@ -636,6 +636,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bin" width="7" height="9"/>
+        <image name="bin" width="14" height="18"/>
     </resources>
 </document>

@@ -10,11 +10,10 @@ import UIKit
 import RealmSwift
 
 class CartVC: UIViewController {
-//    var items: [CartItem] = []
+
     let cartDBManager = CartDBManager.shared
     lazy var items: Results<CartItem> = { return cartDBManager.getAllCartItems() }()
     var selectedCart: CartItem?
-//    var alert: CartAlertView?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeBarItem: UIBarButtonItem!
@@ -51,7 +50,9 @@ class CartVC: UIViewController {
             cartAlertVC.okAction = { [weak self] in
                 guard let self = self, let selectedCart = self.selectedCart else { return }
                 self.cartDBManager.remove(cart: selectedCart)
+                
                 self.tableView.reloadData()
+                self.updatePrice()
             }
         }
     }
@@ -60,31 +61,8 @@ class CartVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func deleteCartItem() {
-        guard let selectedCart = selectedCart else { return }
-        cartDBManager.remove(cart: selectedCart)
-        self.tableView.reloadData()
-    }
-    
-    @objc func closeAlert() {
-//        alert?.removeFromSuperview()
-    }
-    
-    @IBAction func deleteItem(_ sender: UIButton) {
-//        items.remove(at:sender.tag)
-//        cartDBManager.remove(cart: items[sender.tag])
+    @IBAction func deleteButtonTapped(_ sender: UIButton) {
         selectedCart = items[sender.tag]
-//        alert = CartAlertView()
-//        guard let alert = alert else { return }
-//        alert.okButton.addTarget(self, action: #selector(deleteCartItem), for: .touchUpInside)
-//        alert.cancelButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
-//        view.addSubview(alert)
-        
-        updatePrice()
-    }
-    
-    override func willMove(toParent parent: UIViewController?) {
-        print("Shit")
     }
     
     private func updatePrice() {
@@ -109,9 +87,12 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         return 96
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedCart = items[indexPath.row]
+        return indexPath
     }
     
-    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
 }

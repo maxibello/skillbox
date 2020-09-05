@@ -13,7 +13,7 @@ class CartAlertVC: UIViewController {
     var okAction: (() -> Void)?
     var cancelAction: (() -> Void)?
     
-    @IBOutlet weak var contentView: CartAlertView!
+    @IBOutlet weak var contentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias SizeOption = (colorName: String, colorURL: String, offers: [Offer])
+
 protocol SizePickerDelegate {
     func didPickSize(_: SizePickerVC, color: String, offer: Offer)
 }
@@ -16,7 +18,7 @@ class SizePickerVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var offers: [(String, [Offer])] = []
+    var options: [SizeOption] = []
     let cellID = "ColorOffersViewCell"
     var delegate: SizePickerDelegate?
     
@@ -28,26 +30,25 @@ class SizePickerVC: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ColorOffersView", bundle: nil), forCellReuseIdentifier: cellID)
     }
-    
-
 }
 
 extension SizePickerVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return offers[section].1.count
+        return options[section].offers.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return offers.count
+        return options.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return offers[section].0
+        return options[section].colorName
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ColorOffersViewCell
-        cell.configure(with: offers[indexPath.section].1[indexPath.row])
+        cell.configure(with: options[indexPath.section].offers[indexPath.row],
+                       colorURL: options[indexPath.section].colorURL)
         return cell
     }
     
@@ -56,8 +57,8 @@ extension SizePickerVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ColorOffersViewCell
         cell.checkmarkImageView.image = #imageLiteral(resourceName: "doneIcon")
         
-        let color = offers[indexPath.section].0
-        let offer = offers[indexPath.section].1[indexPath.row]
+        let color = options[indexPath.section].colorName
+        let offer = options[indexPath.section].offers[indexPath.row]
         delegate?.didPickSize(self, color: color, offer: offer)
     }
 }

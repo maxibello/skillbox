@@ -20,13 +20,13 @@ class ProductVC: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
     
-    
     @IBAction func addToCart(_ sender: Any) {
         
         guard children.count == 0,
             let sizePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "SizePickerVC") as? SizePickerVC, let product = product else {
                 return
         }
+        showBlur()
         addToCartButton.isEnabled = false
         addChild(sizePickerVC)
         
@@ -43,7 +43,7 @@ class ProductVC: UIViewController {
         sizePickerVC.didMove(toParent: self)
         
         sizePickerVC.delegate = self
-        sizePickerVC.offers = product.offers.map { $0 }
+        sizePickerVC.options = product.offers
     }
     
     lazy var photoScrollView: UIScrollView = {
@@ -87,9 +87,27 @@ class ProductVC: UIViewController {
         return basketControl
     }()
     
+    lazy var blurView: UIView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.alpha = 0
+        return blurEffectView
+    }()
+    
+    lazy var hudImageView: UIImageView = {
+       let hud = UIImageView(image: #imageLiteral(resourceName: "hud"))
+        hud.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        hud.center = view.center
+        return hud
+    }()
+    
     @objc func handleTap() {
         if children.count > 0 {
             closeSizePickerVC()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.blurView.alpha = 0
+            })
         }
     }
     
@@ -127,7 +145,9 @@ class ProductVC: UIViewController {
         photoScrollView.addSubview(basketControl)
         photoScrollView.addSubview(imageLoader)
         view.addSubview(photoScrollView)
+        view.addSubview(blurView)
         setupConstraints()
+        
         
         imageLoader.startAnimating()
         DispatchQueue.global(qos: .userInitiated).async {
@@ -175,8 +195,11 @@ class ProductVC: UIViewController {
             basketControl.topAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.topAnchor, constant: 10),
             basketControl.trailingAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.trailingAnchor, constant: -16),
             imageLoader.centerXAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.centerXAnchor),
-            imageLoader.centerYAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.centerYAnchor)
-            
+            imageLoader.centerYAnchor.constraint(equalTo: photoScrollView.frameLayoutGuide.centerYAnchor),
+            blurView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            blurView.bottomAnchor.constraint(equalTo: containerView.topAnchor)
         ])
     }
     
@@ -214,16 +237,52 @@ class ProductVC: UIViewController {
         nameLabel.text = product.frontProduct.name.withoutHtml
         priceLabel.text = product.frontProduct.price.formattedPrice
         descriptionLabel.text = product.frontProduct.description.withoutHtml
-        descriptionLabel.sizeToFit()
+//        descriptionLabel.sizeToFit()
     }
     
+    private func performSuccessAnimation() {
+        hudImageView.alpha = 0
+        view.addSubview(hudImageView)
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.hudImageView.alpha = 1
+        }, completion: { result in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.hudImageView.alpha = 0
+            }, completion: { result in
+                UIView.animate(withDuration: 0.3,
+                               animations: {
+                                self.blurView.alpha = 0
+                },
+                               completion: { result in
+                                self.basketControl.setShopItemsCount(with: self.basketControl.shopItemsCount + 1, animated: true)
+                }
+                               )
+            })
+        })
+    }
+    
+    private func showBlur() {
+        UIView.animate(withDuration: 0.3,
+                       animations: {
+                        self.blurView.alpha = 1
+        })
+    }
+    
+    private func hideBlur() {
+        UIView.animate(withDuration: 0.3,
+                       animations: {
+                        self.blurView.alpha = 0
+        })
+    }
+        
     private func closeSizePickerVC() {
         addToCartButton.isEnabled = true
         containerView.isUserInteractionEnabled = false
         let sizePickerVC = children[0]
         sizePickerVC.willMove(toParent: nil)
         
-        UIView.animate(withDuration: 0.8, animations: { sizePickerVC.view.alpha = 0 },
+        UIView.animate(withDuration: 0.3, animations: { sizePickerVC.view.alpha = 0 },
                        completion: {(value: Bool) in
                         sizePickerVC.view.removeFromSuperview()
         })
@@ -251,7 +310,7 @@ extension ProductVC: UIGestureRecognizerDelegate {
 extension ProductVC: SizePickerDelegate {
     func didPickSize(_: SizePickerVC, color: String, offer: Offer) {
         closeSizePickerVC()
-        basketControl.setShopItemsCount(with: basketControl.shopItemsCount + 1, animated: true)
+        
         
         guard let product = product else { return }
         let cartItem = CartItem(from: product,
@@ -261,5 +320,6 @@ extension ProductVC: SizePickerDelegate {
         )
         
         cartDBManager.add(cart: cartItem)
+        performSuccessAnimation()
     }
 }
