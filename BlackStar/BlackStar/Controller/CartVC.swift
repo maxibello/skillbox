@@ -7,13 +7,17 @@
 //
 
 import UIKit
-import RealmSwift
+
+protocol ICartVC {
+    func cartDidClosed(_: CartVC)
+}
 
 class CartVC: UIViewController {
 
     let cartDBManager = CartDBManager.shared
-    lazy var items: Results<CartItem> = { return cartDBManager.getAllCartItems() }()
+    var items: [CartItem] = []
     var selectedCart: CartItem?
+    var delegate: ICartVC?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeBarItem: UIBarButtonItem!
@@ -36,6 +40,8 @@ class CartVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        items = cartDBManager.getAllCartItems()
+        
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -51,6 +57,7 @@ class CartVC: UIViewController {
                 guard let self = self, let selectedCart = self.selectedCart else { return }
                 self.cartDBManager.remove(cart: selectedCart)
                 
+                self.items = self.cartDBManager.getAllCartItems()
                 self.tableView.reloadData()
                 self.updatePrice()
             }
@@ -58,6 +65,7 @@ class CartVC: UIViewController {
     }
     
     @IBAction func closeCart(_ sender: Any) {
+        delegate?.cartDidClosed(self)
         dismiss(animated: true, completion: nil)
     }
     

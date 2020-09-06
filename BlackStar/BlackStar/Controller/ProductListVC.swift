@@ -11,8 +11,9 @@ import UIKit
 class ProductListVC: UICollectionViewController {
     
     var products: [[Product]] = [[]]
-    var category: Subcategory?
+    var category: Category?
     var formedProduct: FormedProduct?
+    let basketHelper = BasketControlHelper()
     
     lazy var loader: UIActivityIndicatorView = {
         let loader = UIActivityIndicatorView()
@@ -34,6 +35,11 @@ class ProductListVC: UICollectionViewController {
             loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         loader.startAnimating()
+        
+        let rightBarItem = UIBarButtonItem(customView: basketHelper.basketControl)
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        let cartButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(cartButtonTapped))
+        basketHelper.basketControl.addGestureRecognizer(cartButtonRecognizer)
         
         BlackStarApiService.loadProducts(for: category.id) { [weak self] result in
             guard let self = self else { return }
@@ -74,7 +80,19 @@ class ProductListVC: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Product", let productVC = segue.destination as? ProductVC {
+            productVC.delegate = self
+            productVC.isModalInPresentation = true
             productVC.product = formedProduct
+        }
+    }
+    
+    @objc func cartButtonTapped() {
+        if let cartVC = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC {
+            cartVC.delegate = self
+            cartVC.isModalInPresentation = true
+            cartVC.modalPresentationStyle = .fullScreen
+            cartVC.modalTransitionStyle = .coverVertical
+            self.present(cartVC, animated: true, completion: nil)
         }
     }
 }
@@ -98,4 +116,10 @@ extension ProductListVC: UICollectionViewDelegateFlowLayout {
       return 0
     }
     
+}
+
+extension ProductListVC: ICartVC {
+    func cartDidClosed(_: CartVC) {
+        basketHelper.updateControl()
+    }
 }

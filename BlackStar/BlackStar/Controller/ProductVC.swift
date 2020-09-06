@@ -13,6 +13,7 @@ class ProductVC: UIViewController {
     var loadedImages: [UIImage] = []
     
     let cartDBManager = CartDBManager.shared
+    var delegate: ProductListVC?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -171,6 +172,7 @@ class ProductVC: UIViewController {
     }
     
     @objc func backButtonTapped() {
+        delegate?.basketHelper.updateControl()
         dismiss(animated: true, completion: nil)
     }
     

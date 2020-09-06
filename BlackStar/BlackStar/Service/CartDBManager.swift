@@ -16,9 +16,14 @@ class CartDBManager {
         database = try! Realm()
     }
     
-    func getAllCartItems() ->   Results<CartItem> {
+//    func getAllCartItems() ->   Results<CartItem> {
+//        let results: Results<CartItem> = database.objects(CartItem.self)
+//        return results
+//    }
+    
+    func getAllCartItems() -> [CartItem] {
         let results: Results<CartItem> = database.objects(CartItem.self)
-        return results
+        return Array(results)
     }
     
     func getItemsCount() -> Int {

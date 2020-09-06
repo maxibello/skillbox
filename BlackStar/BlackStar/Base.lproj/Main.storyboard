@@ -10,7 +10,7 @@
         <!--Категории-->
         <scene sceneID="6Uz-SP-pnj">
             <objects>
-                <tableViewController id="ak0-fV-v7O" customClass="CategoryVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CategoryVC" id="ak0-fV-v7O" customClass="CategoryVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tnL-u2-9Jo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,6 @@
                                     <outlet property="categoryImageView" destination="oca-bO-hY4" id="GQ6-hq-pJP"/>
                                     <outlet property="categoryLabel" destination="xxa-vb-3Ha" id="fCl-R1-tgC"/>
                                     <outlet property="imageLoader" destination="eHn-gv-gYX" id="xfI-6J-ix1"/>
-                                    <segue destination="ao0-jc-OhP" kind="show" identifier="Subcategories" id="Mjz-Db-1Qf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -69,69 +68,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9q-ky-EVz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="747.82608695652175" y="50.892857142857139"/>
-        </scene>
-        <!--SubcategoryVC-->
-        <scene sceneID="QVB-yf-QFh">
-            <objects>
-                <tableViewController id="ao0-jc-OhP" customClass="SubcategoryVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6k8-t7-ggV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SubcategoryCell" rowHeight="80" id="OSU-is-lG3" customClass="SubcategoryViewCell" customModule="BlackStar" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OSU-is-lG3" id="aLg-g1-gYu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Mx-md-c9E">
-                                            <rect key="frame" x="16" y="12" width="56" height="56"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="56" id="M0S-qX-8HW"/>
-                                                <constraint firstAttribute="height" constant="56" id="NGQ-BP-G3u"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NA-PJ-2AZ">
-                                            <rect key="frame" x="88" y="29.5" width="232" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="qBn-OH-QQo">
-                                            <rect key="frame" x="34" y="29" width="20" height="20"/>
-                                        </activityIndicatorView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="7Mx-md-c9E" firstAttribute="top" secondItem="aLg-g1-gYu" secondAttribute="top" constant="12" id="FXd-YJ-tag"/>
-                                        <constraint firstItem="9NA-PJ-2AZ" firstAttribute="centerY" secondItem="aLg-g1-gYu" secondAttribute="centerY" id="Snq-Et-eYn"/>
-                                        <constraint firstItem="7Mx-md-c9E" firstAttribute="leading" secondItem="aLg-g1-gYu" secondAttribute="leading" constant="16" id="Xb8-bK-AfQ"/>
-                                        <constraint firstItem="9NA-PJ-2AZ" firstAttribute="leading" secondItem="7Mx-md-c9E" secondAttribute="trailing" constant="16" id="YTz-Fy-TdC"/>
-                                        <constraint firstAttribute="bottom" secondItem="7Mx-md-c9E" secondAttribute="bottom" constant="12" id="aT6-5D-iHe"/>
-                                        <constraint firstItem="qBn-OH-QQo" firstAttribute="centerY" secondItem="7Mx-md-c9E" secondAttribute="centerY" id="kDp-5G-DnZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="9NA-PJ-2AZ" secondAttribute="trailing" constant="55" id="kSp-6d-MfT"/>
-                                        <constraint firstItem="qBn-OH-QQo" firstAttribute="centerX" secondItem="7Mx-md-c9E" secondAttribute="centerX" id="neb-Y2-dku"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="imageLoader" destination="qBn-OH-QQo" id="mVh-ub-rHF"/>
-                                    <outlet property="subcategoryImageView" destination="7Mx-md-c9E" id="oEE-ou-zco"/>
-                                    <outlet property="subcategoryLabel" destination="9NA-PJ-2AZ" id="mUl-AL-iNY"/>
-                                    <segue destination="SaD-LB-sxv" kind="show" identifier="Products" id="5nh-nl-qwd"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ao0-jc-OhP" id="iRz-jc-fn8"/>
-                            <outlet property="delegate" destination="ao0-jc-OhP" id="7bU-Uk-JNW"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="ynt-xN-u6N"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OHE-5N-yku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1668" y="45"/>
         </scene>
         <!--Item-->
         <scene sceneID="bRI-Mb-oPE">
@@ -402,7 +338,7 @@
         <!--Product ListVC-->
         <scene sceneID="YUr-0q-wOU">
             <objects>
-                <collectionViewController id="SaD-LB-sxv" customClass="ProductListVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ProductListVC" id="SaD-LB-sxv" customClass="ProductListVC" customModule="BlackStar" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ICD-nG-dec">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

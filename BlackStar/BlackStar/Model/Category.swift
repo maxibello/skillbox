@@ -12,66 +12,43 @@ struct Category: Decodable {
     let name: String
     let sortOrder: String
     let iconImage: String
-    let iconImageActive: String
-    let subcategories: [Subcategory]
+    let subcategories: [Category]?
     let id: String
     
     enum CodingKeys: CodingKey {
         case name
         case sortOrder
         case iconImage
-        case iconImageActive
         case subcategories
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        // 3
-        // Decode firstName & lastName
-        name = try container.decode(String.self, forKey: CodingKeys.name)
-        sortOrder = try container.decode(String.self, forKey: CodingKeys.sortOrder)
-        iconImage = try container.decode(String.self, forKey: CodingKeys.iconImage)
-        iconImageActive = try container.decode(String.self, forKey: CodingKeys.iconImageActive)
-        subcategories = try container.decode([Subcategory].self, forKey: CodingKeys.subcategories)
-        id = container.codingPath.first!.stringValue
-    }
-}
-
-struct Subcategory: Decodable {
-    let id: String
-    let iconImage: String
-    let sortOrder: String
-    let name: String
-    
-    enum CodingKeys: CodingKey {
         case id
-        case iconImage
-        case name
-        case sortOrder
     }
     
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        iconImage = try container.decode(String.self, forKey: .iconImage)
-        name = try container.decode(String.self, forKey: .name)
-        
-        do {
-            id = try String(container.decode(String.self, forKey: .id))
-        } catch DecodingError.typeMismatch {
-            let intId = try container.decode(Int.self, forKey: .id)
-            id = "\(intId)"
-        }
-        
+        name = try container.decode(String.self, forKey: CodingKeys.name)
+        iconImage = try container.decode(String.self, forKey: CodingKeys.iconImage)
+
         do {
             sortOrder = try String(container.decode(String.self, forKey: .sortOrder))
         } catch DecodingError.typeMismatch {
             let intSortOrder = try container.decode(Int.self, forKey: .sortOrder)
             sortOrder = "\(intSortOrder)"
         }
+        
+        subcategories = try container.decodeIfPresent([Category].self, forKey: .subcategories)
+        if subcategories != nil {
+            id = container.codingPath.first?.stringValue ?? ""
+        } else {
+            do {
+                id = try String(container.decode(String.self, forKey: .id))
+            } catch DecodingError.typeMismatch {
+                let intId = try container.decode(Int.self, forKey: .id)
+                id = "\(intId)"
+            }
+        }
+        
     }
 }
 

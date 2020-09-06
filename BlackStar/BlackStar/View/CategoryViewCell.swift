@@ -18,12 +18,18 @@ class CategoryViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        categoryImageView.image = nil
         imageLoader.startAnimating()
     }
     
     func configure(with category: Category) {
         categoryLabel.text = category.name
         imageLoader.startAnimating()
+        
+        guard !category.iconImage.isEmpty else {
+            imageLoader.stopAnimating()
+            return
+        }
         
         BlackStarApiService.downloadImage(from: category.iconImage) { [weak self] image, error in
             DispatchQueue.main.async {
