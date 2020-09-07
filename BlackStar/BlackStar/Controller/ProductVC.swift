@@ -50,7 +50,7 @@ class ProductVC: UIViewController {
     
     lazy var backButton: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "backButton")
+        imageView.image = UIImage(named: "backButton")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
@@ -72,7 +72,7 @@ class ProductVC: UIViewController {
     }()
     
     lazy var hudImageView: UIImageView = {
-       let hud = UIImageView(image: #imageLiteral(resourceName: "hud"))
+        let hud = UIImageView(image: UIImage(named: "hud"))
         hud.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         hud.center = view.center
         return hud

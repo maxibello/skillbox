@@ -55,7 +55,7 @@ extension SizePickerVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! ColorOffersViewCell
-        cell.checkmarkImageView.image = #imageLiteral(resourceName: "doneIcon")
+        cell.checkmarkImageView.image = UIImage(named: "doneIcon")
         
         let color = options[indexPath.section].colorName
         let offer = options[indexPath.section].offers[indexPath.row]

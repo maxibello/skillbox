@@ -17,7 +17,7 @@ class BasketControl: UIView {
     
     var cart: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "cart")
+        imageView.image = UIImage(named: "cart")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -32,7 +32,7 @@ class BasketControl: UIView {
     }()
     
     var bubbleView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "redCircle"))
+        let imageView = UIImageView(image: UIImage(named: "redCircle"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
