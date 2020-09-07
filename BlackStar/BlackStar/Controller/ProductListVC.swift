@@ -81,7 +81,7 @@ class ProductListVC: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Product", let productVC = segue.destination as? ProductVC {
             productVC.delegate = self
-            productVC.isModalInPresentation = true
+            productVC.presentationController?.delegate = self;
             productVC.product = formedProduct
         }
     }
@@ -120,6 +120,12 @@ extension ProductListVC: UICollectionViewDelegateFlowLayout {
 
 extension ProductListVC: ICartVC {
     func cartDidClosed(_: CartVC) {
+        basketHelper.updateControl()
+    }
+}
+
+extension ProductListVC: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         basketHelper.updateControl()
     }
 }
