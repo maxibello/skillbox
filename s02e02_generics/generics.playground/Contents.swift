@@ -125,3 +125,70 @@ func +(lhs: CustomStringConvertible, rhs: CustomStringConvertible) -> String {
 }
 
 7 + " string"
+
+//9. Напишите для библиотеки анимаций новый аниматор:
+//a. изменяющий фоновый цвет для UIView
+
+protocol Animator {
+    associatedtype Target
+    associatedtype Value
+    
+    init(_ value: Value)
+    
+    func animate(target: Target)
+}
+
+class BackgroundAnimator: Animator {
+    typealias Target = UIView
+    typealias Value = UIColor
+    
+    let newValue: UIColor
+    
+    required init(_ value: UIColor) {
+        newValue = value
+    }
+    
+    func animate(target: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            target.backgroundColor = self.newValue
+        })
+    }
+}
+
+//b. изменяющий center UIView
+
+class CenterAnimator: Animator {
+    typealias Target = UIView
+    typealias Value = CGPoint
+    
+    let newValue: CGPoint
+    
+    required init(_ value: CGPoint) {
+        newValue = value
+    }
+    
+    func animate(target: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            target.center = self.newValue
+        })
+    }
+}
+
+//c. делающий scale трансформацию для UIView
+
+class ScaleAnimator: Animator {
+    typealias Target = UIView
+    typealias Value = CGAffineTransform
+    
+    let newValue: CGAffineTransform
+    
+    required init(_ value: CGAffineTransform) {
+        newValue = value
+    }
+    
+    func animate(target: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            target.transform = self.newValue
+        })
+    }
+}
