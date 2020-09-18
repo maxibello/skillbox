@@ -24,17 +24,13 @@ class CategoryVC: UITableViewController {
     
     override func viewDidLoad() {
         tableView.tableFooterView = UIView()
+        tableView.allowsSelection = false
         view.addSubview(loader)
         
         NSLayoutConstraint.activate([
             loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        let rightBarItem = UIBarButtonItem(customView: basketHelper.basketControl)
-        self.navigationItem.rightBarButtonItem = rightBarItem
-        let cartButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(cartButtonTapped))
-        basketHelper.basketControl.addGestureRecognizer(cartButtonRecognizer)
         
         guard categories.count == 0 else { return }
         
@@ -58,11 +54,6 @@ class CategoryVC: UITableViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        basketHelper.updateControl()
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         categories.count
     }
@@ -74,43 +65,8 @@ class CategoryVC: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard let category = selectedCategory else { return }
-        
-        if let subcategories = category.subcategories, subcategories.count > 0,
-            let subcategoryVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryVC") as? CategoryVC {
-            subcategoryVC.categories = subcategories.sorted(by: {
-                left, right in
-                return Int(left.sortOrder) ?? Int.max < Int(right.sortOrder) ?? Int.max
-            })
-            subcategoryVC.navigationItem.title = category.name
-            navigationController?.pushViewController(subcategoryVC,
-                                                     animated: true)
-        } else if let productListVC = self.storyboard?.instantiateViewController(withIdentifier: "ProductListVC") as? ProductListVC {
-            productListVC.category = selectedCategory
-            navigationController?.pushViewController(productListVC,
-            animated: true)
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectedCategory = categories[indexPath.row]
         return indexPath
-    }
-    
-    @objc func cartButtonTapped() {
-        if let cartVC = self.storyboard?.instantiateViewController(withIdentifier: "CartVC") as? CartVC {
-            cartVC.delegate = self
-            cartVC.isModalInPresentation = true
-            cartVC.modalPresentationStyle = .fullScreen
-            cartVC.modalTransitionStyle = .coverVertical
-            self.present(cartVC, animated: true, completion: nil)
-        }
-    }}
-
-extension CategoryVC: ICartVC {
-    func cartDidClosed(_: CartVC) {
-        basketHelper.updateControl()
     }
 }
