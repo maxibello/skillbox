@@ -85,3 +85,28 @@ extension LinkedList: CustomStringConvertible {
         return String(describing: head)
     }
 }
+
+public struct LinkedListIterator<T>: IteratorProtocol {
+    public typealias Element = Node<T>
+    private var currentNode: Element?
+    
+    fileprivate init(startNode: Element?) {
+        currentNode = startNode
+    }
+    
+    public mutating func next() -> LinkedListIterator.Element? {
+        let node = currentNode
+        currentNode = currentNode?.next
+        
+        return node
+    }
+}
+
+extension LinkedList: Sequence {
+    
+    public typealias Iterator = LinkedListIterator<Value>
+    
+    public func makeIterator() -> LinkedList.Iterator {
+        return LinkedListIterator(startNode: head)
+    }
+}

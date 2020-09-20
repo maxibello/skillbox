@@ -143,3 +143,13 @@ struct BiCurrencyBasket {
 
 let final = *(BiCurrencyBasket(dollars: 10, euros: 20) ++ BiCurrencyBasket(dollars: 10, euros: 10) + BiCurrencyBasket(dollars: 5, euros: 5))^
 print(final)
+
+
+var linkedListSequence = LinkedList<Int>()
+linkedListSequence.append(0)
+linkedListSequence.append(1)
+linkedListSequence.append(2)
+
+for node in linkedListSequence {
+    print(node.value)
+}
