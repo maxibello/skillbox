@@ -16,6 +16,7 @@ class RocketVC: UIViewController {
     @IBOutlet weak var secondButton: UIButton!
     
     let disposeBag = DisposeBag()
+    var subscription: Disposable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +25,20 @@ class RocketVC: UIViewController {
         firstButton.rx.tap.map({ true }),
         secondButton.rx.tap.map({ true })) { $0 && $1 }
 
-        launchRocket.subscribe(onNext: { [unowned self] in
+        subscription = launchRocket.subscribe(onNext: { [unowned self] in
             if $0 {
                 self.mainLabel.text = "Ракета запущена"
+                self.disposeSubscription()
             }
         })
-          .disposed(by: disposeBag)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        subscription?.dispose()
+    }
+    
+    private func disposeSubscription() {
+        subscription?.dispose()
     }
 }

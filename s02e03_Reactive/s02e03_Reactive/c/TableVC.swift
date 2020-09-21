@@ -25,23 +25,16 @@ class TableVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        items
-          .bind(to: tableView
-            .rx
-            .items(cellIdentifier: NameCell.identifier,
-                   cellType: NameCell.self)) {
-                    row, item, cell in
-                    cell.configure(with: item)
-          }
-          .disposed(by: disposeBag)
-        
+                
         addButton.rx.tap
             .bind(onNext: { [unowned self] in
                 if let randomName = self.names.randomElement(),
                     let currentItems = try? self.items.value() {
                     let newItems = currentItems + [randomName]
                     self.items.onNext(newItems)
+                    
+                    let indexPath = IndexPath(row: newItems.count - 1, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 }
             })
         .disposed(by: disposeBag)
@@ -54,6 +47,20 @@ class TableVC: UIViewController {
         })
         .disposed(by: disposeBag)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        items
+          .bind(to: tableView
+            .rx
+            .items(cellIdentifier: NameCell.identifier,
+                   cellType: NameCell.self)) {
+                    row, item, cell in
+                    cell.configure(with: item)
+          }
+          .disposed(by: disposeBag)
     }
     
 }

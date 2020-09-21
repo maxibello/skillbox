@@ -32,9 +32,12 @@ class TextFieldVC: UIViewController {
                 self.validate(login: $0)
         }
         
-        loginValid
+        let loginLostFocus = loginTextField.rx.controlEvent(.editingDidEnd).map { true }
+        let loginCombine = Observable<Bool>.combineLatest(loginValid, loginLostFocus) { $0 && $1 }
+        
+        loginCombine
             .subscribe(onNext: { [unowned self] result in
-                if !result, let currentText = self.loginTextField.text, !currentText.isEmpty {
+                if !result  {
                     self.messageLabel.text = "Некорректная почта"
                 } else {
                     self.messageLabel.text = ""
@@ -61,12 +64,12 @@ class TextFieldVC: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        let everythingValid = Observable<Bool>.combineLatest(loginValid, passwordValid) { $0 && $1
+        let everythingValid = Observable<Bool>.combineLatest(loginCombine, passwordValid) { $0 && $1
         }
-
+        
         everythingValid
-          .bind(to: sendButton.rx.isEnabled)
-          .disposed(by: disposeBag)
+            .bind(to: sendButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
     
     func validate(login: String?) -> Bool {
