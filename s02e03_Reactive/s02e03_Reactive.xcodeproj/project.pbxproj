@@ -19,6 +19,7 @@
 		93495B2E250E750900EB1FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93495B2D250E750900EB1FD1 /* Assets.xcassets */; };
 		93495B31250E750900EB1FD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93495B2F250E750900EB1FD1 /* LaunchScreen.storyboard */; };
 		9349F557250F7EDF00DCF67A /* DelayedRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349F556250F7EDF00DCF67A /* DelayedRequestVC.swift */; };
+		93B54DF32519DE82003A5BD1 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B54DF22519DE81003A5BD1 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		93495B30250E750900EB1FD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93495B32250E750900EB1FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9349F556250F7EDF00DCF67A /* DelayedRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedRequestVC.swift; sourceTree = "<group>"; };
+		93B54DF22519DE81003A5BD1 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		A6C9D8AEF4AA3D22B6209942 /* Pods_s02e03_Reactive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_s02e03_Reactive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC065EF0480FB26E052FEF2A /* Pods-s02e03_Reactive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-s02e03_Reactive.debug.xcconfig"; path = "Target Support Files/Pods-s02e03_Reactive/Pods-s02e03_Reactive.debug.xcconfig"; sourceTree = "<group>"; };
 		EE127B8CD5EDE30655E5E442 /* Pods-s02e03_Reactive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-s02e03_Reactive.release.xcconfig"; path = "Target Support Files/Pods-s02e03_Reactive/Pods-s02e03_Reactive.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				93495B2F250E750900EB1FD1 /* LaunchScreen.storyboard */,
 				93495B2A250E750300EB1FD1 /* Main.storyboard */,
 				93495B26250E750300EB1FD1 /* SceneDelegate.swift */,
+				93B54DF22519DE81003A5BD1 /* Queue.swift */,
 			);
 			path = s02e03_Reactive;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				93495B27250E750300EB1FD1 /* SceneDelegate.swift in Sources */,
 				9345E5FC250FC15B004FDAB1 /* TableVC.swift in Sources */,
 				9345E5FA250FC0DC004FDAB1 /* NameCell.swift in Sources */,
+				93B54DF32519DE82003A5BD1 /* Queue.swift in Sources */,
 				9349F557250F7EDF00DCF67A /* DelayedRequestVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

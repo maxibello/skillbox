@@ -52,6 +52,8 @@ class TableVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        tableView.delegate = nil
+        tableView.dataSource = nil
         items
           .bind(to: tableView
             .rx
