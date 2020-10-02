@@ -24,6 +24,7 @@
 		9331662B2514D95200AE080B /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933166282514D95100AE080B /* FirstLaunch.swift */; };
 		9331662C2514D95200AE080B /* UserDefaultsPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933166292514D95200AE080B /* UserDefaultsPersistent.swift */; };
 		9331662D2514D95200AE080B /* ErrorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9331662A2514D95200AE080B /* ErrorOverlayVC.swift */; };
+		936D4D512527803800D678AE /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D4D502527803800D678AE /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		933166282514D95100AE080B /* FirstLaunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
 		933166292514D95200AE080B /* UserDefaultsPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistent.swift; sourceTree = "<group>"; };
 		9331662A2514D95200AE080B /* ErrorOverlayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorOverlayVC.swift; sourceTree = "<group>"; };
+		936D4D502527803800D678AE /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				9331661A2514D89900AE080B /* CategoryViewCell.swift */,
+				936D4D502527803800D678AE /* RootView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				9331662B2514D95200AE080B /* FirstLaunch.swift in Sources */,
 				9331661E2514D89E00AE080B /* CategoryVC.swift in Sources */,
 				9331662C2514D95200AE080B /* UserDefaultsPersistent.swift in Sources */,
+				936D4D512527803800D678AE /* RootView.swift in Sources */,
 				933166272514D8B400AE080B /* ServiceLocator.swift in Sources */,
 				933166232514D8AE00AE080B /* ToDoItem.swift in Sources */,
 				9331662D2514D95200AE080B /* ErrorOverlayVC.swift in Sources */,
