@@ -24,6 +24,7 @@
 		9331662B2514D95200AE080B /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933166282514D95100AE080B /* FirstLaunch.swift */; };
 		9331662C2514D95200AE080B /* UserDefaultsPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933166292514D95200AE080B /* UserDefaultsPersistent.swift */; };
 		9331662D2514D95200AE080B /* ErrorOverlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9331662A2514D95200AE080B /* ErrorOverlayVC.swift */; };
+		934C04622527905B00DB921F /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934C04612527905B00DB921F /* CategoryCell.xib */; };
 		936D4D512527803800D678AE /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D4D502527803800D678AE /* RootView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		933166282514D95100AE080B /* FirstLaunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
 		933166292514D95200AE080B /* UserDefaultsPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistent.swift; sourceTree = "<group>"; };
 		9331662A2514D95200AE080B /* ErrorOverlayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorOverlayVC.swift; sourceTree = "<group>"; };
+		934C04612527905B00DB921F /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		936D4D502527803800D678AE /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 			children = (
 				9331661A2514D89900AE080B /* CategoryViewCell.swift */,
 				936D4D502527803800D678AE /* RootView.swift */,
+				934C04612527905B00DB921F /* CategoryCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				933165F52514A2CC00AE080B /* LaunchScreen.storyboard in Resources */,
 				933165F22514A2CC00AE080B /* Assets.xcassets in Resources */,
 				933165F02514A2C600AE080B /* Main.storyboard in Resources */,
+				934C04622527905B00DB921F /* CategoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

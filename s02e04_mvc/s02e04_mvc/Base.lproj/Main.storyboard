@@ -35,62 +35,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzF-OU-A1N" customClass="RootView" customModule="s02e04_mvc" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hTL-l6-5zH">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="769"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="80" id="CyP-Y3-xlL" customClass="CategoryViewCell" customModule="s02e04_mvc" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="80"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CyP-Y3-xlL" id="fgN-Hy-9zJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3z1-32-Gav">
-                                                            <rect key="frame" x="16" y="12" width="56" height="56"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="56" id="j51-gU-eUx"/>
-                                                                <constraint firstAttribute="width" constant="56" id="y5C-SH-LOW"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pkh-6A-EvH">
-                                                            <rect key="frame" x="88" y="29.5" width="271" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bom-oX-kcK">
-                                                            <rect key="frame" x="34" y="30" width="20" height="20"/>
-                                                        </activityIndicatorView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="3z1-32-Gav" secondAttribute="bottom" constant="12" id="2dG-tA-Q94"/>
-                                                        <constraint firstItem="Pkh-6A-EvH" firstAttribute="leading" secondItem="3z1-32-Gav" secondAttribute="trailing" constant="16" id="3sk-oe-Kwg"/>
-                                                        <constraint firstItem="3z1-32-Gav" firstAttribute="leading" secondItem="fgN-Hy-9zJ" secondAttribute="leading" constant="16" id="6x0-5M-R26"/>
-                                                        <constraint firstItem="bom-oX-kcK" firstAttribute="centerY" secondItem="3z1-32-Gav" secondAttribute="centerY" id="9ux-Ig-2xv"/>
-                                                        <constraint firstItem="Pkh-6A-EvH" firstAttribute="centerY" secondItem="fgN-Hy-9zJ" secondAttribute="centerY" id="ZK8-DC-1KA"/>
-                                                        <constraint firstItem="3z1-32-Gav" firstAttribute="top" secondItem="fgN-Hy-9zJ" secondAttribute="top" constant="12" id="vjp-fS-mhx"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Pkh-6A-EvH" secondAttribute="trailing" constant="55" id="yTE-LY-Zbn"/>
-                                                        <constraint firstItem="bom-oX-kcK" firstAttribute="centerX" secondItem="3z1-32-Gav" secondAttribute="centerX" id="yZk-kV-Fbj"/>
-                                                    </constraints>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="categoryImageView" destination="3z1-32-Gav" id="jji-cj-sEy"/>
-                                                    <outlet property="categoryLabel" destination="Pkh-6A-EvH" id="cSh-9f-P8p"/>
-                                                    <outlet property="imageLoader" destination="bom-oX-kcK" id="rjW-un-lSt"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstItem="hTL-l6-5zH" firstAttribute="top" secondItem="AzF-OU-A1N" secondAttribute="top" id="BAL-ir-q1R"/>
-                                    <constraint firstAttribute="bottom" secondItem="hTL-l6-5zH" secondAttribute="bottom" id="EL1-zV-K1z"/>
-                                    <constraint firstItem="hTL-l6-5zH" firstAttribute="leading" secondItem="AzF-OU-A1N" secondAttribute="leading" id="b14-oQ-K1C"/>
-                                    <constraint firstAttribute="trailing" secondItem="hTL-l6-5zH" secondAttribute="trailing" id="lkP-PJ-iQa"/>
-                                </constraints>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -105,7 +50,6 @@
                     <tabBarItem key="tabBarItem" title="Item" id="bLA-11-jb8"/>
                     <connections>
                         <outlet property="rootView" destination="AzF-OU-A1N" id="hRN-Jv-O0o"/>
-                        <outlet property="tableView" destination="hTL-l6-5zH" id="lPg-fm-Iui"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qsj-3E-Jle" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
