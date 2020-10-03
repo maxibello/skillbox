@@ -12,21 +12,12 @@ import RealmSwift
 class ToDoListViewController: UITableViewController {
     
     var presenter: ToDoListPresenterInput!
+    let configurator: TDLConfiguratorProtocol = TDLConfigurator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        config()
+        configurator.configure(with: self)
         presenter.fetchItems()
-    }
-    
-    private func config() {
-        presenter = ToDoListPresenter()
-        presenter.outputDelegate = self
-        
-        let interactor = ToDoListInteractor()
-        interactor.outputDelegate = presenter as? ToDoListPresenter
-        presenter.interactor = interactor
-        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,26 +34,10 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         presenter.deleteItem(with: indexPath)
-        
-        
     }
     
     @IBAction func addNewTask(_ sender: Any) {
-        let alert = UIAlertController(title: "New task", message: "Type what you want to do", preferredStyle: .alert)
-        
-        alert.addTextField(configurationHandler: nil)
-        let saveAction = UIAlertAction(title: "OK", style: .default, handler: { [weak self, weak alert] action in
-            guard let self = self, let textField = alert?.textFields?.first else {
-                return
-            }
-            if let text = textField.text, text.count > 0 {
-                self.presenter.addItem(with: text)
-            }
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+        presenter.showAddItemAlert()
     }
 }
 
@@ -78,9 +53,5 @@ extension ToDoListViewController: ToDoListPresenterOutput {
     
     func updateItems() {
         tableView.reloadData()
-    }
-    
-    func handleError(message: String) {
-        showError(message: message)
     }
 }

@@ -10,8 +10,6 @@ import Foundation
 
 protocol CategoryPresenterInput {
     var items: [Category] { get set }
-    var outputDelegate: CategoryPresenterOutput? { get set }
-    var interactor: CategoryIteractorInput? { get set }
     func loadCategories()
 }
 
@@ -19,23 +17,27 @@ protocol CategoryPresenterOutput: AnyObject {
     func showLoader()
     func hideLoader()
     func didLoadCategories()
-    func didLoadCategoriesError(message: String)
 }
 
 class CategoryPresenter: CategoryPresenterInput {
-    var interactor: CategoryIteractorInput?
     var items: [Category] = []
     weak var outputDelegate: CategoryPresenterOutput?
+    private let interactor: CategoryInteractorInput
+    private let router: CategoryRouterInput
+    
+    init(interactor: CategoryInteractorInput, router: CategoryRouterInput) {
+        self.interactor = interactor
+        self.router = router
+    }
     
     func loadCategories() {
         outputDelegate?.showLoader()
-        interactor?.fetchCategories()
+        interactor.fetchCategories()
     }
 }
 
-extension CategoryPresenter: CategoryIteractorOutput {
+extension CategoryPresenter: CategoryInteractorOutput {
     func categoriesReceiveError(message: String) {
-        outputDelegate?.didLoadCategoriesError(message: message)
         outputDelegate?.hideLoader()
     }
     

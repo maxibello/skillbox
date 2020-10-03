@@ -11,6 +11,7 @@ import UIKit
 class CategoryVC: UITableViewController {
     
     var presenter: CategoryPresenterInput!
+    let configurator: CategoryConfiguratorProtocol = CategoryConfigurator()
     
     lazy var loader: UIActivityIndicatorView = {
         let loader = UIActivityIndicatorView()
@@ -22,7 +23,8 @@ class CategoryVC: UITableViewController {
     }()
     
     override func viewDidLoad() {
-        configure()
+        configurator.configure(with: self)
+        
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
         view.addSubview(loader)
@@ -47,16 +49,6 @@ class CategoryVC: UITableViewController {
         
         return cell
     }
-    
-    private func configure() {
-        presenter = CategoryPresenter()
-        presenter.outputDelegate = self
-        
-        let interactor = CategoryIteractor()
-        interactor.outputDelegate = presenter as? CategoryPresenter
-        
-        presenter.interactor = interactor
-    }
 }
 
 extension CategoryVC: CategoryPresenterOutput {
@@ -66,10 +58,6 @@ extension CategoryVC: CategoryPresenterOutput {
     
     func hideLoader() {
         loader.stopAnimating()
-    }
-    
-    func didLoadCategoriesError(message: String) {
-        showError(message: message)
     }
     
     func didLoadCategories() {

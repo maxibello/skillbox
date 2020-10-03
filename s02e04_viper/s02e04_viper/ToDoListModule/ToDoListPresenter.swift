@@ -11,46 +11,52 @@ import RealmSwift
 
 protocol ToDoListPresenterInput {
     var items: Results<ToDoItem>? { get set }
-    var outputDelegate: ToDoListPresenterOutput? { get set }
-    var interactor: ToDoListInteractorInput? { get set }
-    
     func deleteItem(with indexPath: IndexPath)
     func addItem(with text: String)
+    func showAddItemAlert()
     func fetchItems()
 }
 
 protocol ToDoListPresenterOutput {
     func updateItems()
-    func handleError(message: String)
     func itemDeleted(at row: Int)
-    func errorOccured(message: String)
 }
 
 class ToDoListPresenter: ToDoListPresenterInput {
     
     var items: Results<ToDoItem>?
     var outputDelegate: ToDoListPresenterOutput?
-    var interactor: ToDoListInteractorInput?
+    private let interactor: ToDoListInteractorInput
+    private let router: ToDoListRouterInput
+    
+    init(interactor: ToDoListInteractorInput, router: ToDoListRouterInput) {
+        self.interactor = interactor
+        self.router = router
+    }
     
     func fetchItems() {
-        interactor?.fetchItems()
+        interactor.fetchItems()
     }
     
     func deleteItem(with indexPath: IndexPath) {
-        interactor?.deleteItem(with: indexPath.row)
+        interactor.deleteItem(with: indexPath.row)
     }
     
     func addItem(with text: String) {
-        interactor?.addItem(with: text)
+        interactor.addItem(with: text)
+    }
+    
+    func showAddItemAlert() {
+        router.showNewItemDialog(presenter: self)
     }
     
 }
 
 extension ToDoListPresenter: ToDoListInteractorOutput {
     func errorOccured(message: String) {
-        outputDelegate?.errorOccured(message: message)
+        router.showError(message: message)
     }
-    
+
     func itemAdded() {
         outputDelegate?.updateItems()
     }
@@ -65,8 +71,6 @@ extension ToDoListPresenter: ToDoListInteractorOutput {
     }
     
     func fetchingDidError(message: String) {
-        outputDelegate?.handleError(message: message)
+        router.showError(message: message)
     }
-    
-    
 }

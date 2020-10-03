@@ -8,19 +8,18 @@
 
 import Foundation
 
-protocol CategoryIteractorInput {
+protocol CategoryInteractorInput {
     func fetchCategories()
-    var outputDelegate: CategoryIteractorOutput? { get set }
 }
 
-protocol CategoryIteractorOutput {
+protocol CategoryInteractorOutput {
     func categoriesDidReceived(categories: [Category])
     func categoriesReceiveError(message: String)
 }
 
-class CategoryIteractor: CategoryIteractorInput {
+class CategoryInteractor: CategoryInteractorInput {
     
-    var outputDelegate: CategoryIteractorOutput?
+    var outputDelegate: CategoryInteractorOutput?
     
     func fetchCategories() {
         BlackStarApiService.loadCategories() { [weak self] result in
