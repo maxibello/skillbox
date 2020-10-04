@@ -12,13 +12,13 @@ import RealmSwift
 
 class TDLInteractorTests: XCTestCase {
 
-    var tdlInteractor: MockInteracor?
+    var tdlInteractor: ToDoListInteractor?
     var tdlInteractorOutput: MockOutput?
     
     override func setUpWithError() throws {
-        tdlInteractor = MockInteracor()
+        tdlInteractor = ToDoListInteractor()
         tdlInteractorOutput = MockOutput()
-        tdlInteractor?.output = tdlInteractorOutput
+        tdlInteractor?.outputDelegate = tdlInteractorOutput
     }
     
     func testExample() throws {
@@ -29,24 +29,6 @@ class TDLInteractorTests: XCTestCase {
         }
         
         XCTAssert(tdlInteractorOutput.itemsCount > 0)
-    }
-    
-    class MockInteracor: ToDoListInteractorInput {
-        
-        var output: ToDoListInteractorOutput?
-        
-        func fetchItems() {
-            let realm = try! Realm()
-            output?.itemsDidFetched(items: realm.objects(ToDoItem.self))
-        }
-        
-        func deleteItem(with id: Int) {
-            
-        }
-        
-        func addItem(with text: String) {
-            
-        }
     }
     
     class MockOutput: ToDoListInteractorOutput {

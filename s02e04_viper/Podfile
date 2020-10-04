@@ -13,6 +13,6 @@ end
 target 's02e04_viperTests' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
   pod 'RealmSwift'
+  pod 'Mockingjay', '3.0.0-alpha.1'
 end

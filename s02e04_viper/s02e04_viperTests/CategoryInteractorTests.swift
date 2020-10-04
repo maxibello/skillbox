@@ -7,20 +7,26 @@
 //
 
 import XCTest
+import Mockingjay
 @testable import s02e04_viper
 
 class CategoryInteractorTests: XCTestCase {
 
-    var categoryInteractor: MockInteractor?
+    var categoryInteractor: CategoryInteractor?
     var interactorOutput: MockOutput?
     
     override func setUpWithError() throws {
-        categoryInteractor = MockInteractor()
+        categoryInteractor = CategoryInteractor()
         interactorOutput = MockOutput()
-        categoryInteractor?.output = interactorOutput
+        categoryInteractor?.outputDelegate = interactorOutput
     }
     
     func testExample() throws {
+
+        let path = Bundle(for: type(of: self)).path(forResource: "categories", ofType: "json")!
+        let data = NSData(contentsOfFile: path)!
+        stub(uri("https://blackstarshop.ru/index.php?route=api/v1/categories"), jsonData(data as Data))
+        
         categoryInteractor?.fetchCategories()
 
         guard let interactorOutput = interactorOutput else {
@@ -28,25 +34,6 @@ class CategoryInteractorTests: XCTestCase {
         }
         
         XCTAssert(interactorOutput.categoriesCount > 0)
-    }
-    
-    class MockInteractor: CategoryInteractorInput {
-        var output: CategoryInteractorOutput?
-        func fetchCategories() {
-            let categories = decodeCategories()
-            output?.categoriesDidReceived(categories: categories)
-        }
-        
-        func decodeCategories() -> [s02e04_viper.Category] {
-            let testBundle = Bundle(for: type(of: self))
-            guard let ressourceURL = testBundle.url(forResource: "categories", withExtension: "json") else {
-                return []
-            }
-            let data = try! Data(contentsOf: ressourceURL)
-            let categories = try! JSONDecoder().decode(DecodedArray<s02e04_viper.Category>.self, from: data)
-            return categories.map( { $0 })
-        }
-        
     }
     
     class MockOutput: CategoryInteractorOutput {
