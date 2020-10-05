@@ -23,6 +23,9 @@ class CategoryInteractorTests: XCTestCase {
     
     func testExample() throws {
 
+        let expectation = XCTestExpectation(description: "Download categories")
+        interactorOutput?.expectation = expectation
+        
         let path = Bundle(for: type(of: self)).path(forResource: "categories", ofType: "json")!
         let data = NSData(contentsOfFile: path)!
         stub(uri("https://blackstarshop.ru/index.php?route=api/v1/categories"), jsonData(data as Data))
@@ -33,20 +36,24 @@ class CategoryInteractorTests: XCTestCase {
             return XCTFail()
         }
         
+        wait(for: [expectation], timeout: 5)
         XCTAssert(interactorOutput.categoriesCount > 0)
     }
     
     class MockOutput: CategoryInteractorOutput {
         
+        var expectation: XCTestExpectation?
         var categoriesCount = 0
         var errorMessage: String?
         
         func categoriesDidReceived(categories: [s02e04_viper.Category]) {
             categoriesCount = categories.count
+            expectation?.fulfill()
         }
         
         func categoriesReceiveError(message: String) {
             errorMessage = message
+            expectation?.fulfill()
         }
     }
 
