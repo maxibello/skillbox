@@ -86,8 +86,8 @@ class ToDoListViewController: UITableViewController {
     }
 }
 
-//extension ToDoListViewController: ErrorOverlayDismissing {
-//    func didCloseErrorVC(_: ErrorOverlayVC) {
-//        dismiss(animated: true, completion: nil)
-//    }
-//}
+extension ToDoListViewController: ErrorOverlayDismissing {
+    func didCloseErrorVC(_: ErrorOverlayVC) {
+        dismiss(animated: true, completion: nil)
+    }
+}

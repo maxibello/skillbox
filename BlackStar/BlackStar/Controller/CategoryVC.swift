@@ -22,8 +22,6 @@ class CategoryVC: UITableViewController {
         return loader
     }()
     
-    let basketHelper = BasketControlHelper()
-    
     override func viewDidLoad() {
         tableView.tableFooterView = UIView()
         view.addSubview(loader)
