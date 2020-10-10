@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93228428253058D100FD10A6 /* ConcurrencyIssuesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93228427253058D100FD10A6 /* ConcurrencyIssuesVC.swift */; };
 		934A3D16252382CA00347B4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A3D15252382CA00347B4D /* AppDelegate.swift */; };
 		934A3D18252382CA00347B4D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A3D17252382CA00347B4D /* SceneDelegate.swift */; };
 		934A3D1A252382CA00347B4D /* ImageDownloadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934A3D19252382CA00347B4D /* ImageDownloadVC.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93228427253058D100FD10A6 /* ConcurrencyIssuesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrencyIssuesVC.swift; sourceTree = "<group>"; };
 		934A3D12252382CA00347B4D /* s02e05_concurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = s02e05_concurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		934A3D15252382CA00347B4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		934A3D17252382CA00347B4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				934A3D23252382CF00347B4D /* Info.plist */,
 				93FF954B2523909300F78064 /* BlurImageVC.swift */,
 				93C81C9C252496E100F37271 /* PrimeNumberVC.swift */,
+				93228427253058D100FD10A6 /* ConcurrencyIssuesVC.swift */,
 			);
 			path = s02e05_concurrency;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			files = (
 				934A3D1A252382CA00347B4D /* ImageDownloadVC.swift in Sources */,
 				93FF954C2523909300F78064 /* BlurImageVC.swift in Sources */,
+				93228428253058D100FD10A6 /* ConcurrencyIssuesVC.swift in Sources */,
 				93C81C9D252496E100F37271 /* PrimeNumberVC.swift in Sources */,
 				934A3D16252382CA00347B4D /* AppDelegate.swift in Sources */,
 				934A3D18252382CA00347B4D /* SceneDelegate.swift in Sources */,

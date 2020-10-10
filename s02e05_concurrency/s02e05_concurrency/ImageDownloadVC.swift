@@ -20,7 +20,7 @@ class ImageDownloadVC: UIViewController {
         guard let url = URL(string: imageURL) else { return }
         
         URLSession.shared.dataTask(with: url) {
-          [weak self] data, response, error in
+          [weak self] data, _, _ in
           guard let self = self,
             let data = data,
             let image = UIImage(data: data) else {
