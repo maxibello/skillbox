@@ -11,7 +11,11 @@ import UIKit
 class ConcurrencyIssuesVC: UIViewController {
     
     @IBAction func deadlock(_ sender: Any) {
-        DispatchQueue.main.sync {}
+        let queue = DispatchQueue(label: "deadlock")
+        queue.async {
+            queue.sync {}
+        }
+        
     }
     
     @IBAction func raceCondition(_ sender: Any) {
@@ -19,57 +23,59 @@ class ConcurrencyIssuesVC: UIViewController {
         var arr: [String] = []
         let concurrentQueue = DispatchQueue(label: "concurrent", attributes: .concurrent)
         
+        for _ in 0..<10 {
+            arr.append("⚽")
+        }
+        
         concurrentQueue.async {
-            for i in 0...1000 {
-                usleep(3)
-                arr.append("🌎: \(i)")
+            for i in 0..<arr.count {
+                arr[i] = "🌎: \(i)"
             }
         }
-
+        
         concurrentQueue.async {
-            for i in 0...1000 {
-                arr[i] = "⚽: \(i)"
+            for item in arr {
+                print(item)
             }
+            print("-------------------")
         }
+        
+        
     }
     
     @IBAction func priorityInversion(_ sender: Any) {
-        enum Color: String {
-            case blue = "🔵"
-            case white = "⚪️"
+        
+        let high = DispatchQueue.global(qos: .userInteractive)
+        let medium = DispatchQueue.global(qos: .userInitiated)
+        let low = DispatchQueue.global(qos: .background)
+
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        high.async {
+            Thread.sleep(forTimeInterval: 2)
+            semaphore.wait()
+            defer { semaphore.signal() }
+
+            print("High priority task is running")
         }
 
-        func output(color: Color, times: Int) {
-            for _ in 1...times {
-                print(color.rawValue)
+        for i in 1 ... 10 {
+            medium.async {
+                let waitTime = Double(exactly: arc4random_uniform(7))!
+                print("Medium task \(i)")
+                Thread.sleep(forTimeInterval: waitTime)
             }
         }
 
-        let starterQueue = DispatchQueue(label: "starter", qos: .userInteractive)
-        let utilityQueue = DispatchQueue(label: "utility", qos: .utility)
-        let backgroundQueue = DispatchQueue(label: "background", qos: .background)
-        let count = 10
+        low.async {
+            semaphore.wait()
+            defer { semaphore.signal() }
 
-        starterQueue.async {
-
-            backgroundQueue.async {
-                output(color: .white, times: count)
-            }
-
-            backgroundQueue.async {
-                output(color: .white, times: count)
-            }
-
-            utilityQueue.async {
-                output(color: .blue, times: count)
-            }
-
-            utilityQueue.async {
-                output(color: .blue, times: count)
-            }
-            
-            backgroundQueue.sync {}
-            
-        }    }
-
+            print("Lowest priority task")
+            Thread.sleep(forTimeInterval: 5)
+        }
+        
+        print("_______________________")
+    }
+    
 }
