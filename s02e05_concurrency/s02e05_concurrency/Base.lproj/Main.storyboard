@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lDu-j7-SQB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lDu-j7-SQB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,12 +45,12 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4SD-1b-rvT" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bUH-RP-IFZ"/>
                             <constraint firstItem="4SD-1b-rvT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bgf-Gt-Z2w"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="9uc-NG-QNo"/>
                     <connections>
@@ -70,25 +72,32 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ltf-Go-8gW">
                                 <rect key="frame" x="57" y="298" width="300" height="300"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPu-4B-cWY">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPu-4B-cWY">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="75"/>
                                         <state key="normal" title="Deadlock"/>
                                         <connections>
                                             <action selector="deadlock:" destination="tfy-eV-fU1" eventType="touchUpInside" id="Ar0-IG-eYl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqc-P9-x8B">
-                                        <rect key="frame" x="0.0" y="100" width="300" height="100"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqc-P9-x8B">
+                                        <rect key="frame" x="0.0" y="75" width="300" height="75"/>
                                         <state key="normal" title="Race condition"/>
                                         <connections>
                                             <action selector="raceCondition:" destination="tfy-eV-fU1" eventType="touchUpInside" id="GdG-Fp-qGQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRV-17-1H9">
-                                        <rect key="frame" x="0.0" y="200" width="300" height="100"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRV-17-1H9">
+                                        <rect key="frame" x="0.0" y="150" width="300" height="75"/>
                                         <state key="normal" title="Priority Inversion"/>
                                         <connections>
                                             <action selector="priorityInversion:" destination="tfy-eV-fU1" eventType="touchUpInside" id="ZcW-WF-sNj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOl-P3-UeU">
+                                        <rect key="frame" x="0.0" y="225" width="300" height="75"/>
+                                        <state key="normal" title="Livelock"/>
+                                        <connections>
+                                            <action selector="liveLock:" destination="tfy-eV-fU1" eventType="touchUpInside" id="79S-fk-Dza"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -98,12 +107,12 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Ift-36-xVR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ltf-Go-8gW" firstAttribute="centerY" secondItem="JMx-0c-DPF" secondAttribute="centerY" id="2GE-Dv-Nwt"/>
                             <constraint firstItem="Ltf-Go-8gW" firstAttribute="centerX" secondItem="JMx-0c-DPF" secondAttribute="centerX" id="AM1-3H-VUP"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Ift-36-xVR"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="WBD-Hp-sIM"/>
                 </viewController>
@@ -124,7 +133,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cX1-50-o7m">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cX1-50-o7m">
                                 <rect key="frame" x="166" y="88" width="82" height="30"/>
                                 <state key="normal" title="Рассчитать"/>
                                 <connections>
@@ -133,7 +142,7 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X2G-6a-sVD">
                                 <rect key="frame" x="0.0" y="122" width="414" height="691"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExecutionCell" id="RdE-fO-6kY">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
@@ -146,7 +155,8 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ltz-uN-uxN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ysw-sg-ckN" firstAttribute="top" secondItem="ltz-uN-uxN" secondAttribute="top" id="5Rh-7K-fcV"/>
                             <constraint firstItem="ltz-uN-uxN" firstAttribute="trailing" secondItem="X2G-6a-sVD" secondAttribute="trailing" id="5xB-y6-gyV"/>
@@ -158,7 +168,6 @@
                             <constraint firstItem="X2G-6a-sVD" firstAttribute="leading" secondItem="ltz-uN-uxN" secondAttribute="leading" id="d3e-FQ-irU"/>
                             <constraint firstItem="X2G-6a-sVD" firstAttribute="top" secondItem="cX1-50-o7m" secondAttribute="bottom" constant="4" id="rWj-63-B6i"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ltz-uN-uxN"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="BhA-Nc-SpN"/>
                     <connections>
@@ -186,12 +195,12 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Hg4-Jd-n58"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="njh-lD-rj8" firstAttribute="centerX" secondItem="Cl0-Z3-Fyx" secondAttribute="centerX" id="hfC-zX-hv5"/>
                             <constraint firstItem="njh-lD-rj8" firstAttribute="centerY" secondItem="Cl0-Z3-Fyx" secondAttribute="centerY" id="pIv-Rc-uNP"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Hg4-Jd-n58"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="070-1w-I6g"/>
                     <connections>
@@ -203,4 +212,9 @@
             <point key="canvasLocation" x="-670" y="686"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
