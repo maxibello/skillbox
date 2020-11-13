@@ -8,6 +8,16 @@
 
 import UIKit
 
+class Diner {
+    var isHungry = true
+    private let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+}
+
 class ConcurrencyIssuesVC: UIViewController {
     
     @IBAction func deadlock(_ sender: Any) {
@@ -76,6 +86,9 @@ class ConcurrencyIssuesVC: UIViewController {
         }
         
         print("_______________________")
+    }
+    @IBAction func liveLock(_ sender: Any) {
+        
     }
     
 }
