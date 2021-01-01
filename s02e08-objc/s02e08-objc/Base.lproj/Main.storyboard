@@ -65,6 +65,54 @@
             </objects>
             <point key="canvasLocation" x="235" y="745"/>
         </scene>
+        <!--SwizzlerVC-->
+        <scene sceneID="C4Z-VK-Mdy">
+            <objects>
+                <viewController id="DhC-xD-IC4" customClass="SwizzlerVC" customModule="s02e08_objc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2eX-M1-Xgl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voe-qI-yeq">
+                                <rect key="frame" x="139" y="433" width="136" height="30"/>
+                                <state key="normal" title="Проверим Swizzler"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="DhC-xD-IC4" eventType="touchUpInside" id="85k-Xy-K0u"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7dt-F1-LBo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="voe-qI-yeq" firstAttribute="centerX" secondItem="2eX-M1-Xgl" secondAttribute="centerX" id="GdD-XA-Yc7"/>
+                            <constraint firstItem="voe-qI-yeq" firstAttribute="centerY" secondItem="2eX-M1-Xgl" secondAttribute="centerY" id="vWA-HI-TRK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Y8q-0Q-gTD"/>
+                    <connections>
+                        <segue destination="ibP-ex-SGU" kind="show" identifier="Swizzler1" id="P0s-B8-fsC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwQ-tS-vcM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1143.4782608695652" y="1481.9196428571429"/>
+        </scene>
+        <!--SwizzlerVC-->
+        <scene sceneID="Buc-ef-hRO">
+            <objects>
+                <viewController id="ibP-ex-SGU" customClass="SwizzlerVC" customModule="s02e08_objc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cZF-Ys-1YE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="j2o-an-lf1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SAo-xj-40z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cD6-ns-MgV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2045" y="1489"/>
+        </scene>
         <!--Task 1-->
         <scene sceneID="vgQ-3S-qq7">
             <objects>
@@ -134,11 +182,31 @@
                     <connections>
                         <segue destination="p0B-Ef-qxP" kind="relationship" relationship="viewControllers" id="ukq-fb-cJt"/>
                         <segue destination="xhd-b2-V4v" kind="relationship" relationship="viewControllers" id="H0Q-ac-gCc"/>
+                        <segue destination="D33-1l-o1z" kind="relationship" relationship="viewControllers" id="edn-mE-uz2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAR-LU-X5R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-655" y="297"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="f6s-N2-Uj1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D33-1l-o1z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="oza-Ta-h3D"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w1R-ZY-bjK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DhC-xD-IC4" kind="relationship" relationship="rootViewController" id="qq5-zP-6In"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tsD-d0-f9D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="233.33333333333334" y="1481.9196428571429"/>
         </scene>
     </scenes>
     <resources>

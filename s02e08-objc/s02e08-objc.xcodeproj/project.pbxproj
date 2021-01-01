@@ -15,6 +15,9 @@
 		B14EBE58257D3DE700928593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B14EBE56257D3DE700928593 /* LaunchScreen.storyboard */; };
 		B14EBE5B257D3DE700928593 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B14EBE5A257D3DE700928593 /* main.m */; };
 		B14EBE65257D43F600928593 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = B14EBE64257D43F600928593 /* ViewController2.m */; };
+		B1639D69259F6997006F2075 /* UIImage+identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D68259F6997006F2075 /* UIImage+identifier.swift */; };
+		B1B28039259F361400CAAD5A /* SegueSwizzler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B28038259F361400CAAD5A /* SegueSwizzler.swift */; };
+		B1B2803C259F381500CAAD5A /* SwizzlerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B2803B259F381500CAAD5A /* SwizzlerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,10 @@
 		B14EBE5A257D3DE700928593 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B14EBE64257D43F600928593 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		B14EBE69257D446000928593 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
+		B1639D68259F6997006F2075 /* UIImage+identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+identifier.swift"; sourceTree = "<group>"; };
+		B1B28037259F361300CAAD5A /* s02e08-objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "s02e08-objc-Bridging-Header.h"; sourceTree = "<group>"; };
+		B1B28038259F361400CAAD5A /* SegueSwizzler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueSwizzler.swift; sourceTree = "<group>"; };
+		B1B2803B259F381500CAAD5A /* SwizzlerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwizzlerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,21 +71,57 @@
 		B14EBE47257D3DE400928593 /* s02e08-objc */ = {
 			isa = PBXGroup;
 			children = (
+				B1B2803E259F3A1F00CAAD5A /* VC */,
+				B1B28038259F361400CAAD5A /* SegueSwizzler.swift */,
 				B14EBE48257D3DE400928593 /* AppDelegate.h */,
 				B14EBE49257D3DE400928593 /* AppDelegate.m */,
 				B14EBE4B257D3DE400928593 /* SceneDelegate.h */,
 				B14EBE4C257D3DE400928593 /* SceneDelegate.m */,
-				B14EBE4E257D3DE400928593 /* ViewController1.h */,
-				B14EBE4F257D3DE400928593 /* ViewController1.m */,
 				B14EBE51257D3DE400928593 /* Main.storyboard */,
 				B14EBE54257D3DE700928593 /* Assets.xcassets */,
 				B14EBE56257D3DE700928593 /* LaunchScreen.storyboard */,
 				B14EBE59257D3DE700928593 /* Info.plist */,
 				B14EBE5A257D3DE700928593 /* main.m */,
+				B1B28037259F361300CAAD5A /* s02e08-objc-Bridging-Header.h */,
+				B1639D68259F6997006F2075 /* UIImage+identifier.swift */,
+			);
+			path = "s02e08-objc";
+			sourceTree = "<group>";
+		};
+		B1B2803E259F3A1F00CAAD5A /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				B1B2803F259F3A2900CAAD5A /* 1 */,
+				B1B28040259F3A2D00CAAD5A /* 2 */,
+				B1B28041259F3A3100CAAD5A /* Swizzler */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		B1B2803F259F3A2900CAAD5A /* 1 */ = {
+			isa = PBXGroup;
+			children = (
+				B14EBE4E257D3DE400928593 /* ViewController1.h */,
+				B14EBE4F257D3DE400928593 /* ViewController1.m */,
+			);
+			path = 1;
+			sourceTree = "<group>";
+		};
+		B1B28040259F3A2D00CAAD5A /* 2 */ = {
+			isa = PBXGroup;
+			children = (
 				B14EBE64257D43F600928593 /* ViewController2.m */,
 				B14EBE69257D446000928593 /* ViewController2.h */,
 			);
-			path = "s02e08-objc";
+			path = 2;
+			sourceTree = "<group>";
+		};
+		B1B28041259F3A3100CAAD5A /* Swizzler */ = {
+			isa = PBXGroup;
+			children = (
+				B1B2803B259F381500CAAD5A /* SwizzlerVC.swift */,
+			);
+			path = Swizzler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,6 +154,7 @@
 				TargetAttributes = {
 					B14EBE44257D3DE400928593 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -150,11 +194,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1639D69259F6997006F2075 /* UIImage+identifier.swift in Sources */,
 				B14EBE50257D3DE400928593 /* ViewController1.m in Sources */,
+				B1B28039259F361400CAAD5A /* SegueSwizzler.swift in Sources */,
 				B14EBE4A257D3DE400928593 /* AppDelegate.m in Sources */,
 				B14EBE65257D43F600928593 /* ViewController2.m in Sources */,
 				B14EBE5B257D3DE700928593 /* main.m in Sources */,
 				B14EBE4D257D3DE400928593 /* SceneDelegate.m in Sources */,
+				B1B2803C259F381500CAAD5A /* SwizzlerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +344,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "s02e08-objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -305,6 +353,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "maxibello.s02e08-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "s02e08-objc/s02e08-objc-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -314,6 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "s02e08-objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -322,6 +374,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "maxibello.s02e08-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "s02e08-objc/s02e08-objc-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
