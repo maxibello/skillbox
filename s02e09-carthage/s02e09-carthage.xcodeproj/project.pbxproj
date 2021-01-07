@@ -13,7 +13,23 @@
 		B15DC2A925A6F9B300B247A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15DC2A725A6F9B300B247A0 /* Main.storyboard */; };
 		B15DC2AB25A6F9B700B247A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B15DC2AA25A6F9B700B247A0 /* Assets.xcassets */; };
 		B15DC2AE25A6F9B700B247A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B15DC2AC25A6F9B700B247A0 /* LaunchScreen.storyboard */; };
+		B15DC2C825A7272200B247A0 /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B15DC2BD25A7008200B247A0 /* VKSdkFramework.framework */; };
+		B15DC2C925A7272200B247A0 /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B15DC2BD25A7008200B247A0 /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B15DC2CA25A7272200B247A0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B15DC2C925A7272200B247A0 /* VKSdkFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B15DC29E25A6F9B300B247A0 /* s02e09-carthage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "s02e09-carthage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +40,9 @@
 		B15DC2AA25A6F9B700B247A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B15DC2AD25A6F9B700B247A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B15DC2AF25A6F9B700B247A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B15DC2B725A6FFB900B247A0 /* VKSdkFramework */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = VKSdkFramework; path = Carthage/Build/iOS/VKSdkFramework.framework/VKSdkFramework; sourceTree = "<group>"; };
+		B15DC2BD25A7008200B247A0 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VKSdkFramework.framework; path = Carthage/Build/iOS/VKSdkFramework.framework; sourceTree = "<group>"; };
+		B15DC2C325A7268B00B247A0 /* VKSdkFramework.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = VKSdkFramework.framework.dSYM; path = Carthage/Build/iOS/VKSdkFramework.framework.dSYM; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B15DC2C825A7272200B247A0 /* VKSdkFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +62,7 @@
 			children = (
 				B15DC2A025A6F9B300B247A0 /* s02e09-carthage */,
 				B15DC29F25A6F9B300B247A0 /* Products */,
+				B15DC2B625A6FFB900B247A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +88,16 @@
 			path = "s02e09-carthage";
 			sourceTree = "<group>";
 		};
+		B15DC2B625A6FFB900B247A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B15DC2C325A7268B00B247A0 /* VKSdkFramework.framework.dSYM */,
+				B15DC2BD25A7008200B247A0 /* VKSdkFramework.framework */,
+				B15DC2B725A6FFB900B247A0 /* VKSdkFramework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +108,7 @@
 				B15DC29A25A6F9B300B247A0 /* Sources */,
 				B15DC29B25A6F9B300B247A0 /* Frameworks */,
 				B15DC29C25A6F9B300B247A0 /* Resources */,
+				B15DC2CA25A7272200B247A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -287,15 +319,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "s02e09-carthage/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/VKSdkFramework.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "maxibello.s02e09-carthage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -305,15 +346,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "s02e09-carthage/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/VKSdkFramework.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "maxibello.s02e09-carthage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
