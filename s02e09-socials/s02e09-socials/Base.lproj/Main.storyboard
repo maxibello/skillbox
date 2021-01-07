@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vL7-Dx-cgN">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="4DE-qK-cU4">
+            <objects>
+                <tabBarController id="vL7-Dx-cgN" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="whp-Zl-sCM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Lfj-gP-7HD"/>
+                        <segue destination="aG3-vf-khA" kind="relationship" relationship="viewControllers" id="5eM-Hf-4D6"/>
+                        <segue destination="1Zr-fc-qZh" kind="relationship" relationship="viewControllers" id="yk9-71-mUX"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uMy-yi-V1E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2053" y="124"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7BZ-FY-zrA">
+            <objects>
+                <viewController id="JKi-on-7E3" customClass="VKViewController" customModule="s02e09_socials" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iV0-Jo-Oni">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BM1-7j-oT2">
+                                <rect key="frame" x="148.5" y="299" width="117" height="30"/>
+                                <state key="normal" title="Авторизация VK"/>
+                                <connections>
+                                    <action selector="vkAuth:" destination="JKi-on-7E3" eventType="touchUpInside" id="ycc-kI-LTO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZg-C1-fTs">
+                                <rect key="frame" x="170.5" y="366" width="73" height="30"/>
+                                <state key="normal" title="Пошарить"/>
+                                <connections>
+                                    <action selector="shareAction:" destination="JKi-on-7E3" eventType="touchUpInside" id="VLd-h0-Zzb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7L4-ek-SZw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BM1-7j-oT2" firstAttribute="centerX" secondItem="iV0-Jo-Oni" secondAttribute="centerX" id="EuM-5g-jer"/>
+                            <constraint firstItem="SZg-C1-fTs" firstAttribute="top" secondItem="BM1-7j-oT2" secondAttribute="bottom" constant="37" id="Mud-u9-9j8"/>
+                            <constraint firstItem="BM1-7j-oT2" firstAttribute="top" secondItem="7L4-ek-SZw" secondAttribute="top" constant="211" id="nll-dx-yp6"/>
+                            <constraint firstItem="SZg-C1-fTs" firstAttribute="centerX" secondItem="iV0-Jo-Oni" secondAttribute="centerX" id="pSf-em-FZ0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="rAf-Ex-vcJ"/>
+                    <connections>
+                        <outlet property="authButton" destination="BM1-7j-oT2" id="X8R-Bf-QkK"/>
+                        <outlet property="shareButton" destination="SZg-C1-fTs" id="cFB-Ua-GYi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhi-5d-iYx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="163.768115942029" y="735.9375"/>
+        </scene>
+        <!--FB-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="FBViewController" customModule="s02e09_socials" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="FB" id="h3L-Sc-aou"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="45"/>
+        </scene>
+        <!--Google-->
+        <scene sceneID="hKw-qU-V7q">
+            <objects>
+                <viewController id="1Zr-fc-qZh" customClass="GoogleViewController" customModule="s02e09_socials" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h5E-Ts-geX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Eog-08-L9q"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Google" id="LBD-Mf-tEr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vjm-Z4-aPK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1952" y="965"/>
+        </scene>
+        <!--VK-->
+        <scene sceneID="4xe-ET-AIs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aG3-vf-khA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="VK" id="78V-dp-2Wc"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NAe-pl-BnL">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JKi-on-7E3" kind="relationship" relationship="rootViewController" id="Bf7-xk-r0C"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDD-fS-xaL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-746.37681159420299" y="735.9375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
