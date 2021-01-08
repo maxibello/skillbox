@@ -113,6 +113,22 @@
             </objects>
             <point key="canvasLocation" x="2045" y="1489"/>
         </scene>
+        <!--ImagePicker-->
+        <scene sceneID="oob-OB-OnT">
+            <objects>
+                <viewController id="njm-uv-6Hv" customClass="UIImagePickerVC" customModule="s02e08_objc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gHZ-QQ-J6D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="npV-Re-PIE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="ImagePicker" id="fsc-1u-2eq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="REo-iu-XuI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-705" y="-441"/>
+        </scene>
         <!--Task 1-->
         <scene sceneID="vgQ-3S-qq7">
             <objects>
@@ -183,6 +199,7 @@
                         <segue destination="p0B-Ef-qxP" kind="relationship" relationship="viewControllers" id="ukq-fb-cJt"/>
                         <segue destination="xhd-b2-V4v" kind="relationship" relationship="viewControllers" id="H0Q-ac-gCc"/>
                         <segue destination="D33-1l-o1z" kind="relationship" relationship="viewControllers" id="edn-mE-uz2"/>
+                        <segue destination="njm-uv-6Hv" kind="relationship" relationship="viewControllers" id="qCR-wK-h6B"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAR-LU-X5R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

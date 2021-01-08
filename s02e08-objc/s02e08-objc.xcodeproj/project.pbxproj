@@ -16,6 +16,7 @@
 		B14EBE5B257D3DE700928593 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B14EBE5A257D3DE700928593 /* main.m */; };
 		B14EBE65257D43F600928593 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = B14EBE64257D43F600928593 /* ViewController2.m */; };
 		B1639D69259F6997006F2075 /* UIImage+identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D68259F6997006F2075 /* UIImage+identifier.swift */; };
+		B17AFFFF25A8A94000F49980 /* UIImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17AFFFE25A8A94000F49980 /* UIImagePickerVC.swift */; };
 		B1B28039259F361400CAAD5A /* SegueSwizzler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B28038259F361400CAAD5A /* SegueSwizzler.swift */; };
 		B1B2803C259F381500CAAD5A /* SwizzlerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B2803B259F381500CAAD5A /* SwizzlerVC.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		B14EBE64257D43F600928593 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		B14EBE69257D446000928593 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		B1639D68259F6997006F2075 /* UIImage+identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+identifier.swift"; sourceTree = "<group>"; };
+		B17AFFFE25A8A94000F49980 /* UIImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerVC.swift; sourceTree = "<group>"; };
 		B1B28037259F361300CAAD5A /* s02e08-objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "s02e08-objc-Bridging-Header.h"; sourceTree = "<group>"; };
 		B1B28038259F361400CAAD5A /* SegueSwizzler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueSwizzler.swift; sourceTree = "<group>"; };
 		B1B2803B259F381500CAAD5A /* SwizzlerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwizzlerVC.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				B14EBE5A257D3DE700928593 /* main.m */,
 				B1B28037259F361300CAAD5A /* s02e08-objc-Bridging-Header.h */,
 				B1639D68259F6997006F2075 /* UIImage+identifier.swift */,
+				B17AFFFE25A8A94000F49980 /* UIImagePickerVC.swift */,
 			);
 			path = "s02e08-objc";
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				B14EBE5B257D3DE700928593 /* main.m in Sources */,
 				B14EBE4D257D3DE400928593 /* SceneDelegate.m in Sources */,
 				B1B2803C259F381500CAAD5A /* SwizzlerVC.swift in Sources */,
+				B17AFFFF25A8A94000F49980 /* UIImagePickerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
