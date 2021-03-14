@@ -24,7 +24,6 @@ class Cinema: NSObject, MKAnnotation {
   }
   
   init?(feature: MKGeoJSONFeature) {
-    // 1
     guard
       let point = feature.geometry.first as? MKMultiPoint,
       let propertiesData = feature.properties,

@@ -16,6 +16,10 @@
 		B17A003625AB488D00F49980 /* cinemas.geojson in Resources */ = {isa = PBXBuildFile; fileRef = B17A003525AB488D00F49980 /* cinemas.geojson */; };
 		B17A003925AB496300F49980 /* Cinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17A003825AB496300F49980 /* Cinema.swift */; };
 		B192CA1625D82D08007E10BF /* CinemaMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B192CA1525D82D08007E10BF /* CinemaMarkerView.swift */; };
+		B1C9199625FE0A80000C4E83 /* GoogleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9199525FE0A80000C4E83 /* GoogleVC.swift */; };
+		B1C919AB25FE8160000C4E83 /* CinemaGMSMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C919AA25FE8160000C4E83 /* CinemaGMSMarker.swift */; };
+		B1E06C9925F52B670040335D /* YandexVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E06C9825F52B670040335D /* YandexVC.swift */; };
+		B1E06CA025F53C1C0040335D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E06C9F25F53C1C0040335D /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		B17A003525AB488D00F49980 /* cinemas.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = cinemas.geojson; sourceTree = "<group>"; };
 		B17A003825AB496300F49980 /* Cinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cinema.swift; sourceTree = "<group>"; };
 		B192CA1525D82D08007E10BF /* CinemaMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaMarkerView.swift; sourceTree = "<group>"; };
+		B1C9199525FE0A80000C4E83 /* GoogleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVC.swift; sourceTree = "<group>"; };
+		B1C919AA25FE8160000C4E83 /* CinemaGMSMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaGMSMarker.swift; sourceTree = "<group>"; };
+		B1E06C9825F52B670040335D /* YandexVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexVC.swift; sourceTree = "<group>"; };
+		B1E06C9F25F53C1C0040335D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		BB2E6B9A350731DA2CAFE167 /* Pods-s02e10-maps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-s02e10-maps.release.xcconfig"; path = "Target Support Files/Pods-s02e10-maps/Pods-s02e10-maps.release.xcconfig"; sourceTree = "<group>"; };
 		FC9710E42ECB35C58AE34252 /* Pods-s02e10-maps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-s02e10-maps.debug.xcconfig"; path = "Target Support Files/Pods-s02e10-maps/Pods-s02e10-maps.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,14 +92,15 @@
 		B17A001625AB469C00F49980 /* s02e10-maps */ = {
 			isa = PBXGroup;
 			children = (
+				B1C919AD25FEAF8E000C4E83 /* Data */,
+				B1C9199425FE0A72000C4E83 /* Google */,
+				B1E06C9725F52B580040335D /* Yandex */,
 				B17A003425AB475A00F49980 /* MapKit */,
 				B17A001725AB469C00F49980 /* AppDelegate.swift */,
 				B17A001925AB469C00F49980 /* SceneDelegate.swift */,
 				B17A002025AB469E00F49980 /* Assets.xcassets */,
 				B17A002225AB469E00F49980 /* LaunchScreen.storyboard */,
 				B17A002525AB469E00F49980 /* Info.plist */,
-				B17A003525AB488D00F49980 /* cinemas.geojson */,
-				B17A003825AB496300F49980 /* Cinema.swift */,
 			);
 			path = "s02e10-maps";
 			sourceTree = "<group>";
@@ -103,6 +112,33 @@
 				B192CA1525D82D08007E10BF /* CinemaMarkerView.swift */,
 			);
 			path = MapKit;
+			sourceTree = "<group>";
+		};
+		B1C9199425FE0A72000C4E83 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				B1C9199525FE0A80000C4E83 /* GoogleVC.swift */,
+				B1C919AA25FE8160000C4E83 /* CinemaGMSMarker.swift */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
+		B1C919AD25FEAF8E000C4E83 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B1E06C9F25F53C1C0040335D /* Data.swift */,
+				B17A003825AB496300F49980 /* Cinema.swift */,
+				B17A003525AB488D00F49980 /* cinemas.geojson */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B1E06C9725F52B580040335D /* Yandex */ = {
+			isa = PBXGroup;
+			children = (
+				B1E06C9825F52B670040335D /* YandexVC.swift */,
+			);
+			path = Yandex;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +153,7 @@
 				B17A001125AB469C00F49980 /* Frameworks */,
 				B17A001225AB469C00F49980 /* Resources */,
 				F1D3DB02AF0DC90A7AB28ADB /* [CP] Embed Pods Frameworks */,
+				81C6A73DE9F3BB995BB2C071 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,6 +232,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		81C6A73DE9F3BB995BB2C071 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-s02e10-maps/Pods-s02e10-maps-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-s02e10-maps/Pods-s02e10-maps-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-s02e10-maps/Pods-s02e10-maps-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F1D3DB02AF0DC90A7AB28ADB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -219,11 +273,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C919AB25FE8160000C4E83 /* CinemaGMSMarker.swift in Sources */,
+				B1E06CA025F53C1C0040335D /* Data.swift in Sources */,
 				B17A003925AB496300F49980 /* Cinema.swift in Sources */,
 				B192CA1625D82D08007E10BF /* CinemaMarkerView.swift in Sources */,
 				B17A001C25AB469C00F49980 /* MapKitVC.swift in Sources */,
+				B1E06C9925F52B670040335D /* YandexVC.swift in Sources */,
 				B17A001825AB469C00F49980 /* AppDelegate.swift in Sources */,
 				B17A001A25AB469C00F49980 /* SceneDelegate.swift in Sources */,
+				B1C9199625FE0A80000C4E83 /* GoogleVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

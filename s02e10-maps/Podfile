@@ -5,6 +5,9 @@ target 's02e10-maps' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'SnapKit'
+  pod 'YandexMapsMobile', ’4.0.0-lite’
+  pod 'GoogleMaps', '4.2.0'
+  pod 'GooglePlaces', '4.2.0'
   # Pods for s02e10-maps
 
 end
