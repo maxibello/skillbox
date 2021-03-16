@@ -80,6 +80,10 @@ extension MapKitVC: MKMapViewDelegate {
         if let annotationTitle = view.annotation?.title
         {
             print("Вы выбрали: \(annotationTitle!)")
+            let annotationCenter: CGPoint = CGPoint(x: view.frame.origin.x + (view.frame.size.width / 2),
+                                                    y: view.frame.origin.y + (view.frame.size.height / 2));
+            let center = mapView.convert(annotationCenter, toCoordinateFrom: view.superview)
+            mapView.setCenter(center, animated: true)
         }
     }
 }
