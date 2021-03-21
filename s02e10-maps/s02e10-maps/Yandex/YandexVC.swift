@@ -1,41 +1,66 @@
 import UIKit
 import YandexMapsMobile
 import SnapKit
+import CoreLocation
 
 class YandexVC: UIViewController {
     
     let mapView = YMKMapView()
     let cinemas = CinemasData.cinemas
+    let locationButton = UIButton(frame: .zero)
     private let circleMapObjectTapListener = CinemaMapObjectTapListener()
     
-    let TARGET_LOCATION = YMKPoint(latitude: 55.751892, longitude: 37.616821)
+    let initialLocation = YMKPoint(latitude: 55.751892, longitude: 37.616821)
+    private var userLocationLayer: YMKUserLocationLayer!
+    private var locationManager: YMKLocationManager!
+        private var nativeLocationManager = CLLocationManager()
+    private var userLocationPoint: YMKPoint!
+    
+    var userLocation: YMKPoint? {
+            didSet {
+                guard userLocation != nil && userLocation?.latitude != 0 && userLocation?.longitude != 0 else { return }
+                
+                mapView.mapWindow.map.move(
+                    with: YMKCameraPosition.init(target: userLocation!, zoom: 10, azimuth: 0, tilt: 0),
+                    animationType: YMKAnimation(type: YMKAnimationType.smooth, duration: 1),
+                    cameraCallback: nil)
+            }
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mapView.mapWindow.map.move(
-            with: YMKCameraPosition(target: TARGET_LOCATION, zoom: 15, azimuth: 0, tilt: 0),
-            animationType: YMKAnimation(type: YMKAnimationType.smooth, duration: 5),
-            cameraCallback: nil)
-        
-        let scale = UIScreen.main.scale
+
+        locationButton.setImage(UIImage(named: "UserArrow"), for: .normal)
+        locationButton.contentVerticalAlignment = .fill
+        locationButton.contentHorizontalAlignment = .fill
+        locationButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+
         let mapKit = YMKMapKit.sharedInstance()
-        let userLocationLayer = mapKit.createUserLocationLayer(with: mapView.mapWindow)
+        userLocationLayer = mapKit.createUserLocationLayer(with: mapView.mapWindow)
 
         userLocationLayer.setVisibleWithOn(true)
         userLocationLayer.isHeadingEnabled = true
-        userLocationLayer.setAnchorWithAnchorNormal(
-            CGPoint(x: 0.5 * mapView.frame.size.width * scale, y: 0.5 * mapView.frame.size.height * scale),
-            anchorCourse: CGPoint(x: 0.5 * mapView.frame.size.width * scale, y: 0.83 * mapView.frame.size.height * scale))
-        userLocationLayer.setObjectListenerWith(self)
+        userLocation = initialLocation
         
         view.addSubview(mapView)
+        view.addSubview(locationButton)
         
         mapView.snp.makeConstraints { v in
             v.edges.equalToSuperview()
         }
         
+        locationButton.snp.makeConstraints { v in
+            v.bottom.equalToSuperview().offset(-100)
+            v.trailing.equalToSuperview().offset(-10)
+            v.size.equalTo(22)
+        }
+        
         createPoints()
+        setupNativeLocationManager()
+    }
+    
+    @objc func buttonClicked() {
+        userLocation = userLocationPoint
     }
     
     func createPoints() {
@@ -55,6 +80,14 @@ class YandexVC: UIViewController {
         }
         
     }
+
+    private func setupNativeLocationManager() {
+            if CLLocationManager.locationServicesEnabled() {
+                nativeLocationManager.delegate = self
+                nativeLocationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                nativeLocationManager.startUpdatingLocation()
+            }
+        }
 }
 
 private class CinemaMapObjectTapListener: NSObject, YMKMapObjectTapListener {
@@ -71,16 +104,8 @@ private class CinemaMapObjectTapListener: NSObject, YMKMapObjectTapListener {
     }
 }
 
-extension YandexVC: YMKUserLocationObjectListener {
-    func onObjectAdded(with view: YMKUserLocationView) {
-        view.arrow.setIconWith(UIImage(named:"UserArrow")!)
-        view.pin.useCompositeIcon()
-        view.accuracyCircle.fillColor = UIColor.blue
+extension YandexVC: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        userLocationPoint = YMKPoint(latitude: locations.last!.coordinate.latitude, longitude: locations.last!.coordinate.longitude)
     }
-
-    func onObjectRemoved(with view: YMKUserLocationView) {}
-
-    func onObjectUpdated(with view: YMKUserLocationView, event: YMKObjectEvent) {}
-    
-    
 }

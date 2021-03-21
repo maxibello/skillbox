@@ -25,16 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mapKitVC = MapKitVC()
         mapKitVC.tabBarItem = UITabBarItem(title: "MapKit", image: nil, selectedImage: nil)
         
-//        YMKMapKit.setApiKey(yandexApiKey)
-//        let yandexVC = YandexVC()
-//        yandexVC.tabBarItem = UITabBarItem(title: "YendexMapKit", image: nil, selectedImage: nil)
+        YMKMapKit.setApiKey(yandexApiKey)
+        let yandexVC = YandexVC()
+        yandexVC.tabBarItem = UITabBarItem(title: "YendexMapKit", image: nil, selectedImage: nil)
         
         let googleVC = GoogleVC()
         googleVC.tabBarItem = UITabBarItem(title: "GoogleMaps", image: nil, selectedImage: nil)
         GMSPlacesClient.provideAPIKey(googleApiKey)
         GMSServices.provideAPIKey(googleApiKey)
         
-        tabBarVC.viewControllers = [mapKitVC, googleVC]
+        tabBarVC.viewControllers = [mapKitVC, googleVC, yandexVC]
         
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
