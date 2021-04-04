@@ -8,7 +8,7 @@ class YandexVC: UIViewController {
     let mapView = YMKMapView()
     let cinemas = CinemasData.cinemas
     let locationButton = UIButton(frame: .zero)
-    private let circleMapObjectTapListener = CinemaMapObjectTapListener()
+    private var circleMapObjectTapListener: CinemaMapObjectTapListener!
     
     let initialLocation = YMKPoint(latitude: 55.751892, longitude: 37.616821)
     private var userLocationLayer: YMKUserLocationLayer!
@@ -29,6 +29,8 @@ class YandexVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        circleMapObjectTapListener = CinemaMapObjectTapListener(self)
 
         locationButton.setImage(UIImage(named: "UserArrow"), for: .normal)
         locationButton.contentVerticalAlignment = .fill
@@ -92,12 +94,23 @@ class YandexVC: UIViewController {
 
 private class CinemaMapObjectTapListener: NSObject, YMKMapObjectTapListener {
     private weak var controller: UIViewController?
+    
+    init(_ vc: UIViewController) {
+        self.controller = vc
+    }
 
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
         if let circle = mapObject as? YMKCircleMapObject {
 
             if let cinema = circle.userData as? Cinema, let title = cinema.title {
                 print("Вы выбрали: \(title)")
+                
+                if let vc = controller as? YandexVC {
+                    vc.mapView.mapWindow.map.move(
+                        with: YMKCameraPosition.init(target: point, zoom: 10, azimuth: 0, tilt: 0),
+                        animationType: YMKAnimation(type: YMKAnimationType.smooth, duration: 1),
+                        cameraCallback: nil)
+                }
             }
         }
         return true;
@@ -109,3 +122,4 @@ extension YandexVC: CLLocationManagerDelegate {
         userLocationPoint = YMKPoint(latitude: locations.last!.coordinate.latitude, longitude: locations.last!.coordinate.longitude)
     }
 }
+
